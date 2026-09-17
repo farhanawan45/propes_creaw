@@ -104,9 +104,8 @@ export default function Header() {
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="group relative z-10 flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium text-ivory focus-ring"
+                  className="group relative z-10 flex items-center rounded-full px-4 py-2 text-sm font-medium text-ivory focus-ring"
                 >
-                  <span className="font-mono-label text-[10px] text-copper-light">{item.index}</span>
                   {/* Two stacked copies of the label — on hover the top copy
                       slides up and out while the bottom copy slides up into
                       its place, so the text is never fully gone mid-transition. */}
@@ -136,7 +135,7 @@ export default function Header() {
               href="#contact"
               onClick={(e: React.MouseEvent) => handleNavClick(e, "#contact")}
               cursorLabel="Quote"
-              className="inline-flex items-center rounded-full bg-copper px-4 py-2 text-xs font-medium tracking-wide text-pounamu-night transition-colors hover:bg-copper-light sm:hidden"
+              className="btn-gradient inline-flex items-center rounded-full px-4 py-2 text-xs font-medium tracking-wide text-pounamu-night sm:hidden"
             >
               Quote
             </MagneticButton>
@@ -146,7 +145,7 @@ export default function Header() {
               href="#contact"
               onClick={(e: React.MouseEvent) => handleNavClick(e, "#contact")}
               cursorLabel="Quote"
-              className="group hidden items-center gap-2 rounded-full bg-copper px-5 py-2.5 text-sm font-medium tracking-wide text-pounamu-night transition-colors hover:bg-copper-light sm:inline-flex"
+              className="btn-gradient group hidden items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium tracking-wide text-pounamu-night sm:inline-flex"
             >
               Get a Quote
               <svg

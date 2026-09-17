@@ -32,6 +32,11 @@ export interface Service {
   highlights: [string, string, string];
 }
 
+export interface WorkKeyFact {
+  label: string;
+  value: string;
+}
+
 export interface WorkProject {
   id: string;
   title: string;
@@ -39,6 +44,7 @@ export interface WorkProject {
   category: string;
   image: string;
   description: string;
+  keyFacts: [WorkKeyFact, WorkKeyFact, WorkKeyFact];
 }
 
 export interface NavLink {
@@ -77,7 +83,7 @@ export const site = {
   ] satisfies NavLink[],
 
   preloader: {
-    durationSeconds: 7,
+    durationSeconds: 5,
   },
 
   hero: {
@@ -284,6 +290,11 @@ export const site = {
         category: "Wedding",
         image: "/images/work-queenstown-wedding.jpg",
         description: "A lakeside ceremony and reception staged against the Remarkables for 140 guests.",
+        keyFacts: [
+          { label: "Guests", value: "140" },
+          { label: "Duration", value: "3 Days" },
+          { label: "Location", value: "Queenstown" },
+        ],
       },
       {
         id: "auckland-mice",
@@ -292,6 +303,11 @@ export const site = {
         category: "MICE",
         image: "/images/work-auckland-mice.jpg",
         description: "Three-day conference production, from keynote AV to delegate travel logistics.",
+        keyFacts: [
+          { label: "Delegates", value: "300" },
+          { label: "Duration", value: "3 Days" },
+          { label: "Location", value: "Auckland" },
+        ],
       },
       {
         id: "rotorua-incentive",
@@ -300,6 +316,11 @@ export const site = {
         category: "Incentive Travel",
         image: "/images/work-rotorua-incentive.jpg",
         description: "A five-day reward trip blending geothermal spas, culture and team experiences.",
+        keyFacts: [
+          { label: "Guests", value: "60" },
+          { label: "Duration", value: "5 Days" },
+          { label: "Location", value: "Rotorua" },
+        ],
       },
       {
         id: "bayofislands-cruise",
@@ -308,6 +329,11 @@ export const site = {
         category: "Private Cruise",
         image: "/images/work-bay-of-islands-cruise.jpg",
         description: "A sunset charter and celebration dinner across the islands for 40 guests.",
+        keyFacts: [
+          { label: "Guests", value: "40" },
+          { label: "Duration", value: "1 Evening" },
+          { label: "Location", value: "Bay of Islands" },
+        ],
       },
       {
         id: "wanaka-heli",
@@ -316,6 +342,11 @@ export const site = {
         category: "Bespoke Experience",
         image: "/images/work-wanaka-heli.jpg",
         description: "An alpine helicopter landing staged for a private proposal above Lake Wanaka.",
+        keyFacts: [
+          { label: "Guests", value: "2" },
+          { label: "Duration", value: "1 Day" },
+          { label: "Location", value: "Wanaka" },
+        ],
       },
       {
         id: "wellington-gala",
@@ -324,6 +355,11 @@ export const site = {
         category: "Corporate Gala",
         image: "/images/work-wellington-gala.jpg",
         description: "A black-tie gala for 220 guests with full staging, catering and live entertainment.",
+        keyFacts: [
+          { label: "Guests", value: "220" },
+          { label: "Duration", value: "1 Evening" },
+          { label: "Location", value: "Wellington" },
+        ],
       },
     ] satisfies WorkProject[],
   },

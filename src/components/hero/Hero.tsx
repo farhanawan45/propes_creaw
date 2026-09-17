@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
@@ -39,35 +39,35 @@ export default function Hero() {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({ delay: reduced ? 0 : 1.6 });
+      const tl = gsap.timeline({ delay: reduced ? 0 : 0.25 });
 
       tl.fromTo(
         labelRef.current,
         { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
       )
         .fromTo(
           wordRefs.current,
           { yPercent: 110 },
-          { yPercent: 0, duration: 0.9, stagger: 0.045, ease: "power4.out" },
+          { yPercent: 0, duration: 0.7, stagger: 0.035, ease: "power4.out" },
           "-=0.3"
         )
         .fromTo(
           subRef.current,
           { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
           "-=0.5"
         )
         .fromTo(
           ctaRef.current,
           { opacity: 0, y: 14 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
           "-=0.4"
         )
         .fromTo(
           bottomBarRef.current,
           { opacity: 0 },
-          { opacity: 1, duration: 0.6 },
+          { opacity: 1, duration: 0.45 },
           "-=0.2"
         );
 
@@ -155,16 +155,19 @@ export default function Hero() {
             }}
           >
             {flatWords.map(({ word, emphasis }, i) => (
-              <span key={i} className="mr-[0.22em] inline-block overflow-hidden align-top">
-                <span
-                  ref={(el) => {
-                    wordRefs.current[i] = el;
-                  }}
-                  className={`inline-block ${emphasis ? "text-copper italic" : ""}`}
-                >
-                  {word}
+              <Fragment key={i}>
+                {word === "across" && <br className="hidden lg:block" />}
+                <span className="mr-[0.22em] inline-block overflow-hidden align-top">
+                  <span
+                    ref={(el) => {
+                      wordRefs.current[i] = el;
+                    }}
+                    className={`inline-block ${emphasis ? "text-copper italic" : ""}`}
+                  >
+                    {word}
+                  </span>
                 </span>
-              </span>
+              </Fragment>
             ))}
           </h1>
 
@@ -185,7 +188,7 @@ export default function Hero() {
                 scrollToHash(site.hero.ctaPrimary.href);
               }}
               cursorLabel="View"
-              className="rounded-full bg-copper px-8 py-3.5 text-sm font-semibold tracking-wide text-pounamu-night transition-colors hover:bg-copper-light focus-ring"
+              className="btn-gradient rounded-full px-8 py-3.5 text-sm font-semibold tracking-wide text-pounamu-night focus-ring"
             >
               {site.hero.ctaPrimary.label}
             </MagneticButton>
@@ -196,7 +199,7 @@ export default function Hero() {
                 e.preventDefault();
                 scrollToHash(site.hero.ctaSecondary.href);
               }}
-              className="rounded-full border border-ivory/30 bg-white/5 px-8 py-3.5 text-sm font-medium tracking-wide text-ivory backdrop-blur-sm transition-colors hover:border-copper hover:text-copper focus-ring"
+              className="btn-gradient-outline rounded-full px-8 py-3.5 text-sm font-medium tracking-wide text-ivory backdrop-blur-sm focus-ring"
             >
               {site.hero.ctaSecondary.label}
             </MagneticButton>
@@ -261,7 +264,7 @@ export default function Hero() {
                 onClick={() => setShowreelOpen(true)}
                 data-cursor="Play"
                 aria-label="Play showreel with sound"
-                className="flex h-14 w-14 items-center justify-center rounded-full border border-copper text-copper transition-colors hover:bg-copper hover:text-pounamu-night focus-ring"
+                className="btn-gradient-icon flex h-14 w-14 items-center justify-center rounded-full text-copper focus-ring"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
                   <polygon points="1,0 14,7 1,14" />

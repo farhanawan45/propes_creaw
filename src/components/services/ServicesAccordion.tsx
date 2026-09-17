@@ -71,7 +71,7 @@ export default function ServicesAccordion() {
                           requestEnquiry(service.id);
                           scrollToHash("#contact");
                         }}
-                        className="mt-5 w-full rounded-full bg-copper px-6 py-3 text-sm font-semibold text-pounamu-night transition-colors hover:bg-copper-light"
+                        className="btn-gradient mt-5 w-full rounded-full px-6 py-3 text-sm font-semibold text-pounamu-night"
                       >
                         Enquire about this service
                       </button>

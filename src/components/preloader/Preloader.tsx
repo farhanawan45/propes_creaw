@@ -6,8 +6,8 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
 
 const SESSION_KEY = "pc-preloader-shown";
-const QUICK_DURATION_S = 1.5;
-const HOLD_CAP_MS = 3000;
+const QUICK_DURATION_S = 5;
+const HOLD_CAP_MS = 800;
 const STATUS_MESSAGES = ["Preparing your experience…", "Loading New Zealand…", "Almost ready…"];
 
 // Preloads in parallel with the timeline below — never shortens it, only
@@ -21,8 +21,8 @@ function waitForAssets(): Promise<void> {
   });
   const video = new Promise<void>((resolve) => {
     const v = document.createElement("video");
-    v.preload = "auto";
-    v.oncanplaythrough = () => resolve();
+    v.preload = "metadata";
+    v.onloadedmetadata = () => resolve();
     v.onerror = () => resolve();
     v.src = site.hero.video.mp4;
     v.load();
@@ -88,7 +88,7 @@ export default function Preloader() {
       const duration = quick ? QUICK_DURATION_S : site.preloader.durationSeconds;
 
       // Started immediately, in parallel with the timeline — not chained
-      // after it. By the time the 7s (or 1.5s) timeline completes, this
+      // after it. By the time the 5s timeline completes, this
       // has almost always already resolved.
       const assetsReadyRef = { current: false };
       const assetsPromise = waitForAssets().then(() => {
@@ -215,44 +215,94 @@ export default function Preloader() {
   );
 
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[100] bg-pounamu-night" role="status" aria-label="Site loading">
+    <div ref={containerRef} className="fixed inset-0 z-[100] overflow-hidden bg-pounamu-night" role="status" aria-label="Site loading">
       <div ref={panelLeftRef} className="absolute inset-y-0 left-0 w-1/2 bg-pounamu-night" />
       <div ref={panelRightRef} className="absolute inset-y-0 right-0 w-1/2 bg-pounamu-night" />
 
-      <div data-track className="absolute inset-x-[8%] top-1/2 -translate-y-1/2">
-        <div className="relative h-px w-full bg-deep-line">
-          <div ref={fillRef} className="absolute inset-y-0 left-0 bg-copper" style={{ width: "0%" }} />
+      <div
+        className="pointer-events-none absolute inset-0 opacity-35"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(201,119,74,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(201,119,74,0.08) 1px, transparent 1px)",
+          backgroundSize: "72px 72px",
+          maskImage: "radial-gradient(circle at center, black, transparent 72%)",
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(201,119,74,0.16), transparent 67%)" }}
+        aria-hidden="true"
+      />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px animate-[scanLine_3.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-copper/80 to-transparent shadow-[0_0_18px_rgba(201,119,74,0.8)]" aria-hidden="true" />
+
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+        <span className="preloader-bubble left-[7%] top-[18%] h-16 w-16 sm:h-20 sm:w-20" style={{ animationDelay: "-1.2s", animationDuration: "7s" }} />
+        <span className="preloader-bubble left-[20%] top-[70%] h-10 w-10 sm:h-12 sm:w-12" style={{ animationDelay: "-4.1s", animationDuration: "9s" }} />
+        <span className="preloader-bubble left-[36%] top-[13%] h-8 w-8 sm:h-10 sm:w-10" style={{ animationDelay: "-2.6s", animationDuration: "6s" }} />
+        <span className="preloader-bubble left-[56%] top-[76%] h-14 w-14 sm:h-16 sm:w-16" style={{ animationDelay: "-5.2s", animationDuration: "8s" }} />
+        <span className="preloader-bubble left-[72%] top-[20%] h-12 w-12 sm:h-14 sm:w-14" style={{ animationDelay: "-3.4s", animationDuration: "7.5s" }} />
+        <span className="preloader-bubble left-[86%] top-[65%] h-16 w-16 sm:h-24 sm:w-24" style={{ animationDelay: "-6s", animationDuration: "10s" }} />
+        <span className="preloader-bubble left-[82%] top-[39%] h-7 w-7 sm:h-9 sm:w-9" style={{ animationDelay: "-0.8s", animationDuration: "5.5s" }} />
+      </div>
+
+      <div data-track className="absolute inset-x-[11%] top-1/2 -translate-y-1/2 sm:inset-x-[8%]">
+        <div className="absolute -top-5 left-0 font-mono-label text-[8px] text-mist/50">00 / INIT</div>
+        <div className="absolute -top-5 right-0 font-mono-label text-[8px] text-mist/50">100 / ENTER</div>
+        <div
+          className="relative h-[3px] w-full overflow-visible bg-deep-line"
+          style={{
+            backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,232,0.14) 0 1px, transparent 1px 32px)",
+          }}
+        >
+          <div
+            ref={fillRef}
+            className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#8f3d28] via-copper to-[#f0b07a] shadow-[0_0_18px_rgba(201,119,74,0.75)]"
+            style={{ width: "0%" }}
+          />
         </div>
 
         <div
           ref={logoRef}
-          className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-copper/50 bg-pounamu-night"
-          style={{ left: "0%", boxShadow: "0 0 22px rgba(201,119,74,0.55)" }}
+          className="absolute top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-copper/70 bg-pounamu-night sm:h-14 sm:w-14"
+          style={{ left: "0%", boxShadow: "0 0 0 6px rgba(201,119,74,0.06), 0 0 32px rgba(201,119,74,0.58)" }}
         >
-          <span className="font-display text-xs font-semibold text-copper">P&amp;C</span>
+          <span className="absolute inset-1 animate-spin-slower rounded-full border border-dashed border-copper/45" />
+          <span className="absolute -inset-2 rounded-full border border-copper/15" />
+          <span className="font-display text-xs font-semibold text-copper sm:text-sm">P&amp;C</span>
         </div>
       </div>
 
-      <div ref={centerRef} className="absolute inset-0 flex flex-col items-center justify-center gap-5">
-        <div ref={wordmarkRef} className="flex gap-[0.15em] overflow-hidden">
+      <div ref={centerRef} className="absolute inset-0 flex flex-col items-center justify-center px-5">
+        <div className="mb-5 flex items-center gap-3 font-mono-label text-[9px] text-copper/80">
+          <span className="h-px w-8 bg-gradient-to-r from-transparent to-copper/70" />
+          IMMERSIVE SYSTEM
+          <span className="h-px w-8 bg-gradient-to-l from-transparent to-copper/70" />
+        </div>
+        <div
+          ref={wordmarkRef}
+          className="flex max-w-full gap-[0.08em] overflow-hidden whitespace-nowrap font-display font-semibold leading-none tracking-[0.08em] text-ivory sm:gap-[0.12em] sm:tracking-[0.12em]"
+          style={{ fontSize: "clamp(29px, 8vw, 50px)" }}
+        >
           {site.name.toUpperCase().split("").map((char, i) => (
-            <span key={i} data-letter className="font-mono-label inline-block text-mist">
+            <span key={i} data-letter className="inline-block drop-shadow-[0_0_18px_rgba(245,241,232,0.16)]">
               {char === " " ? " " : char}
             </span>
           ))}
         </div>
-        <div className="font-mono-label tabular-nums text-copper" style={{ fontSize: "20px" }}>
-          <span ref={counterRef}>000</span>
+        <div className="mt-7 flex items-baseline gap-2 font-mono-label tabular-nums text-copper">
+          <span ref={counterRef} className="text-[28px] tracking-[0.16em] sm:text-[32px]">000</span>
+          <span className="text-[10px] text-mist/50">%</span>
         </div>
-        <div className="relative h-4 w-full text-center">
+        <div className="relative mt-3 h-5 w-full text-center">
           {STATUS_MESSAGES.map((msg, i) => (
             <span
               key={msg}
               ref={(el) => {
                 statusRefs.current[i] = el;
               }}
-              className="font-mono-label absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-mist opacity-0"
-              style={{ fontSize: "11px" }}
+              className="font-mono-label absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-mist/70 opacity-0"
+              style={{ fontSize: "10px", letterSpacing: "0.16em" }}
             >
               {msg}
             </span>
@@ -263,10 +313,11 @@ export default function Preloader() {
       <button
         type="button"
         data-skip
-        className="absolute bottom-8 right-8 font-mono-label text-ivory transition-colors hover:text-copper focus-ring"
+        className="btn-gradient-outline absolute bottom-8 right-8 rounded-full px-5 py-2 font-mono-label text-[10px] text-ivory focus-ring"
       >
-        Skip
+        Skip intro
       </button>
+
     </div>
   );
 }

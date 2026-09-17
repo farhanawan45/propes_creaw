@@ -65,7 +65,7 @@ export default function ServiceDetailPanel({ service, progress }: ServiceDetailP
         <button
           type="button"
           onClick={handleEnquire}
-          className="mt-7 w-full rounded-full bg-copper px-6 py-3.5 text-sm font-semibold tracking-wide text-pounamu-night transition-colors hover:bg-copper-light focus-ring"
+          className="btn-gradient mt-7 w-full rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide text-pounamu-night focus-ring"
         >
           Enquire about this service
         </button>

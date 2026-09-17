@@ -57,7 +57,7 @@ export default function ContactSection() {
                 href={site.contact.whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-copper px-5 py-2.5 text-sm font-medium text-copper transition-colors hover:bg-copper hover:text-pounamu-night"
+                className="btn-gradient-outline inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-copper"
               >
                 Chat on WhatsApp
               </a>

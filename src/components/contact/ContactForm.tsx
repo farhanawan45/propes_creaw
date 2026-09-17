@@ -192,7 +192,7 @@ export default function ContactForm() {
         type="submit"
         id="contact-submit"
         disabled={status === "loading"}
-        className="flex h-[60px] w-full items-center justify-center gap-2 rounded-full bg-copper text-sm font-semibold tracking-wide text-pounamu-night transition-colors hover:bg-copper-light disabled:opacity-60 focus-ring"
+        className="btn-gradient flex h-[60px] w-full items-center justify-center gap-2 rounded-full text-sm font-semibold tracking-wide text-pounamu-night disabled:opacity-60 focus-ring"
       >
         {status === "loading" ? (
           <>

@@ -158,7 +158,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                       <button
                         type="button"
                         onClick={() => setOpen(false)}
-                        className="rounded-full bg-copper px-5 py-2 text-sm font-semibold text-pounamu-night transition-colors hover:bg-copper-light focus-ring"
+                        className="btn-gradient rounded-full px-5 py-2 text-sm font-semibold text-pounamu-night focus-ring"
                       >
                         Done
                       </button>
