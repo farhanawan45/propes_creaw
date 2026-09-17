@@ -144,7 +144,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 </p>
               </div>
 
-              <div className="mt-5 overflow-hidden lg:hidden">
+              <div className="mt-5 overflow-hidden">
                 <button
                   type="button"
                   onClick={onView}
@@ -170,20 +170,6 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
               </div>
             </div>
 
-            <div className="mt-8 hidden overflow-hidden lg:block">
-              <div data-reveal className="flex flex-wrap items-center gap-4">
-                <button
-                  type="button"
-                  onClick={onView}
-                  data-cursor="View"
-                  className="btn-gradient flex h-12 items-center gap-2 rounded-full px-6 text-sm font-semibold text-pounamu-night focus-ring"
-                >
-                  View project
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
-                </button>
-                <span className="text-xs text-mist/70">Case study coming soon</span>
-              </div>
-            </div>
           </div>
 
           {/* IMAGE PANEL */}
