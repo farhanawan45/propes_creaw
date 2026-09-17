@@ -7,6 +7,7 @@ import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
 import { scrollToHash } from "@/lib/scrollTo";
 import MagneticButton from "@/components/ui/MagneticButton";
+import BrandLogo from "@/components/ui/BrandLogo";
 import LiveClock from "@/components/ui/LiveClock";
 
 const year = new Date().getFullYear();
@@ -122,17 +123,7 @@ export default function Footer() {
         {/* Info grid */}
         <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <div className="flex items-center gap-3.5" aria-label="Props & Crew">
-              <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-copper/70 bg-[radial-gradient(circle_at_32%_25%,rgba(240,176,122,0.3),rgba(201,119,74,0.08)_38%,rgba(8,34,30,0.98)_72%)] shadow-[0_0_0_4px_rgba(201,119,74,0.05),0_0_24px_rgba(201,119,74,0.22)]">
-                <span className="absolute inset-1.5 rounded-full border border-dashed border-copper/35" />
-                <span className="absolute right-0 top-1 h-1.5 w-1.5 rounded-full bg-copper-light shadow-[0_0_8px_rgba(240,176,122,0.8)]" />
-                <span className="relative font-display text-[13px] font-semibold"><span className="text-ivory">P&amp;</span><span className="text-copper-light">C</span></span>
-              </span>
-              <span className="border-l border-copper/25 pl-3.5 leading-none">
-                <span className="block font-display text-[15px] font-semibold tracking-[0.08em] text-ivory">PROPS</span>
-                <span className="mt-1.5 block font-mono-label text-[8px] tracking-[0.24em] text-copper-light">&amp; CREW</span>
-              </span>
-            </div>
+            <BrandLogo size="md" />
             <p className="mt-4 max-w-xs text-base font-light leading-relaxed text-mist">{site.footer.brandLine}</p>
             <div className="mt-6 flex gap-3">
               {site.social.map((s) => (

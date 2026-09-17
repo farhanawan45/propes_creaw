@@ -41,6 +41,7 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
 
   return (
     <motion.div
+      className="h-full"
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -50,19 +51,19 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
         ref={cardRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="group relative overflow-hidden rounded-3xl bg-pounamu-night p-8 transition-transform duration-300 ease-out will-change-transform"
+        className="group relative h-full overflow-hidden rounded-2xl bg-pounamu-night p-4 transition-transform duration-300 ease-out will-change-transform sm:p-6 lg:rounded-3xl lg:p-8"
       >
         <span className="absolute inset-x-0 top-0 h-[3px] origin-left scale-x-0 bg-copper transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
-        <div className="flex h-12 w-12 items-center justify-center rounded-full border border-deep-line transition-colors duration-300 group-hover:border-copper group-hover:bg-copper">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border border-deep-line transition-colors duration-300 group-hover:border-copper group-hover:bg-copper sm:h-11 sm:w-11 lg:h-12 lg:w-12">
           <Icon
             className="h-5 w-5 text-copper transition-all duration-300 group-hover:rotate-12 group-hover:scale-110 group-hover:text-pounamu-night"
             strokeWidth={1.5}
           />
         </div>
 
-        <h3 className="mt-6 font-display text-xl font-semibold text-ivory">{value.title}</h3>
-        <p className="mt-2 text-base font-light leading-relaxed text-mist">{value.text}</p>
+        <h3 className="mt-4 font-display text-base font-semibold text-ivory sm:text-lg lg:mt-6 lg:text-xl">{value.title}</h3>
+        <p className="mt-2 text-xs font-light leading-relaxed text-mist sm:text-sm lg:text-base">{value.text}</p>
       </div>
     </motion.div>
   );
@@ -70,7 +71,7 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
 
 export default function ValuesRow() {
   return (
-    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
       {site.about.values.map((value, i) => (
         <ValueCard key={value.title} value={value} index={i} />
       ))}

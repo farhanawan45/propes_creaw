@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin } from "lucide-react";
 import { site } from "@/content/site";
 import ContactForm from "@/components/contact/ContactForm";
 import LiveClock from "@/components/ui/LiveClock";
@@ -39,29 +38,6 @@ export default function ContactSection() {
               {site.contact.title}
             </h2>
             <p className="mt-6 max-w-sm text-lg font-light leading-relaxed text-mist">{site.contact.sub}</p>
-
-            <div className="mt-10 space-y-5">
-              <a href={site.contact.phoneHref} className="flex items-center gap-3 text-ivory/90 transition-colors hover:text-copper">
-                <Phone className="h-5 w-5 text-copper" strokeWidth={1.5} />
-                {site.contact.phone}
-              </a>
-              <a href={`mailto:${site.contact.email}`} className="flex items-center gap-3 text-ivory/90 transition-colors hover:text-copper">
-                <Mail className="h-5 w-5 text-copper" strokeWidth={1.5} />
-                {site.contact.email}
-              </a>
-              <div className="flex items-start gap-3 text-ivory/90">
-                <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-copper" strokeWidth={1.5} />
-                <span className="max-w-[240px]">{site.contact.address}</span>
-              </div>
-              <a
-                href={site.contact.whatsappHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gradient-outline inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-copper"
-              >
-                Chat on WhatsApp
-              </a>
-            </div>
 
             <div className="mt-10 flex items-center gap-6">
               <div className="flex gap-5">

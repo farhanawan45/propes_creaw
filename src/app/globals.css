@@ -309,6 +309,7 @@ body {
   border: 1px solid rgba(245, 241, 232, 0.18);
   background: linear-gradient(120deg, #a94f2d 0%, #d67d4d 34%, #f0b07a 52%, #c4683d 72%, #8f3d28 100%);
   background-size: 220% 220%;
+  color: var(--color-ivory);
   box-shadow: 0 10px 30px rgba(169, 79, 45, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 

@@ -87,7 +87,7 @@ export default function StatsStrip() {
   return (
     <div
       ref={containerRef}
-      className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+      className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5"
     >
       {site.about.stats.map((stat, i) => (
         <div
@@ -96,7 +96,7 @@ export default function StatsStrip() {
             cardRefs.current[i] = el;
           }}
           onMouseMove={handleMouseMove(i)}
-          className="group relative overflow-hidden rounded-3xl border bg-linen p-8 transition-[transform,border-color] duration-300 hover:-translate-y-1.5"
+          className="group relative overflow-hidden rounded-2xl border bg-linen p-4 transition-[transform,border-color] duration-300 hover:-translate-y-1.5 sm:p-6 lg:rounded-3xl lg:p-8"
           style={
             {
               borderColor: "var(--color-linen-border)",
@@ -121,7 +121,7 @@ export default function StatsStrip() {
 
           <div
             className="relative mt-4 font-display font-semibold text-ink"
-            style={{ fontSize: "clamp(48px, 5vw, 72px)", letterSpacing: "-0.02em", lineHeight: 1 }}
+            style={{ fontSize: "clamp(32px, 8vw, 72px)", letterSpacing: "-0.02em", lineHeight: 1 }}
           >
             <span
               ref={(el) => {
@@ -132,9 +132,9 @@ export default function StatsStrip() {
             </span>
             <span className="text-copper">{stat.suffix}</span>
           </div>
-          <div className="relative mt-3 font-mono-label text-stone">{stat.label}</div>
+          <div className="relative mt-3 font-mono-label leading-relaxed text-stone" style={{ fontSize: "clamp(8px, 2.4vw, 12px)" }}>{stat.label}</div>
 
-          <div className="relative mt-6 h-px w-full overflow-hidden bg-linen-border">
+          <div className="relative mt-4 h-px w-full overflow-hidden bg-linen-border sm:mt-5 lg:mt-6">
             <div
               ref={(el) => {
                 lineRefs.current[i] = el;

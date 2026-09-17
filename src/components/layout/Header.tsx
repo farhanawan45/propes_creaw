@@ -8,6 +8,7 @@ import { scrollToHash } from "@/lib/scrollTo";
 import { useMenu } from "@/context/MenuContext";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import MagneticButton from "@/components/ui/MagneticButton";
+import BrandLogo from "@/components/ui/BrandLogo";
 import LiveClock from "@/components/ui/LiveClock";
 import FullscreenMenu from "@/components/layout/FullscreenMenu";
 
@@ -78,15 +79,7 @@ export default function Header() {
               data-cursor="Home"
               aria-label="Props & Crew — Home"
             >
-              <span className="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-copper/70 bg-[radial-gradient(circle_at_32%_25%,rgba(240,176,122,0.3),rgba(201,119,74,0.08)_38%,rgba(8,34,30,0.98)_72%)] shadow-[0_0_0_3px_rgba(201,119,74,0.05),0_0_20px_rgba(201,119,74,0.2)] sm:h-11 sm:w-11">
-                <span className="absolute inset-1.5 rounded-full border border-dashed border-copper/35" />
-                <span className="absolute right-0 top-1 h-1.5 w-1.5 rounded-full bg-copper-light shadow-[0_0_8px_rgba(240,176,122,0.8)]" />
-                <span className="relative font-display text-[11px] font-semibold sm:text-xs"><span className="text-ivory">P&amp;</span><span className="text-copper-light">C</span></span>
-              </span>
-              <span className="hidden border-l border-copper/25 pl-2.5 leading-none lg:block">
-                <span className="block font-display text-xs font-semibold tracking-[0.08em] text-ivory">PROPS</span>
-                <span className="mt-1 block font-mono-label text-[7px] tracking-[0.22em] text-copper-light">&amp; CREW</span>
-              </span>
+              <BrandLogo />
             </Link>
           </motion.div>
 
