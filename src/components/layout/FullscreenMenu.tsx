@@ -83,7 +83,17 @@ export default function FullscreenMenu({
       className="fixed inset-0 z-[90] flex flex-col bg-pounamu-night"
     >
       <div className="flex items-center justify-between px-6 py-5 sm:px-10 sm:py-6">
-        <span className="font-display text-xl font-semibold text-ivory">P&amp;C</span>
+        <div className="flex items-center gap-3.5" aria-label="Props & Crew">
+          <span className="relative flex h-12 w-12 items-center justify-center rounded-full border border-copper/70 bg-[radial-gradient(circle_at_32%_25%,rgba(240,176,122,0.3),rgba(201,119,74,0.08)_38%,rgba(8,34,30,0.98)_72%)] shadow-[0_0_0_4px_rgba(201,119,74,0.05),0_0_24px_rgba(201,119,74,0.22)]">
+            <span className="absolute inset-1.5 rounded-full border border-dashed border-copper/35" />
+            <span className="absolute right-0 top-1 h-1.5 w-1.5 rounded-full bg-copper-light shadow-[0_0_8px_rgba(240,176,122,0.8)]" />
+            <span className="relative font-display text-[13px] font-semibold"><span className="text-ivory">P&amp;</span><span className="text-copper-light">C</span></span>
+          </span>
+          <span className="border-l border-copper/25 pl-3.5 leading-none">
+            <span className="block font-display text-[15px] font-semibold tracking-[0.08em] text-ivory">PROPS</span>
+            <span className="mt-1.5 block font-mono-label text-[8px] tracking-[0.24em] text-copper-light">&amp; CREW</span>
+          </span>
+        </div>
         <button
           ref={closeRef}
           type="button"
@@ -98,9 +108,9 @@ export default function FullscreenMenu({
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-10 overflow-y-auto px-6 pb-8 sm:px-10 lg:flex-row lg:items-center lg:gap-6">
+      <div className="flex flex-1 flex-col gap-7 overflow-y-auto px-6 pb-6 sm:px-10 lg:flex-row lg:items-center lg:gap-8">
         <nav
-          className="flex flex-1 flex-col justify-center gap-1"
+          className="flex flex-1 flex-col justify-center gap-1.5 sm:gap-2"
           onMouseLeave={() => setHovered(null)}
         >
           {site.nav.map((item, i) => (
@@ -115,13 +125,13 @@ export default function FullscreenMenu({
               initial={{ y: 60, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-              className={`group flex items-baseline gap-4 border-b border-deep-line py-3 transition-opacity duration-300 sm:py-4 ${
+              className={`group flex items-baseline gap-3 rounded-sm border-b border-deep-line px-1 py-3 transition-[opacity,background-color,padding] duration-300 hover:bg-ivory/[0.025] sm:gap-4 sm:px-2 sm:py-3.5 ${
                 hovered && hovered !== item.href ? "opacity-35" : "opacity-100"
               }`}
             >
-              <span className="font-mono-label text-copper">{item.index}</span>
+              <span className="w-5 shrink-0 font-mono-label text-[8px] text-copper sm:w-6 sm:text-[9px]">{item.index}</span>
               <span
-                className={`font-display text-[13vw] font-semibold leading-none tracking-tight transition-colors duration-300 sm:text-6xl lg:text-7xl ${
+                className={`font-display text-[clamp(1.65rem,7.4vw,2rem)] font-semibold leading-[1.08] tracking-tight transition-colors duration-300 sm:text-[2.25rem] lg:text-[clamp(2.25rem,3.4vw,3rem)] xl:text-[3.25rem] ${
                   active === item.href || hovered === item.href ? "text-copper" : "text-ivory"
                 }`}
               >
@@ -148,33 +158,33 @@ export default function FullscreenMenu({
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 border-t border-deep-line px-6 py-6 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-10">
-        <div className="flex flex-wrap gap-x-6 gap-y-2 text-ivory/80">
-          <a href={`mailto:${site.contact.email}`} className="hover:text-copper">
+      <div className="flex flex-col gap-3 border-t border-deep-line bg-pounamu-night/95 px-5 py-4 text-xs sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:px-10 sm:py-6 sm:text-sm">
+        <div className="grid grid-cols-2 gap-2 text-ivory/80 sm:flex sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
+          <a href={`mailto:${site.contact.email}`} className="col-span-2 rounded-xl border border-deep-line bg-ivory/[0.025] px-3 py-2.5 text-center transition-colors hover:border-copper/50 hover:text-copper sm:col-auto sm:border-0 sm:bg-transparent sm:p-0 sm:text-left">
             {site.contact.email}
           </a>
-          <a href={site.contact.phoneHref} className="hover:text-copper">
+          <a href={site.contact.phoneHref} className="rounded-xl border border-deep-line bg-ivory/[0.025] px-2 py-2.5 text-center transition-colors hover:border-copper/50 hover:text-copper sm:border-0 sm:bg-transparent sm:p-0 sm:text-left">
             {site.contact.phone}
           </a>
-          <a href={site.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="hover:text-copper">
+          <a href={site.contact.whatsappHref} target="_blank" rel="noopener noreferrer" className="rounded-xl border border-deep-line bg-ivory/[0.025] px-2 py-2.5 text-center transition-colors hover:border-copper/50 hover:text-copper sm:border-0 sm:bg-transparent sm:p-0 sm:text-left">
             WhatsApp
           </a>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="flex gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-deep-line/70 pt-3 sm:flex-nowrap sm:justify-start sm:gap-6 sm:border-0 sm:pt-0">
+          <div className="flex items-center gap-3 sm:gap-5">
             {site.social.map((s) => (
               <a
                 key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-mono-label text-mist hover:text-copper"
+                className="font-mono-label text-[8px] text-mist transition-colors hover:text-copper sm:text-[10px]"
               >
                 {s.label}
               </a>
             ))}
           </div>
-          <LiveClock />
+          <LiveClock className="inline-flex rounded-full border border-copper/25 bg-copper/[0.05] px-2.5 py-2 text-[8px] sm:border-0 sm:bg-transparent sm:p-0 sm:text-[10px]" />
         </div>
       </div>
     </motion.div>

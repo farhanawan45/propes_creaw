@@ -83,7 +83,7 @@ export const site = {
   ] satisfies NavLink[],
 
   preloader: {
-    durationSeconds: 5,
+    durationSeconds: 1.1,
   },
 
   hero: {
@@ -98,6 +98,7 @@ export const site = {
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
       mp4: "/videos/intro.mp4",
+      showreelMp4: "https://videos.pexels.com/video-files/7791920/7791920-hd_1920_1080_25fps.mp4",
       poster: "/images/hero-poster.jpg",
     },
     kenBurnsFallback: [
@@ -288,7 +289,7 @@ export const site = {
         title: "A Destination Wedding in the Mountains",
         location: "Queenstown",
         category: "Wedding",
-        image: "/images/work-queenstown-wedding.jpg",
+        image: "/images/work-queenstown-wedding.webp",
         description: "A lakeside ceremony and reception staged against the Remarkables for 140 guests.",
         keyFacts: [
           { label: "Guests", value: "140" },
@@ -301,7 +302,7 @@ export const site = {
         title: "Corporate Summit for 300 Delegates",
         location: "Auckland",
         category: "MICE",
-        image: "/images/work-auckland-mice.jpg",
+        image: "/images/work-auckland-mice.webp",
         description: "Three-day conference production, from keynote AV to delegate travel logistics.",
         keyFacts: [
           { label: "Delegates", value: "300" },
@@ -314,7 +315,7 @@ export const site = {
         title: "Incentive Retreat in Geothermal Country",
         location: "Rotorua",
         category: "Incentive Travel",
-        image: "/images/work-rotorua-incentive.jpg",
+        image: "/images/work-rotorua-incentive.webp",
         description: "A five-day reward trip blending geothermal spas, culture and team experiences.",
         keyFacts: [
           { label: "Guests", value: "60" },
@@ -327,7 +328,7 @@ export const site = {
         title: "Private Charter Celebration",
         location: "Bay of Islands",
         category: "Private Cruise",
-        image: "/images/work-bay-of-islands-cruise.jpg",
+        image: "/images/work-bay-of-islands-cruise.webp",
         description: "A sunset charter and celebration dinner across the islands for 40 guests.",
         keyFacts: [
           { label: "Guests", value: "40" },
@@ -340,7 +341,7 @@ export const site = {
         title: "Scenic Helicopter Proposal",
         location: "Wanaka",
         category: "Bespoke Experience",
-        image: "/images/work-wanaka-heli.jpg",
+        image: "/images/work-wanaka-heli.webp",
         description: "An alpine helicopter landing staged for a private proposal above Lake Wanaka.",
         keyFacts: [
           { label: "Guests", value: "2" },
@@ -353,7 +354,7 @@ export const site = {
         title: "Gala Dinner & Live Entertainment",
         location: "Wellington",
         category: "Corporate Gala",
-        image: "/images/work-wellington-gala.jpg",
+        image: "/images/work-wellington-gala.webp",
         description: "A black-tie gala for 220 guests with full staging, catering and live entertainment.",
         keyFacts: [
           { label: "Guests", value: "220" },

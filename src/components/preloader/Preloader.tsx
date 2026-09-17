@@ -6,8 +6,8 @@ import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
 
 const SESSION_KEY = "pc-preloader-shown";
-const QUICK_DURATION_S = 5;
-const HOLD_CAP_MS = 800;
+const QUICK_DURATION_S = 1.1;
+const HOLD_CAP_MS = 100;
 const STATUS_MESSAGES = ["Preparing your experience…", "Loading New Zealand…", "Almost ready…"];
 
 // Preloads in parallel with the timeline below — never shortens it, only
@@ -88,7 +88,7 @@ export default function Preloader() {
       const duration = quick ? QUICK_DURATION_S : site.preloader.durationSeconds;
 
       // Started immediately, in parallel with the timeline — not chained
-      // after it. By the time the 5s timeline completes, this
+      // after it. By the time the short timeline completes, this
       // has almost always already resolved.
       const assetsReadyRef = { current: false };
       const assetsPromise = waitForAssets().then(() => {
@@ -108,8 +108,8 @@ export default function Preloader() {
       };
 
       const runExit = () => {
-        const exitDuration = quick ? 0.35 : 0.7;
-        const splitDuration = quick ? 0.6 : 1.2;
+        const exitDuration = 0.2;
+        const splitDuration = 0.45;
         const tl = gsap.timeline({ onComplete: finish });
         tl.to(logoRef.current, {
           x: () => -(logoRef.current!.getBoundingClientRect().left) + 28,
@@ -122,7 +122,7 @@ export default function Preloader() {
           .to(
             panelLeftRef.current,
             { clipPath: "inset(0 100% 0 0)", duration: splitDuration, ease: "power4.inOut" },
-            quick ? "-=0.1" : "-=0.3"
+            "-=0.1"
           )
           .to(panelRightRef.current, { clipPath: "inset(0 0 0 100%)", duration: splitDuration, ease: "power4.inOut" }, "<");
       };
@@ -201,7 +201,7 @@ export default function Preloader() {
         }
 
         statusTl.kill();
-        await delay(400);
+        await delay(80);
         if (!skippedRef.current) runExit();
       });
 

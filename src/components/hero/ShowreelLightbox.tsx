@@ -27,7 +27,7 @@ export default function ShowreelLightbox({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
-      className="fixed inset-0 z-[95] flex items-center justify-center bg-pounamu-night/95 p-4 sm:p-10"
+      className="fixed inset-0 z-[95] flex items-center justify-center bg-pounamu-night/95 p-3 sm:p-8"
       onClick={onClose}
     >
       <button
@@ -41,14 +41,17 @@ export default function ShowreelLightbox({ onClose }: { onClose: () => void }) {
           <line x1="15" y1="1" x2="1" y2="15" />
         </svg>
       </button>
-      <video
-        ref={videoRef}
-        src={site.hero.video.mp4}
-        controls
-        playsInline
-        className="max-h-full max-w-full rounded-2xl"
-        onClick={(e) => e.stopPropagation()}
-      />
+      <div className="w-[96vw] max-w-[1280px] overflow-hidden rounded-2xl border border-copper/25 bg-black shadow-[0_30px_100px_rgba(0,0,0,0.55)] sm:rounded-3xl" onClick={(e) => e.stopPropagation()}>
+        <video
+          ref={videoRef}
+          src={site.hero.video.showreelMp4}
+          poster={site.hero.video.poster}
+          controls
+          playsInline
+          preload="metadata"
+          className="aspect-video max-h-[82svh] w-full bg-black object-cover"
+        />
+      </div>
     </motion.div>
   );
 }

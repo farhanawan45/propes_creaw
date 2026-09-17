@@ -141,8 +141,41 @@ export default function ServicesSection() {
             <span className="absolute inset-7 rounded-full bg-[radial-gradient(circle_at_32%_25%,rgba(240,176,122,0.3),rgba(12,48,42,0.96)_70%)]" />
             <span className="relative font-display text-3xl font-semibold"><span className="text-ivory">P&amp;</span><span className="text-copper">C</span></span>
           </div>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {site.services.map((service, index) => <ServiceNode key={service.id} index={index} side={index < 7 ? "left" : "right"} active={activeIndex === index} onActivate={() => setActiveIndex(index)} />)}
+          <div className="grid w-full min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
+            {site.services.map((service, index) => {
+              const Icon = serviceIcons[index];
+              const active = activeIndex === index;
+              return (
+                <button
+                  key={service.id}
+                  type="button"
+                  onClick={() => setActiveIndex(index)}
+                  className={`flex min-h-[72px] w-full min-w-0 items-center gap-3 overflow-hidden rounded-2xl border px-3 py-3 text-left transition-[border-color,background-color,box-shadow] duration-300 focus-ring ${
+                    active
+                      ? "border-copper/75 bg-copper/10 shadow-[0_0_24px_rgba(201,119,74,0.16)]"
+                      : "border-deep-line bg-pounamu-night/70"
+                  }`}
+                  aria-pressed={active}
+                >
+                  <span
+                    className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border ${
+                      active ? "border-copper-light text-pounamu-night" : "border-copper/40 text-ivory"
+                    }`}
+                    style={{
+                      background: active
+                        ? "linear-gradient(135deg, #f0b07a, #c9774a 55%, #8f3d28)"
+                        : "linear-gradient(145deg, rgba(240,176,122,0.18), rgba(201,119,74,0.1) 48%, rgba(12,48,42,0.9))",
+                    }}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={1.7} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="font-mono-label block text-[9px] text-copper">{service.index}</span>
+                    <span className="mt-1 block break-words text-sm font-medium leading-tight text-ivory">{service.name}</span>
+                  </span>
+                </button>
+              );
+            })}
           </div>
           <div className="mt-6 rounded-2xl border border-copper/25 bg-pounamu/60 p-5 text-center backdrop-blur-md">
             <div className="font-mono-label text-copper">{activeService.index} / 14</div>

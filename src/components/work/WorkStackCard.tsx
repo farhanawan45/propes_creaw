@@ -181,7 +181,8 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 src={project.image}
                 alt={`${project.title} — ${project.location}`}
                 fill
-                priority={index === 0}
+                loading="eager"
+                fetchPriority={index < 2 ? "high" : "auto"}
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105 hover:scale-105"
               />

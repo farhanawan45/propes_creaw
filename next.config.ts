@@ -10,7 +10,7 @@ const csp = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
-  "media-src 'self'",
+  "media-src 'self' https://videos.pexels.com",
   "connect-src 'self'",
   "frame-ancestors 'none'",
   "base-uri 'self'",

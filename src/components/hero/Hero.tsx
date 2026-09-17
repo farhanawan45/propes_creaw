@@ -106,7 +106,7 @@ export default function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative flex min-h-[100svh] w-full items-end overflow-hidden bg-pounamu-night"
+      className="relative flex min-h-0 w-full items-start overflow-hidden bg-pounamu-night sm:min-h-[100svh] sm:items-end"
     >
       <div ref={mediaRef} className="absolute inset-0 origin-bottom overflow-hidden">
         {!videoFailed && !reduced ? (
@@ -128,16 +128,16 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 w-full px-5 pb-20 pt-36 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
+      <div className="relative z-10 w-full px-5 pb-8 pt-32 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
         <div className="mx-auto max-w-[1440px]">
           <div
             ref={labelRef}
-            className="mb-6 inline-flex items-center gap-2 rounded-full bg-pounamu-night/70 px-4 py-2 backdrop-blur-md"
+            className="mb-6 inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full bg-pounamu-night/70 px-3 py-2 backdrop-blur-md sm:gap-2 sm:px-4"
           >
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
             <span
               className="font-mono-label text-ivory"
-              style={{ fontSize: "13px" }}
+              style={{ fontSize: "clamp(7px, 2.25vw, 13px)", letterSpacing: "0.08em" }}
             >
               {site.hero.label}
             </span>
