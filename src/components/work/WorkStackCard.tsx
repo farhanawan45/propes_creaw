@@ -144,6 +144,18 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 </p>
               </div>
 
+              <div className="mt-5 overflow-hidden lg:hidden">
+                <button
+                  type="button"
+                  onClick={onView}
+                  data-reveal
+                  className="btn-gradient flex h-11 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold text-pounamu-night focus-ring"
+                >
+                  View project
+                  <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+                </button>
+              </div>
+
               <div className="mt-6 overflow-hidden">
                 <div data-reveal className="grid grid-cols-3 gap-3 border-t border-deep-line pt-5">
                   {project.keyFacts.map((fact) => (
@@ -158,7 +170,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
               </div>
             </div>
 
-            <div className="mt-8 overflow-hidden">
+            <div className="mt-8 hidden overflow-hidden lg:block">
               <div data-reveal className="flex flex-wrap items-center gap-4">
                 <button
                   type="button"
