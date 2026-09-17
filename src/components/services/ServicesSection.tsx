@@ -2,7 +2,7 @@
 
 import { useRef, useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
-import { AudioLines, Binoculars, BusFront, CalendarDays, Gift, Languages, MapPin, Mountain, Music, Palette, Plane, Ship, UtensilsCrossed, Users, type LucideProps } from "lucide-react";
+import { AudioLines, Binoculars, BusFront, CalendarDays, ChevronLeft, ChevronRight, Gift, Languages, MapPin, Mountain, Music, Palette, Plane, Ship, UtensilsCrossed, Users, type LucideProps } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
@@ -18,6 +18,7 @@ const serviceIcons: ServiceIcon[] = [
 
 const leftOffsets = ["lg:translate-x-16", "lg:translate-x-7", "", "lg:-translate-x-3", "", "lg:translate-x-7", "lg:translate-x-16"];
 const rightOffsets = ["lg:-translate-x-16", "lg:-translate-x-7", "", "lg:translate-x-3", "", "lg:-translate-x-7", "lg:-translate-x-16"];
+const MOBILE_PAGE_SIZE = 4;
 
 interface ServiceNodeProps {
   index: number;
@@ -62,8 +63,11 @@ function ServiceNode({ index, side, active, onActivate }: ServiceNodeProps) {
 export default function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [mobilePage, setMobilePage] = useState(0);
   const { requestEnquiry } = useEnquiry();
   const activeService = site.services[activeIndex];
+  const mobilePageCount = Math.ceil(site.services.length / MOBILE_PAGE_SIZE);
+  const mobileServices = site.services.slice(mobilePage * MOBILE_PAGE_SIZE, (mobilePage + 1) * MOBILE_PAGE_SIZE);
 
   useGSAP(() => {
     if (prefersReducedMotion()) return;
@@ -77,6 +81,12 @@ export default function ServicesSection() {
   const enquire = () => {
     requestEnquiry(activeService.id);
     scrollToHash("#contact");
+  };
+
+  const changeMobilePage = (page: number) => {
+    const nextPage = (page + mobilePageCount) % mobilePageCount;
+    setMobilePage(nextPage);
+    setActiveIndex(nextPage * MOBILE_PAGE_SIZE);
   };
 
   return (
@@ -141,8 +151,13 @@ export default function ServicesSection() {
             <span className="absolute inset-7 rounded-full bg-[radial-gradient(circle_at_32%_25%,rgba(240,176,122,0.3),rgba(12,48,42,0.96)_70%)]" />
             <span className="relative font-display text-3xl font-semibold"><span className="text-ivory">P&amp;</span><span className="text-copper">C</span></span>
           </div>
-          <div className="grid w-full min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
-            {site.services.map((service, index) => {
+          <div className="mb-3 flex items-center justify-between gap-4">
+            <span className="font-mono-label text-[9px] text-mist">Explore services</span>
+            <span className="font-mono-label text-[9px] text-copper">{String(mobilePage + 1).padStart(2, "0")} / {String(mobilePageCount).padStart(2, "0")}</span>
+          </div>
+          <div className="grid min-h-[218px] w-full grid-cols-2 content-start gap-2.5 sm:min-h-[236px] sm:gap-3">
+            {mobileServices.map((service, pageIndex) => {
+              const index = mobilePage * MOBILE_PAGE_SIZE + pageIndex;
               const Icon = serviceIcons[index];
               const active = activeIndex === index;
               return (
@@ -150,7 +165,7 @@ export default function ServicesSection() {
                   key={service.id}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`flex min-h-[72px] w-full min-w-0 items-center gap-3 overflow-hidden rounded-2xl border px-3 py-3 text-left transition-[border-color,background-color,box-shadow] duration-300 focus-ring ${
+                  className={`flex min-h-[104px] w-full min-w-0 flex-col items-start justify-between gap-2 overflow-hidden rounded-2xl border p-3 text-left transition-[border-color,background-color,box-shadow] duration-300 focus-ring sm:min-h-[112px] sm:p-3.5 ${
                     active
                       ? "border-copper/75 bg-copper/10 shadow-[0_0_24px_rgba(201,119,74,0.16)]"
                       : "border-deep-line bg-pounamu-night/70"
@@ -158,7 +173,7 @@ export default function ServicesSection() {
                   aria-pressed={active}
                 >
                   <span
-                    className={`relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full border ${
+                    className={`relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full border sm:h-10 sm:w-10 ${
                       active ? "border-copper-light text-pounamu-night" : "border-copper/40 text-ivory"
                     }`}
                     style={{
@@ -167,15 +182,28 @@ export default function ServicesSection() {
                         : "linear-gradient(145deg, rgba(240,176,122,0.18), rgba(201,119,74,0.1) 48%, rgba(12,48,42,0.9))",
                     }}
                   >
-                    <Icon className="h-5 w-5" strokeWidth={1.7} />
+                    <Icon className="h-4 w-4 sm:h-[18px] sm:w-[18px]" strokeWidth={1.7} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="font-mono-label block text-[9px] text-copper">{service.index}</span>
-                    <span className="mt-1 block break-words text-sm font-medium leading-tight text-ivory">{service.name}</span>
+                    <span className="mt-1 block break-words text-[12px] font-medium leading-[1.2] text-ivory sm:text-sm">{service.name}</span>
                   </span>
                 </button>
               );
             })}
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-4">
+            <button type="button" onClick={() => changeMobilePage(mobilePage - 1)} aria-label="Previous services" className="flex h-10 w-10 items-center justify-center rounded-full border border-deep-line text-ivory transition-colors hover:border-copper hover:text-copper focus-ring">
+              <ChevronLeft className="h-4 w-4" />
+            </button>
+            <div className="flex items-center gap-2" aria-label={`Services page ${mobilePage + 1} of ${mobilePageCount}`}>
+              {Array.from({ length: mobilePageCount }, (_, page) => (
+                <button key={page} type="button" onClick={() => changeMobilePage(page)} aria-label={`Show services page ${page + 1}`} className={`h-1.5 rounded-full transition-all duration-300 ${page === mobilePage ? "w-6 bg-copper" : "w-1.5 bg-ivory/20"}`} />
+              ))}
+            </div>
+            <button type="button" onClick={() => changeMobilePage(mobilePage + 1)} aria-label="Next services" className="flex h-10 w-10 items-center justify-center rounded-full border border-deep-line text-ivory transition-colors hover:border-copper hover:text-copper focus-ring">
+              <ChevronRight className="h-4 w-4" />
+            </button>
           </div>
           <div className="mt-6 rounded-2xl border border-copper/25 bg-pounamu/60 p-5 text-center backdrop-blur-md">
             <div className="font-mono-label text-copper">{activeService.index} / 14</div>
