@@ -220,12 +220,11 @@ export default function Preloader() {
       <div ref={panelRightRef} className="absolute inset-y-0 right-0 w-1/2 bg-pounamu-night" />
 
       <div
-        className="pointer-events-none absolute inset-0 opacity-35"
+        className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(201,119,74,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(201,119,74,0.08) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
-          maskImage: "radial-gradient(circle at center, black, transparent 72%)",
+            "linear-gradient(90deg, transparent 0%, rgba(201,119,74,0.045) 50%, transparent 100%)",
+          maskImage: "radial-gradient(ellipse at center, black, transparent 76%)",
         }}
         aria-hidden="true"
       />
@@ -234,21 +233,10 @@ export default function Preloader() {
         style={{ background: "radial-gradient(circle, rgba(201,119,74,0.16), transparent 67%)" }}
         aria-hidden="true"
       />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px animate-[scanLine_3.5s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-copper/80 to-transparent shadow-[0_0_18px_rgba(201,119,74,0.8)]" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-[8%] top-[18%] h-px bg-gradient-to-r from-transparent via-ivory/10 to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-[8%] bottom-[18%] h-px bg-gradient-to-r from-transparent via-ivory/10 to-transparent" aria-hidden="true" />
 
-      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <span className="preloader-bubble left-[7%] top-[18%] h-16 w-16 sm:h-20 sm:w-20" style={{ animationDelay: "-1.2s", animationDuration: "7s" }} />
-        <span className="preloader-bubble left-[20%] top-[70%] h-10 w-10 sm:h-12 sm:w-12" style={{ animationDelay: "-4.1s", animationDuration: "9s" }} />
-        <span className="preloader-bubble left-[36%] top-[13%] h-8 w-8 sm:h-10 sm:w-10" style={{ animationDelay: "-2.6s", animationDuration: "6s" }} />
-        <span className="preloader-bubble left-[56%] top-[76%] h-14 w-14 sm:h-16 sm:w-16" style={{ animationDelay: "-5.2s", animationDuration: "8s" }} />
-        <span className="preloader-bubble left-[72%] top-[20%] h-12 w-12 sm:h-14 sm:w-14" style={{ animationDelay: "-3.4s", animationDuration: "7.5s" }} />
-        <span className="preloader-bubble left-[86%] top-[65%] h-16 w-16 sm:h-24 sm:w-24" style={{ animationDelay: "-6s", animationDuration: "10s" }} />
-        <span className="preloader-bubble left-[82%] top-[39%] h-7 w-7 sm:h-9 sm:w-9" style={{ animationDelay: "-0.8s", animationDuration: "5.5s" }} />
-      </div>
-
-      <div data-track className="absolute inset-x-[11%] top-1/2 -translate-y-1/2 sm:inset-x-[8%]">
-        <div className="absolute -top-5 left-0 font-mono-label text-[8px] text-mist/50">00 / INIT</div>
-        <div className="absolute -top-5 right-0 font-mono-label text-[8px] text-mist/50">100 / ENTER</div>
+      <div data-track className="absolute inset-x-[10%] top-[61%] -translate-y-1/2 sm:inset-x-[8%] sm:top-[62%]">
         <div
           className="relative h-[3px] w-full overflow-visible bg-deep-line"
           style={{
@@ -257,7 +245,7 @@ export default function Preloader() {
         >
           <div
             ref={fillRef}
-            className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#8f3d28] via-copper to-[#f0b07a] shadow-[0_0_18px_rgba(201,119,74,0.75)]"
+            className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#8f3d28] via-copper to-[#f0b07a] shadow-[0_0_20px_rgba(201,119,74,0.72)]"
             style={{ width: "0%" }}
           />
         </div>
@@ -273,10 +261,10 @@ export default function Preloader() {
         </div>
       </div>
 
-      <div ref={centerRef} className="absolute inset-0 flex flex-col items-center justify-center px-5">
-        <div className="mb-5 flex items-center gap-3 font-mono-label text-[9px] text-copper/80">
+      <div ref={centerRef} className="absolute inset-0 flex -translate-y-[8%] flex-col items-center justify-center px-5 sm:-translate-y-[7%]">
+        <div className="mb-5 flex items-center gap-3 font-mono-label text-[8px] text-copper/80 sm:text-[9px]">
           <span className="h-px w-8 bg-gradient-to-r from-transparent to-copper/70" />
-          IMMERSIVE SYSTEM
+          NEW ZEALAND · EVENTS · EXPERIENCES
           <span className="h-px w-8 bg-gradient-to-l from-transparent to-copper/70" />
         </div>
         <div
@@ -291,7 +279,7 @@ export default function Preloader() {
           ))}
         </div>
         <div className="mt-7 flex items-baseline gap-2 font-mono-label tabular-nums text-copper">
-          <span ref={counterRef} className="text-[28px] tracking-[0.16em] sm:text-[32px]">000</span>
+          <span ref={counterRef} className="text-[22px] tracking-[0.14em] sm:text-[26px]">000</span>
           <span className="text-[10px] text-mist/50">%</span>
         </div>
         <div className="relative mt-3 h-5 w-full text-center">

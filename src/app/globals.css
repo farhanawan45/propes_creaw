@@ -124,33 +124,6 @@
   }
 }
 
-@keyframes preloaderBubbleFloat {
-  0%,
-  100% {
-    transform: translate3d(0, -22px, 0) scale(0.94);
-  }
-  50% {
-    transform: translate3d(8px, 24px, 0) scale(1.06);
-  }
-}
-
-.preloader-bubble {
-  position: absolute;
-  border: 1px solid transparent;
-  border-radius: 9999px;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(245, 241, 232, 0.24) 0 4%, rgba(201, 119, 74, 0.06) 18%, rgba(12, 48, 42, 0.48) 48%, rgba(6, 27, 24, 0.72) 100%) padding-box,
-    linear-gradient(120deg, #8f3d28 0%, #c9774a 50%, #f0b07a 100%) border-box;
-  box-shadow:
-    inset 5px 5px 14px rgba(245, 241, 232, 0.05),
-    inset -9px -10px 22px rgba(0, 0, 0, 0.18),
-    0 0 18px rgba(201, 119, 74, 0.12);
-  backdrop-filter: blur(3px);
-  opacity: 0.82;
-  animation: preloaderBubbleFloat 8s ease-in-out infinite;
-  will-change: transform;
-}
-
 html {
   background: var(--color-pounamu-night);
 }
