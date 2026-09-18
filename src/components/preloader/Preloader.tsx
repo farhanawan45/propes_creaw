@@ -24,7 +24,7 @@ function waitForAssets(): Promise<void> {
     v.preload = "metadata";
     v.onloadedmetadata = () => resolve();
     v.onerror = () => resolve();
-    v.src = site.hero.video.mp4;
+    v.src = site.hero.video.mp4[0];
     v.load();
   });
   const fonts =

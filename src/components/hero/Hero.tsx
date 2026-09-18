@@ -9,7 +9,6 @@ import MagneticButton from "@/components/ui/MagneticButton";
 import VideoBackground from "@/components/hero/VideoBackground";
 import KenBurnsFallback from "@/components/hero/KenBurnsFallback";
 import ServiceTicker from "@/components/hero/ServiceTicker";
-import ShowreelLightbox from "@/components/hero/ShowreelLightbox";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -19,12 +18,10 @@ export default function Hero() {
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const bottomBarRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const [videoFailed, setVideoFailed] = useState(false);
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(true);
-  const [showreelOpen, setShowreelOpen] = useState(false);
   // Server has no `window`, so it always renders the video branch. Reading
   // prefersReducedMotion() directly during render would make the client's
   // very first render diverge from that server markup (hydration
@@ -75,24 +72,9 @@ export default function Hero() {
     { scope: sectionRef, dependencies: [reduced] }
   );
 
-  const toggleMute = () => {
-    setMuted((m) => {
-      const next = !m;
-      if (videoRef.current) videoRef.current.muted = next;
-      return next;
-    });
-  };
+  const toggleMute = () => setMuted((m) => !m);
 
-  const togglePlay = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (playing) {
-      video.pause();
-    } else {
-      video.play().catch(() => {});
-    }
-    setPlaying((p) => !p);
-  };
+  const togglePlay = () => setPlaying((p) => !p);
 
   const headline = site.hero.headline;
   const flatWords = headline.flatMap((part) =>
@@ -111,20 +93,20 @@ export default function Hero() {
       <div ref={mediaRef} className="absolute inset-0 origin-bottom overflow-hidden">
         {!videoFailed && !reduced ? (
           <VideoBackground
-            ref={videoRef}
-            src={site.hero.video.mp4}
+            sources={site.hero.video.mp4}
             poster={site.hero.video.poster}
             muted={muted}
+            playing={playing}
             onError={() => setVideoFailed(true)}
             className="h-full w-full object-cover"
           />
         ) : (
           <KenBurnsFallback />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night via-pounamu-night/50 to-pounamu-night/15" />
+        <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/90 via-pounamu-night/25 to-black/10" />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, rgba(12,31,28,0.85), rgba(12,31,28,0.2))" }}
+          style={{ background: "linear-gradient(to right, rgba(12,31,28,0.68), rgba(12,31,28,0.08) 72%)" }}
         />
       </div>
 
@@ -132,7 +114,7 @@ export default function Hero() {
         <div className="mx-auto max-w-[1440px]">
           <div
             ref={labelRef}
-            className="mb-6 inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full bg-pounamu-night/70 px-3 py-2 backdrop-blur-md sm:gap-2 sm:px-4"
+            className="mb-5 inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full bg-pounamu-night/55 px-3 py-2 backdrop-blur-md sm:gap-2 sm:px-4"
           >
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
             <span
@@ -149,14 +131,13 @@ export default function Hero() {
               // vh-capped too: at 150px on a short/wide 1080p viewport, three
               // stacked lines overflow the bottom-anchored hero and get cut
               // off by the header — clamp on whichever axis is tighter.
-              fontSize: "clamp(44px, min(7.5vw, 9vh), 136px)",
-              lineHeight: 0.98,
+              fontSize: "clamp(46px, min(6.2vw, 8vh), 104px)",
+              lineHeight: 0.96,
               letterSpacing: "-0.03em",
             }}
           >
             {flatWords.map(({ word, emphasis }, i) => (
               <Fragment key={i}>
-                {word === "across" && <br className="hidden lg:block" />}
                 <span className="mr-[0.22em] inline-block overflow-hidden align-top">
                   <span
                     ref={(el) => {
@@ -173,13 +154,13 @@ export default function Hero() {
 
           <p
             ref={subRef}
-            className="mt-6 max-w-[560px] font-light text-ivory/90"
-            style={{ fontSize: "20px", lineHeight: 1.5 }}
+            className="mt-5 max-w-[480px] font-light text-ivory/85"
+            style={{ fontSize: "clamp(16px, 1.35vw, 19px)", lineHeight: 1.45 }}
           >
             {site.hero.lead}
           </p>
 
-          <div ref={ctaRef} className="mt-10 flex flex-wrap items-center gap-4">
+          <div ref={ctaRef} className="mt-7 flex flex-wrap items-center gap-3">
             <MagneticButton
               as="a"
               href={site.hero.ctaPrimary.href}
@@ -188,7 +169,7 @@ export default function Hero() {
                 scrollToHash(site.hero.ctaPrimary.href);
               }}
               cursorLabel="View"
-              className="btn-gradient rounded-full px-8 py-3.5 text-sm font-semibold tracking-wide text-pounamu-night focus-ring"
+              className="btn-gradient rounded-full px-7 py-3 text-sm font-semibold tracking-wide text-ivory focus-ring"
             >
               {site.hero.ctaPrimary.label}
             </MagneticButton>
@@ -199,7 +180,7 @@ export default function Hero() {
                 e.preventDefault();
                 scrollToHash(site.hero.ctaSecondary.href);
               }}
-              className="btn-gradient-outline rounded-full px-8 py-3.5 text-sm font-medium tracking-wide text-ivory backdrop-blur-sm focus-ring"
+              className="btn-gradient-outline rounded-full px-7 py-3 text-sm font-medium tracking-wide text-ivory backdrop-blur-sm focus-ring"
             >
               {site.hero.ctaSecondary.label}
             </MagneticButton>
@@ -259,23 +240,11 @@ export default function Hero() {
                   </button>
                 </>
               )}
-              <button
-                type="button"
-                onClick={() => setShowreelOpen(true)}
-                data-cursor="Play"
-                aria-label="Play showreel with sound"
-                className="btn-gradient-icon flex h-14 w-14 items-center justify-center rounded-full text-copper focus-ring"
-              >
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-                  <polygon points="1,0 14,7 1,14" />
-                </svg>
-              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {showreelOpen && <ShowreelLightbox onClose={() => setShowreelOpen(false)} />}
     </section>
   );
 }

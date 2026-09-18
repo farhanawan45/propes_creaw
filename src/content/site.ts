@@ -87,19 +87,23 @@ export const site = {
   },
 
   hero: {
-    label: "EVENTS · MICE · LUXURY TRAVEL — NEW ZEALAND",
+    label: "NEW ZEALAND · EVENTS · MICE",
     headline: [
-      { text: "We craft " },
-      { text: "unforgettable", emphasis: true },
-      { text: " experiences across New Zealand" },
+      { text: "Unforgettable", emphasis: true },
+      { text: " experiences." },
     ],
-    lead: "Bespoke events, MICE and luxury journeys for Indian corporates, weddings and discerning travellers.",
+    lead: "Events and journeys, crafted end to end.",
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
-      mp4: "/videos/intro.mp4",
+      mp4: [
+        "/videos/hero-event-hall.mp4",
+        "/videos/hero-gala.mp4",
+        "/videos/hero-mice.mp4",
+        "/videos/hero-production.mp4",
+      ],
       showreelMp4: "https://videos.pexels.com/video-files/7791920/7791920-hd_1920_1080_25fps.mp4",
-      poster: "/images/hero-poster.jpg",
+      poster: "/images/hero-event-hall-poster.jpg",
     },
     kenBurnsFallback: [
       "/images/kenburns-1.jpg",
