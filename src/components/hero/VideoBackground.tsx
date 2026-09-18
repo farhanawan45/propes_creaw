@@ -60,6 +60,13 @@ export default function VideoBackground({ sources, poster, muted, playing, onErr
           <source src={src} type="video/mp4" />
         </video>
       ))}
+      {sources.length > 1 && (
+        <div
+          key={active}
+          className="hero-cinematic-flash pointer-events-none absolute inset-0"
+          aria-hidden="true"
+        />
+      )}
     </div>
   );
 }

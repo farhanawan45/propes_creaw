@@ -19,6 +19,7 @@ interface WorkStackCardProps {
 export default function WorkStackCard({ project, index, total, imageOnLeft, isLast, onView }: WorkStackCardProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
+  const imagePanelRef = useRef<HTMLDivElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
   const revealScopeRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +42,17 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
             stagger: 0.07,
             ease: "power4.out",
             scrollTrigger: { trigger: wrapperRef.current, start: "top 80%", once: true },
+          }
+        );
+
+        gsap.fromTo(
+          imagePanelRef.current,
+          { clipPath: "inset(0 0 100% 0 round 24px)" },
+          {
+            clipPath: "inset(0 0 0% 0 round 24px)",
+            duration: 1.15,
+            ease: "power4.inOut",
+            scrollTrigger: { trigger: wrapperRef.current, start: "top 82%", once: true },
           }
         );
       }
@@ -173,7 +185,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
           </div>
 
           {/* IMAGE PANEL */}
-          <div className="relative order-1 aspect-[4/3] w-full shrink-0 overflow-hidden sm:aspect-[16/9] lg:order-none lg:aspect-auto lg:h-full lg:w-[58%]">
+          <div ref={imagePanelRef} className="relative order-1 aspect-[4/3] w-full shrink-0 overflow-hidden sm:aspect-[16/9] lg:order-none lg:aspect-auto lg:h-full lg:w-[58%]">
             <div ref={imageWrapRef} className="absolute inset-0 lg:-inset-y-[8%]">
               <Image
                 src={project.image}

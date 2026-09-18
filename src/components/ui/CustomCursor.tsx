@@ -10,6 +10,7 @@ export default function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [label, setLabel] = useState<string | null>(null);
   const [active, setActive] = useState(false);
+  const [pressed, setPressed] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   const x = useMotionValue(-100);
@@ -32,6 +33,11 @@ export default function CustomCursor() {
       x.set(e.clientX);
       y.set(e.clientY);
     };
+
+    const handleDown = () => setPressed(true);
+    const handleUp = () => setPressed(false);
+    const handleLeave = () => setHidden(true);
+    const handleEnter = () => setHidden(false);
 
     const handleOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
@@ -67,10 +73,18 @@ export default function CustomCursor() {
 
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseover", handleOver);
+    window.addEventListener("mousedown", handleDown);
+    window.addEventListener("mouseup", handleUp);
+    document.documentElement.addEventListener("mouseleave", handleLeave);
+    document.documentElement.addEventListener("mouseenter", handleEnter);
 
     return () => {
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", handleOver);
+      window.removeEventListener("mousedown", handleDown);
+      window.removeEventListener("mouseup", handleUp);
+      document.documentElement.removeEventListener("mouseleave", handleLeave);
+      document.documentElement.removeEventListener("mouseenter", handleEnter);
       document.documentElement.classList.remove("has-custom-cursor");
     };
   }, [x, y]);
@@ -89,11 +103,11 @@ export default function CustomCursor() {
           translateX: "-50%",
           translateY: "-50%",
         }}
-        animate={{ opacity: hidden ? 0 : 1 }}
+        animate={{ opacity: hidden ? 0 : 1, scale: pressed ? 0.55 : 1 }}
         transition={{ duration: 0.15 }}
       />
       <motion.div
-        className="custom-cursor rounded-full border border-copper flex items-center justify-center"
+        className="custom-cursor flex items-center justify-center rounded-full border border-copper"
         style={{
           x: ringX,
           y: ringY,
@@ -101,15 +115,33 @@ export default function CustomCursor() {
           translateY: "-50%",
         }}
         animate={{
-          width: active ? 76 : 32,
-          height: active ? 76 : 32,
+          width: active ? 46 : 32,
+          height: active ? 46 : 32,
+          scale: pressed ? 0.82 : 1,
           opacity: hidden ? 0 : 1,
-          backgroundColor: active ? "rgba(255,122,26,0.12)" : "rgba(255,122,26,0)",
+          borderColor: active ? "rgba(240,176,122,0.95)" : "rgba(201,119,74,0.75)",
+          boxShadow: active ? "0 0 22px rgba(201,119,74,0.28), inset 0 0 14px rgba(201,119,74,0.1)" : "0 0 0 rgba(201,119,74,0)",
         }}
-        transition={{ duration: 0.3, ease: "easeOut" }}
+        transition={{ duration: 0.22, ease: "easeOut" }}
       >
+        {active && (
+          <motion.span
+            className="absolute inset-[-4px] rounded-full"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 2.8, ease: "linear", repeat: Infinity }}
+          >
+            <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-copper-light shadow-[0_0_9px_rgba(240,176,122,.9)]" />
+            <span className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 translate-y-1/2 rounded-full bg-copper" />
+          </motion.span>
+        )}
         {label && (
-          <span className="font-mono-label text-[10px] text-copper">{label}</span>
+          <motion.span
+            initial={{ opacity: 0, x: -4 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="pointer-events-none absolute left-[calc(100%+10px)] whitespace-nowrap rounded-full border border-copper/30 bg-pounamu-night/90 px-2.5 py-1 font-mono-label text-[8px] text-copper-light shadow-[0_8px_24px_rgba(0,0,0,.24)] backdrop-blur-md"
+          >
+            {label}
+          </motion.span>
         )}
       </motion.div>
     </>

@@ -182,9 +182,20 @@ export default function ServicesSection() {
               const endX = node.x * 10;
               const endY = node.y * 7.6;
               const controlX = index < 7 ? 360 : 640;
+              const connectionPath = `M500 380 Q${controlX} 380 ${endX} ${endY}`;
               return (
                 <g key={site.services[index].id}>
-                  <path d={`M500 380 Q${controlX} 380 ${endX} ${endY}`} fill="none" stroke="url(#networkLine)" strokeWidth={activeIndex === index ? 2 : 1} opacity={activeIndex === index ? 1 : 0.62} filter={activeIndex === index ? "url(#lineGlow)" : undefined} />
+                  <path d={connectionPath} fill="none" stroke="url(#networkLine)" strokeWidth={activeIndex === index ? 2 : 1} opacity={activeIndex === index ? 1 : 0.62} filter={activeIndex === index ? "url(#lineGlow)" : undefined}>
+                    {activeIndex === index && (
+                      <animate attributeName="stroke-dasharray" values="4 12;12 5;4 12" dur="2.4s" repeatCount="indefinite" />
+                    )}
+                  </path>
+                  {activeIndex === index && (
+                    <circle r="5" fill="#f0b07a" filter="url(#lineGlow)">
+                      <animate attributeName="opacity" values="0;1;1;0" dur="1.9s" repeatCount="indefinite" />
+                      <animateMotion path={connectionPath} dur="1.9s" repeatCount="indefinite" />
+                    </circle>
+                  )}
                   <circle cx={endX} cy={endY} r={activeIndex === index ? 4 : 2.5} fill="#f0b07a" opacity={activeIndex === index ? 1 : 0.65} />
                 </g>
               );

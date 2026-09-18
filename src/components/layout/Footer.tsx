@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
@@ -180,19 +181,25 @@ export default function Footer() {
 
           <div>
             <div className="font-mono-label text-copper">Contact</div>
-            <ul className="mt-5 space-y-3 text-sm text-ivory/80">
-              <li>
+            <ul className="mt-5 space-y-4 text-sm text-ivory/80">
+              <li className="flex items-center gap-3">
+                <Phone className="h-4 w-4 shrink-0 text-copper" strokeWidth={1.6} aria-hidden="true" />
                 <a href={site.contact.phoneHref} className="hover:text-copper">
                   {site.contact.phone}
                 </a>
               </li>
-              <li>
+              <li className="flex items-center gap-3">
+                <Mail className="h-4 w-4 shrink-0 text-copper" strokeWidth={1.6} aria-hidden="true" />
                 <a href={`mailto:${site.contact.email}`} className="hover:text-copper">
                   {site.contact.email}
                 </a>
               </li>
-              <li className="max-w-[220px] text-mist">{site.contact.address}</li>
-              <li>
+              <li className="flex max-w-[250px] items-start gap-3 text-mist">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-copper" strokeWidth={1.6} aria-hidden="true" />
+                <span>{site.contact.address}</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Clock3 className="h-4 w-4 shrink-0 text-copper" strokeWidth={1.6} aria-hidden="true" />
                 <LiveClock />
               </li>
             </ul>
