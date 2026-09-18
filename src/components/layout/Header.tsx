@@ -96,12 +96,10 @@ export default function Header() {
               >
                 {(hovered === item.href || (!hovered && active === item.href)) && (
                   <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 rounded-full border border-deep-line bg-pounamu"
+                    layoutId="nav-underline"
+                    className="absolute inset-x-4 bottom-0 h-[2px] bg-copper"
                     transition={{ type: "spring", stiffness: 400, damping: 32 }}
-                  >
-                    <span className="absolute inset-x-3 bottom-0 h-[2px] rounded-full bg-copper" />
-                  </motion.span>
+                  />
                 )}
                 <a
                   href={item.href}

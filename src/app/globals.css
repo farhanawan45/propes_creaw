@@ -210,6 +210,13 @@ body {
   padding-bottom: clamp(96px, 12vw, 180px);
 }
 
+/* Keep the first content section close to the mobile hero. */
+@media (max-width: 639px) {
+  .about-section {
+    padding-top: 48px;
+  }
+}
+
 .divider-line {
   height: 1px;
   background: var(--color-deep-line);
@@ -348,6 +355,16 @@ body {
 .btn-gradient-outline:hover::after,
 .btn-gradient-icon:hover::after {
   transform: translateX(75%) rotate(8deg);
+}
+
+/* Consistent corner language for every interactive button across the site. */
+button,
+[role="button"],
+a[href].btn-gradient,
+a[href].btn-gradient-outline,
+a[href].btn-gradient-icon,
+a[href].rounded-full {
+  border-radius: 10px !important;
 }
 
 /* Date input dark theme */

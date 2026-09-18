@@ -162,7 +162,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                   <button type="button" onClick={onView} className="btn-gradient flex h-11 items-center justify-center rounded-full px-4 text-sm font-semibold text-ivory focus-ring">
                     Gallery
                   </button>
-                  <Link href={`/work/${project.id}`} className="btn-gradient-outline flex h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-semibold text-ivory focus-ring">
+                  <Link href={`/work/${project.id}`} prefetch className="btn-gradient-outline flex h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-semibold text-ivory focus-ring">
                     Case study <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
                   </Link>
                 </div>
@@ -191,6 +191,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 src={project.image}
                 alt={`${project.title} — ${project.location}`}
                 fill
+                quality={72}
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105 hover:scale-105"
               />

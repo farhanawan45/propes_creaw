@@ -43,7 +43,15 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </header>
 
       <section className="relative flex min-h-[82svh] items-end overflow-hidden px-5 pb-12 pt-32 sm:px-8 lg:px-12 lg:pb-20">
-        <Image src={project.image} alt={`${project.title} in ${project.location}`} fill priority sizes="100vw" className="object-cover" />
+        <Image
+          src={project.image}
+          alt={`${project.title} in ${project.location}`}
+          fill
+          priority
+          quality={72}
+          sizes="(min-width: 1024px) 58vw, 100vw"
+          className="object-cover bg-pounamu-night"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night via-pounamu-night/35 to-black/15" />
         <div className="relative mx-auto w-full max-w-[1440px]">
           <div className="font-mono-label text-copper-light">{project.category} / {String(index + 1).padStart(2, "0")}</div>
@@ -68,7 +76,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <section className="border-t border-deep-line px-5 py-14 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-[1200px] flex-col items-start justify-between gap-6 sm:flex-row sm:items-center">
           <div><div className="font-mono-label text-copper">Next project</div><div className="mt-2 font-display text-2xl font-semibold sm:text-3xl">{nextProject.title}</div></div>
-          <Link href={`/work/${nextProject.id}`} className="btn-gradient flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ivory">Explore case study <ArrowUpRight className="h-4 w-4" /></Link>
+          <Link href={`/work/${nextProject.id}`} prefetch className="btn-gradient flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-ivory">Explore case study <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
       </section>
     </main>

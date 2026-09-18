@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
-import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import type { WorkProject } from "@/content/site";
 
@@ -19,9 +18,18 @@ export default function WorkLightbox({
 }) {
   const [index, setIndex] = useState(initialIndex);
   const project = projects[index];
+  const previousProject = projects[(index - 1 + projects.length) % projects.length];
+  const nextProject = projects[(index + 1) % projects.length];
 
   const goPrev = () => setIndex((i) => (i - 1 + projects.length) % projects.length);
   const goNext = () => setIndex((i) => (i + 1) % projects.length);
+
+  useEffect(() => {
+    [project, previousProject, nextProject].forEach((item) => {
+      const image = new window.Image();
+      image.src = item.image;
+    });
+  }, [project, previousProject, nextProject]);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -49,7 +57,7 @@ export default function WorkLightbox({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.35 }}
+      transition={{ duration: 0.2 }}
       className="fixed inset-0 z-[95] flex flex-col items-center justify-center bg-pounamu-night/95 p-5 sm:p-10"
       onClick={onClose}
     >
@@ -85,13 +93,13 @@ export default function WorkLightbox({
         <ChevronRight className="h-5 w-5" strokeWidth={1.8} />
       </button>
 
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="sync" initial={false}>
         <motion.div
           key={project.id}
-          initial={{ opacity: 0, x: 24 }}
+          initial={{ opacity: 0, x: 12 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -24 }}
-          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          exit={{ opacity: 0, x: -12 }}
+          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.4}
@@ -99,8 +107,13 @@ export default function WorkLightbox({
           className="relative flex w-full max-w-5xl flex-col items-center"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="relative aspect-[16/10] w-full touch-pan-y overflow-hidden rounded-2xl">
-            <Image src={project.image} alt={project.title} fill sizes="90vw" className="pointer-events-none object-cover" priority />
+          <div
+            role="img"
+            aria-label={project.title}
+            className="relative aspect-[16/10] w-full touch-pan-y overflow-hidden rounded-2xl bg-pounamu bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url("${project.image}")` }}
+          >
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-pounamu-night/20 to-transparent" />
           </div>
           <div className="mt-6 text-center">
             <div className="font-mono-label text-copper">{project.location}, New Zealand</div>

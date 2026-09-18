@@ -143,7 +143,7 @@ export default function Hero() {
                     ref={(el) => {
                       wordRefs.current[i] = el;
                     }}
-                    className={`inline-block ${emphasis ? "text-copper italic" : ""}`}
+                    className={`inline-block ${emphasis ? "text-copper" : ""}`}
                   >
                     {word}
                   </span>

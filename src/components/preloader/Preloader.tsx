@@ -39,6 +39,8 @@ function delay(ms: number): Promise<void> {
 
 export default function Preloader() {
   const pathname = usePathname();
+  const initialPathRef = useRef(pathname);
+  const hasPlayedRef = useRef(false);
   // Read (never write) synchronously during the initial render via a lazy
   // initializer — this is what actually matters. Reading twice (React
   // Strict Mode replays initializers in dev) is safe because it's a pure
@@ -84,6 +86,14 @@ export default function Preloader() {
         document.documentElement.classList.remove("preload-lock");
         gsap.set(container, { display: "none" });
       };
+
+      // The root layout persists between routes. When returning from a case
+      // study, the preloader DOM mounts again but the intro must not replay.
+      if (hasPlayedRef.current || initialPathRef.current !== "/") {
+        finish();
+        return;
+      }
+      hasPlayedRef.current = true;
 
       if (prefersReducedMotion()) {
         finish();
@@ -217,7 +227,7 @@ export default function Preloader() {
         masterTl.kill();
       };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [pathname], revertOnUpdate: true }
   );
 
   if (pathname !== "/") return null;

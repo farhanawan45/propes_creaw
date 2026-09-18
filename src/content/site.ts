@@ -117,10 +117,10 @@ export const site = {
     label: "01 — WHO WE ARE",
     title: "About Props & Crew",
     statement:
-      "Props & Crew is a New Zealand destination management company that turns journeys, conferences and celebrations into seamless, unforgettable experiences — with a Hindi and English speaking crew who understand exactly what you need.",
+      "We create and deliver exceptional events, corporate programmes and journeys across New Zealand — combining local expertise with a crew that understands your culture, expectations and every detail.",
     images: [
-      "/images/about-milford-sound.jpg",
-      "/images/about-queenstown-aerial.jpg",
+      "/images/service-event-management.jpg",
+      "/images/service-decor-fabrications.jpg",
       "/images/about-corporate-group.jpg",
     ],
     stats: [
