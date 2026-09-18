@@ -8,7 +8,6 @@ import LiveClock from "@/components/ui/LiveClock";
 // Temporary proof aid for the 50/50 split — flip to true, screenshot at
 // 1440/1920, confirm it sits exactly between the two equal-width columns,
 // then flip back to false before shipping.
-const DEBUG_CENTER_LINE = false;
 
 export default function ContactSection() {
   return (
@@ -18,10 +17,6 @@ export default function ContactSection() {
       </div>
 
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        {DEBUG_CENTER_LINE && (
-          <div className="pointer-events-none absolute inset-y-0 left-1/2 z-50 w-px -translate-x-1/2 bg-fuchsia-500" />
-        )}
-
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

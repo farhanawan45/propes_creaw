@@ -34,8 +34,20 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2678400,
+  },
   async headers() {
     return [
+      {
+        source: "/videos/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=2592000" }],
+      },
+      {
+        source: "/images/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=2592000" }],
+      },
       {
         source: "/:path*",
         headers: securityHeaders,

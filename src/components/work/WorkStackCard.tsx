@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, ArrowUpRight } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
@@ -157,15 +158,14 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
               </div>
 
               <div className="mt-5 overflow-hidden">
-                <button
-                  type="button"
-                  onClick={onView}
-                  data-reveal
-                  className="btn-gradient flex h-11 w-full items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold text-pounamu-night focus-ring"
-                >
-                  View project
-                  <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
-                </button>
+                <div data-reveal className="grid grid-cols-2 gap-2">
+                  <button type="button" onClick={onView} className="btn-gradient flex h-11 items-center justify-center rounded-full px-4 text-sm font-semibold text-ivory focus-ring">
+                    Gallery
+                  </button>
+                  <Link href={`/work/${project.id}`} className="btn-gradient-outline flex h-11 items-center justify-center gap-1.5 rounded-full px-4 text-sm font-semibold text-ivory focus-ring">
+                    Case study <ArrowUpRight className="h-4 w-4" strokeWidth={2} />
+                  </Link>
+                </div>
               </div>
 
               <div className="mt-6 overflow-hidden">
@@ -191,8 +191,6 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 src={project.image}
                 alt={`${project.title} — ${project.location}`}
                 fill
-                loading="eager"
-                fetchPriority={index < 2 ? "high" : "auto"}
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover transition-transform duration-[1.2s] ease-out group-hover:scale-105 hover:scale-105"
               />

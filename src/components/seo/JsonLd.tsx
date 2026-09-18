@@ -14,7 +14,7 @@ export default function JsonLd() {
     email: site.contact.email,
     address: {
       "@type": "PostalAddress",
-      streetAddress: "123 Queen Street",
+      streetAddress: site.contact.address,
       addressLocality: "Auckland",
       addressCountry: "NZ",
     },

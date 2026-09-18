@@ -83,7 +83,7 @@ export const site = {
   ] satisfies NavLink[],
 
   preloader: {
-    durationSeconds: 1.1,
+    durationSeconds: 0.75,
   },
 
   hero: {

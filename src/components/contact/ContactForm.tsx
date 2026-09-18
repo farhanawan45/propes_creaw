@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import type { ServiceId } from "@/content/site";
+import { site, type ServiceId } from "@/content/site";
 import { contactSchema } from "@/lib/validation";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { TextField, TextAreaField } from "@/components/contact/TextField";
@@ -181,7 +181,7 @@ export default function ContactForm() {
 
       <Checkbox checked={form.consent} onChange={(checked) => setForm((f) => ({ ...f, consent: checked }))}>
         I agree to the{" "}
-        <a href="#privacy" className="text-copper underline underline-offset-2">
+        <a href="/privacy" className="text-copper underline underline-offset-2">
           Privacy Policy
         </a>{" "}
         and consent to being contacted about my enquiry.*
@@ -218,7 +218,15 @@ export default function ContactForm() {
                 : "border-red-400/40 bg-red-400/10 text-ivory"
             }`}
           >
-            {statusMessage}
+            <p>{statusMessage}</p>
+            {status === "error" && (
+              <a
+                href={`mailto:${site.contact.email}`}
+                className="mt-2 inline-block font-semibold text-copper-light underline underline-offset-4"
+              >
+                Email {site.contact.email}
+              </a>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

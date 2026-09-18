@@ -2,11 +2,12 @@
 
 import { useLayoutEffect, useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
 import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
 
 const SESSION_KEY = "pc-preloader-shown";
-const QUICK_DURATION_S = 1.1;
+const QUICK_DURATION_S = 0.25;
 const HOLD_CAP_MS = 100;
 const STATUS_MESSAGES = ["Preparing your experience…", "Loading New Zealand…", "Almost ready…"];
 
@@ -37,6 +38,7 @@ function delay(ms: number): Promise<void> {
 }
 
 export default function Preloader() {
+  const pathname = usePathname();
   // Read (never write) synchronously during the initial render via a lazy
   // initializer — this is what actually matters. Reading twice (React
   // Strict Mode replays initializers in dev) is safe because it's a pure
@@ -64,10 +66,14 @@ export default function Preloader() {
   const skippedRef = useRef(false);
 
   useLayoutEffect(() => {
+    if (pathname !== "/") {
+      document.documentElement.classList.remove("preload-lock");
+      return;
+    }
     // Idempotent — safe to run more than once (Strict Mode), and doesn't
     // affect this visit's own `mode`, only future ones this session.
     sessionStorage.setItem(SESSION_KEY, "1");
-  }, []);
+  }, [pathname]);
 
   useGSAP(
     () => {
@@ -213,6 +219,8 @@ export default function Preloader() {
     },
     { scope: containerRef }
   );
+
+  if (pathname !== "/") return null;
 
   return (
     <div ref={containerRef} className="fixed inset-0 z-[100] overflow-hidden bg-pounamu-night" role="status" aria-label="Site loading">

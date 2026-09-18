@@ -203,20 +203,6 @@ export default function Footer() {
                 <LiveClock />
               </li>
             </ul>
-            <form onSubmit={(e) => e.preventDefault()} className="mt-6 flex items-center gap-2 border-b border-deep-line pb-2 focus-within:border-copper">
-              <input
-                type="email"
-                required
-                placeholder="Your email address"
-                aria-label="Newsletter email"
-                className="w-full bg-transparent text-sm text-ivory placeholder:text-mist outline-none"
-              />
-              <button type="submit" aria-label="Subscribe" className="text-copper focus-ring">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" className="h-5 w-5">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </form>
           </div>
         </div>
       </div>
@@ -248,10 +234,10 @@ export default function Footer() {
           &copy; {year} {site.name}. All rights reserved.
         </p>
         <div className="flex items-center gap-6">
-          <a href="#privacy" className="hover:text-copper">
+          <a href="/privacy" className="hover:text-copper">
             Privacy Policy
           </a>
-          <a href="#terms" className="hover:text-copper">
+          <a href="/terms" className="hover:text-copper">
             Terms of Service
           </a>
           <MagneticButton

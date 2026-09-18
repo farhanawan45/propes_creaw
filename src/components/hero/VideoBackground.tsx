@@ -31,6 +31,19 @@ export default function VideoBackground({ sources, poster, muted, playing, onErr
   }, [playing, sources.length]);
 
   useEffect(() => {
+    if (sources.length < 2) return;
+    const timers = sources.slice(1).map((_, offset) =>
+      window.setTimeout(() => {
+        const video = videosRef.current[offset + 1];
+        if (!video || video.readyState >= 3) return;
+        video.preload = "auto";
+        video.load();
+      }, 1400 + offset * 500)
+    );
+    return () => timers.forEach(window.clearTimeout);
+  }, [sources]);
+
+  useEffect(() => {
     videosRef.current.forEach((video) => {
       if (!video) return;
       video.muted = muted;
@@ -50,7 +63,7 @@ export default function VideoBackground({ sources, poster, muted, playing, onErr
           loop
           muted={muted}
           playsInline
-          preload="auto"
+          preload={index === 0 ? "auto" : "none"}
           poster={index === 0 ? poster : undefined}
           onError={() => {
             failedRef.current.add(index);

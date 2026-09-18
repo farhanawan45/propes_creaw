@@ -36,7 +36,7 @@ export default function Header() {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => setHeaderReady(true), 1900);
+    const timer = setTimeout(() => setHeaderReady(true), 850);
     return () => clearTimeout(timer);
   }, []);
 

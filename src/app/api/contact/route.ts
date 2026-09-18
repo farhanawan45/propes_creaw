@@ -44,9 +44,17 @@ export async function POST(req: NextRequest) {
     await sendContactEmail(parsed.data);
   } catch (error) {
     console.error("Failed to send contact email:", error);
+    const configurationMissing =
+      error instanceof Error && error.message === "SMTP environment variables are not configured";
     return NextResponse.json(
-      { ok: false, message: "Something went wrong sending your enquiry. Please try again or email us directly." },
-      { status: 500 }
+      {
+        ok: false,
+        code: configurationMissing ? "EMAIL_NOT_CONFIGURED" : "EMAIL_SEND_FAILED",
+        message: configurationMissing
+          ? "Online enquiries are being configured. Please email us directly for now."
+          : "Something went wrong sending your enquiry. Please try again or email us directly.",
+      },
+      { status: configurationMissing ? 503 : 500 }
     );
   }
 
