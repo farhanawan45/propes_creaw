@@ -103,10 +103,10 @@ export default function Footer() {
                 {site.services.map((s) => (
                   <span key={s.id} className="flex items-center gap-8">
                     <span
-                      className="font-display font-semibold text-transparent"
+                      className="font-display font-semibold text-ivory/85 drop-shadow-[0_2px_16px_rgba(245,241,232,.08)]"
                       style={{
                         fontSize: "clamp(28px, 4vw, 56px)",
-                        WebkitTextStroke: "1px rgba(245,241,232,0.28)",
+                        WebkitTextStroke: "0.4px rgba(245,241,232,0.35)",
                       }}
                     >
                       {s.name}
@@ -172,8 +172,18 @@ export default function Footer() {
             <div className="font-mono-label text-copper">Services</div>
             <ul className="mt-5 grid grid-cols-1 gap-2.5">
               {site.services.slice(0, 5).map((s) => (
-                <li key={s.id} className="text-sm text-ivory/70">
-                  {s.name}
+                <li key={s.id}>
+                  <a
+                    href="#services"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      scrollToHash("#services");
+                    }}
+                    className="group inline-flex items-center gap-2 text-sm text-ivory/70 transition-all duration-300 hover:translate-x-1 hover:text-copper"
+                  >
+                    <span className="h-px w-0 bg-copper transition-all duration-300 group-hover:w-3" />
+                    {s.name}
+                  </a>
                 </li>
               ))}
             </ul>

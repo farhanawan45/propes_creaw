@@ -100,7 +100,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-6">
+    <form onSubmit={handleSubmit} noValidate className="space-y-4">
       {/* Honeypot */}
       <input
         type="text"
@@ -113,7 +113,7 @@ export default function ContactForm() {
         aria-hidden="true"
       />
 
-      <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
         <TextField
           label="Full Name"
           name="fullName"
@@ -135,7 +135,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
         <PhoneField
           countryCode={form.countryCode}
           phoneNumber={form.phoneNumber}
@@ -150,7 +150,7 @@ export default function ContactForm() {
         />
       </div>
 
-      <div className="grid grid-cols-1 gap-x-5 gap-y-6 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-x-4 gap-y-4 sm:grid-cols-2">
         <TextField
           label="Group Size"
           name="groupSize"
@@ -192,7 +192,7 @@ export default function ContactForm() {
         type="submit"
         id="contact-submit"
         disabled={status === "loading"}
-        className="btn-gradient flex h-[60px] w-full items-center justify-center gap-2 rounded-full text-sm font-semibold tracking-wide text-pounamu-night disabled:opacity-60 focus-ring"
+        className="btn-gradient flex h-12 w-full items-center justify-center gap-2 rounded-full text-sm font-semibold tracking-wide text-pounamu-night disabled:opacity-60 focus-ring"
       >
         {status === "loading" ? (
           <>

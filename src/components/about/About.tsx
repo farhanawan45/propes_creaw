@@ -166,7 +166,7 @@ export default function About() {
               <div className="absolute inset-x-5 bottom-6 z-20 sm:inset-x-8 sm:bottom-8 lg:inset-x-12 lg:bottom-11">
                 <div className="grid items-end gap-7 lg:grid-cols-[1fr_auto]">
                   <div>
-                    <div className="inline-flex items-center gap-2.5 rounded-[10px] border border-copper/55 bg-pounamu-night/80 px-3.5 py-2.5 font-mono-label text-[10px] font-bold tracking-[0.13em] text-copper-light shadow-[0_10px_30px_rgba(0,0,0,.32),inset_0_1px_0_rgba(255,255,255,.08)] backdrop-blur-xl sm:px-4 sm:text-[11px]">
+                    <div className="inline-flex items-center gap-2.5 rounded-[10px] border border-white/25 bg-pounamu-night/[0.18] px-3.5 py-2.5 font-mono-label text-[10px] font-bold tracking-[0.13em] text-copper-light shadow-[0_5px_16px_rgba(0,0,0,.12)] [text-shadow:0_1px_5px_rgba(0,0,0,.85)] backdrop-blur-[2px] sm:px-4 sm:text-[11px]">
                       <span className="size-1.5 shrink-0 rounded-full bg-copper shadow-[0_0_10px_rgba(240,176,122,.9)]" />
                       <span>0{activeSlide + 1}</span>
                       <span className="text-white/35">/</span>
@@ -186,11 +186,11 @@ export default function About() {
                     </AnimatePresence>
                   </div>
 
-                  <div className="flex w-full items-center justify-between gap-1.5 rounded-full border border-white/20 bg-ink/45 p-1.5 shadow-xl backdrop-blur-md lg:w-auto">
-                    <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous slide" className="flex size-10 items-center justify-center rounded-full text-white/80 transition duration-300 hover:bg-white/10 hover:text-white sm:size-11">
+                  <div className="flex w-full items-center justify-between lg:w-auto lg:gap-3">
+                    <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(210,111,65,.3)] transition duration-300 hover:bg-[#e08458] sm:size-12">
                       <ArrowLeft size={18} strokeWidth={1.6} />
                     </button>
-                    <button type="button" onClick={() => moveSlide(1)} aria-label="Next slide" className="flex size-10 items-center justify-center rounded-full bg-copper text-white shadow-[0_8px_24px_rgba(210,111,65,.35)] transition duration-300 hover:bg-[#e08458] sm:size-11">
+                    <button type="button" onClick={() => moveSlide(1)} aria-label="Next slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(210,111,65,.3)] transition duration-300 hover:bg-[#e08458] sm:size-12">
                       <ArrowRight size={18} strokeWidth={1.6} />
                     </button>
                   </div>

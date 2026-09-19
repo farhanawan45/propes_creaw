@@ -106,9 +106,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
   return (
     <div
       ref={wrapperRef}
-      className={`sticky z-[var(--stack-z)] ${
-        isLast ? "h-auto pb-8" : "h-[85svh] lg:h-[100svh]"
-      }`}
+      className="sticky z-[var(--stack-z)] h-[85svh] lg:h-[560px] xl:h-[580px]"
       style={
         {
           top: `calc(var(--stack-top-base) + ${index} * var(--stack-top-step))`,

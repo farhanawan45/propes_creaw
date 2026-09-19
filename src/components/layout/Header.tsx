@@ -64,7 +64,7 @@ export default function Header() {
             borderColor: scrolled ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0)",
           }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="flex w-full items-center justify-between rounded-full border backdrop-blur-xl"
+          className="flex w-full items-center justify-between rounded-[10px] border backdrop-blur-xl"
           style={{ WebkitBackdropFilter: scrolled ? "blur(20px)" : "none" }}
         >
           <motion.div

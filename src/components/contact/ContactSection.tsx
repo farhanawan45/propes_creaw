@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { site } from "@/content/site";
 import ContactForm from "@/components/contact/ContactForm";
 import LiveClock from "@/components/ui/LiveClock";
@@ -11,13 +12,22 @@ import LiveClock from "@/components/ui/LiveClock";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="section-pad relative bg-pounamu-night">
+    <section id="contact" className="section-pad relative overflow-hidden bg-pounamu-night">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="grid h-full w-full grid-cols-1 opacity-30 lg:w-[55%] lg:grid-cols-[1.4fr_.6fr]">
+          <div className="relative h-full">
+            <Image src="/images/service-event-management.jpg" alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+          </div>
+          <div className="relative hidden h-full lg:block">
+            <Image src="/images/service-decor-fabrications.jpg" alt="" fill sizes="18vw" className="object-cover" />
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,27,23,.7)_0%,rgba(5,27,23,.9)_48%,rgba(5,27,23,1)_68%)] max-lg:bg-pounamu-night/75" />
         <div className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-copper/10 blur-[140px]" />
       </div>
 
       <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-14">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +62,7 @@ export default function ContactSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
           >
-            <div className="rounded-3xl border border-deep-line bg-pounamu/60 p-6 sm:p-10">
+            <div className="rounded-3xl border border-deep-line bg-pounamu/65 p-5 backdrop-blur-md sm:p-7">
               <ContactForm />
             </div>
           </motion.div>

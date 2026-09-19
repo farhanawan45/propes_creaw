@@ -110,7 +110,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 w-full px-5 pb-32 pt-36 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
+      <div className="relative z-10 w-full px-5 pb-6 pt-36 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
         <div className="relative top-[10px] mx-auto max-w-[1440px] sm:top-0">
           <div
             ref={labelRef}

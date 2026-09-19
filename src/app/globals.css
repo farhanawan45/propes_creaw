@@ -456,3 +456,38 @@ input[type="date"] {
 .pc-daypicker .rdp-button_previous:hover {
   background: rgba(245, 241, 232, 0.08);
 }
+
+/* Event possibilities — two seamless, counter-moving showcase rows. */
+@keyframes eventMarqueeForward {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(calc(-100% / 3), 0, 0); }
+}
+
+@keyframes eventMarqueeReverse {
+  from { transform: translate3d(calc(-100% / 3), 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.event-marquee-track {
+  animation: eventMarqueeForward 34s linear infinite;
+  will-change: transform;
+}
+
+.event-marquee-track.event-marquee-reverse {
+  animation-name: eventMarqueeReverse;
+  animation-duration: 38s;
+}
+
+.event-marquee:hover .event-marquee-track {
+  animation-play-state: paused;
+}
+
+.event-moment-card {
+  box-shadow: 0 10px 24px rgba(12, 31, 28, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-marquee-track {
+    animation-play-state: paused;
+  }
+}

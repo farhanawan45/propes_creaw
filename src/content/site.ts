@@ -92,7 +92,7 @@ export const site = {
       { text: "Unforgettable", emphasis: true },
       { text: " experiences." },
     ],
-    lead: "Events and journeys, crafted end to end.",
+    lead: "Luxury events, MICE and journeys across New Zealand — thoughtfully crafted from first idea to final farewell.",
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
@@ -158,7 +158,7 @@ export const site = {
       id: "event-management",
       index: "01",
       name: "Event Management",
-      image: "/images/service-event-management.jpg",
+      image: "/images/service-event-management.webp",
       description:
         "End-to-end planning and on-ground execution for weddings, corporate events and celebrations across New Zealand.",
       highlights: ["Full-cycle planning", "On-site delivery team", "Vendor & budget management"],
@@ -167,7 +167,7 @@ export const site = {
       id: "mice",
       index: "02",
       name: "MICE",
-      image: "/images/service-mice.jpg",
+      image: "/images/service-mice.webp",
       description:
         "Meetings, incentives, conferences and exhibitions — flawlessly produced for Indian corporate groups.",
       highlights: ["Conference production", "Incentive travel design", "Delegate management"],
@@ -176,7 +176,7 @@ export const site = {
       id: "luxury-coaches-cars",
       index: "03",
       name: "Luxury Coaches & Cars",
-      image: "/images/service-luxury-coaches-cars.jpg",
+      image: "/images/service-luxury-coaches-cars.webp",
       description:
         "Premium chauffeured coaches and cars for groups of every size, all across the North and South Islands.",
       highlights: ["Chauffeured fleet", "North & South Island routes", "Group & private transfers"],
@@ -185,7 +185,7 @@ export const site = {
       id: "location-management",
       index: "04",
       name: "Location Management",
-      image: "/images/service-location-management.jpg",
+      image: "/images/service-location-management.webp",
       description:
         "Scouting and securing New Zealand's most breathtaking venues and filming-worthy locations.",
       highlights: ["Venue scouting", "Permits & logistics", "Iconic NZ locations"],
@@ -194,7 +194,7 @@ export const site = {
       id: "sites-seeing",
       index: "05",
       name: "Sites Seeing",
-      image: "/images/service-sites-seeing.jpg",
+      image: "/images/service-sites-seeing.webp",
       description:
         "Curated sightseeing itineraries that showcase the very best of Aotearoa's landscapes and culture.",
       highlights: ["Curated itineraries", "Expert local guides", "Iconic landmarks"],
@@ -203,7 +203,7 @@ export const site = {
       id: "indian-food",
       index: "06",
       name: "Indian Food",
-      image: "/images/service-indian-food.jpg",
+      image: "/images/service-indian-food.webp",
       description:
         "Authentic Indian catering and menus, tailored for weddings, corporate dinners and private events.",
       highlights: ["Authentic regional menus", "Dietary customisation", "Live counters"],
@@ -212,7 +212,7 @@ export const site = {
       id: "adventure-experiences",
       index: "07",
       name: "Adventure Experiences",
-      image: "/images/service-adventure-experiences.jpg",
+      image: "/images/service-adventure-experiences.webp",
       description:
         "Thrilling, safely managed adventure activities across New Zealand's iconic outdoors.",
       highlights: ["Safety-certified operators", "Group & private options", "All fitness levels"],
@@ -221,7 +221,7 @@ export const site = {
       id: "private-cruises",
       index: "08",
       name: "Private Cruises",
-      image: "/images/service-private-cruises.jpg",
+      image: "/images/service-private-cruises.webp",
       description:
         "Exclusive harbour and lake cruises, private-chartered for celebrations and intimate gatherings.",
       highlights: ["Private charters", "Harbour & lake routes", "Catering on board"],
@@ -230,7 +230,7 @@ export const site = {
       id: "scenic-chopper-rides",
       index: "09",
       name: "Scenic Chopper Rides",
-      image: "/images/service-scenic-chopper-rides.jpg",
+      image: "/images/service-scenic-chopper-rides.webp",
       description:
         "Helicopter tours over glaciers, fiords and vineyards for an unforgettable aerial perspective.",
       highlights: ["Glacier & fiord routes", "Licensed pilots", "Private proposals & photo flights"],
@@ -239,7 +239,7 @@ export const site = {
       id: "event-technical-support",
       index: "10",
       name: "Event Technical Support",
-      image: "/images/service-event-technical-support.jpg",
+      image: "/images/service-event-technical-support.webp",
       description:
         "Sound, lighting, staging and AV production delivered by experienced technical crews.",
       highlights: ["Sound & lighting rigs", "Staging & AV", "Experienced crew"],
@@ -248,7 +248,7 @@ export const site = {
       id: "decor-fabrications",
       index: "11",
       name: "Decor & Fabrications",
-      image: "/images/service-decor-fabrications.jpg",
+      image: "/images/service-decor-fabrications.webp",
       description:
         "Bespoke decor, sets and fabrication that bring your theme and vision to life.",
       highlights: ["Custom set builds", "Floral & theming", "Concept to install"],
@@ -257,7 +257,7 @@ export const site = {
       id: "gifts-souvenirs",
       index: "12",
       name: "Gifts & Souvenirs",
-      image: "/images/service-gifts-souvenirs.jpg",
+      image: "/images/service-gifts-souvenirs.webp",
       description:
         "Thoughtfully curated New Zealand gifts and souvenirs for guests and delegates.",
       highlights: ["Curated NZ gifting", "Bulk delegate packs", "Custom branding"],
@@ -266,7 +266,7 @@ export const site = {
       id: "hindi-english-crew",
       index: "13",
       name: "Hindi/English Speaking Crew",
-      image: "/images/service-hindi-english-crew.jpg",
+      image: "/images/service-hindi-english-crew.webp",
       description:
         "A dedicated on-ground crew fluent in Hindi and English, present throughout your journey.",
       highlights: ["Bilingual guides", "24/7 on-ground support", "Cultural familiarity"],
@@ -275,7 +275,7 @@ export const site = {
       id: "local-hindi-entertainment",
       index: "14",
       name: "Local/Hindi Entertainment",
-      image: "/images/service-local-hindi-entertainment.jpg",
+      image: "/images/service-local-hindi-entertainment.webp",
       description:
         "Live music, dance and performers spanning local New Zealand talent and Hindi entertainment.",
       highlights: ["Live music & dance", "Local & Hindi performers", "Full stage production"],
@@ -286,7 +286,7 @@ export const site = {
     label: "03 — SELECTED EVENTS",
     title: "Our Work",
     intro:
-      "A glimpse of the experiences we've brought to life across New Zealand. Full case studies coming soon.",
+      "From destination weddings and leadership summits to incentive journeys and private celebrations, explore a selection of experiences brought to life across New Zealand through thoughtful planning, creative production and seamless on-ground delivery.",
     projects: [
       {
         id: "queenstown-wedding",
@@ -372,7 +372,7 @@ export const site = {
   contact: {
     label: "04 — GET IN TOUCH",
     title: "Let's create something extraordinary",
-    sub: "Tell us about your event or journey, and our team will respond within one business day.",
+    sub: "Tell us about your event or journey and share your dates, group size and vision. Our New Zealand-based team will review every detail and respond within one business day with the right next steps.",
     phone: "+64 9 123 4567",
     phoneHref: "tel:+6491234567",
     whatsapp: "+64 21 123 4567",

@@ -24,7 +24,7 @@ export function TextField({ label, name, required, error, className = "", ...res
       <input
         id={name}
         name={name}
-        className={`h-14 px-[18px] ${baseInput} ${error ? errBorder : okBorder} ${className}`}
+        className={`h-12 px-4 ${baseInput} ${error ? errBorder : okBorder} ${className}`}
         {...rest}
       />
       {error && <p className="mt-1.5 text-[13px] text-[#E5484D]">{error}</p>}
@@ -48,8 +48,8 @@ export function TextAreaField({ label, name, required, error, className = "", ..
       <textarea
         id={name}
         name={name}
-        rows={5}
-        className={`min-h-[140px] resize-y px-[18px] py-4 ${baseInput} ${error ? errBorder : okBorder} ${className}`}
+        rows={4}
+        className={`min-h-[104px] resize-y px-4 py-3 ${baseInput} ${error ? errBorder : okBorder} ${className}`}
         {...rest}
       />
       {error && <p className="mt-1.5 text-[13px] text-[#E5484D]">{error}</p>}
