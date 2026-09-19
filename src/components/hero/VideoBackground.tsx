@@ -38,28 +38,36 @@ export default function VideoBackground({ sources, poster, muted, playing, onErr
         if (!video || video.readyState >= 3) return;
         video.preload = "auto";
         video.load();
-      }, 1400 + offset * 500)
+      }, 6000 + offset * 1500)
     );
     return () => timers.forEach(window.clearTimeout);
   }, [sources]);
 
   useEffect(() => {
-    videosRef.current.forEach((video) => {
+    videosRef.current.forEach((video, index) => {
       if (!video) return;
       video.muted = muted;
-      if (playing) video.play().catch(() => {});
-      else video.pause();
+      if (playing && index === active) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
     });
-  }, [muted, playing]);
+  }, [active, muted, playing]);
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      style={{ backgroundImage: `url(${poster})`, backgroundPosition: "center", backgroundSize: "cover" }}
+    >
       {sources.map((src, index) => (
         <video
           key={src}
           ref={(element) => { videosRef.current[index] = element; }}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-in-out ${active === index ? "opacity-100" : "opacity-0"}`}
-          autoPlay
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity ease-in-out ${
+            active === index ? "opacity-100 duration-300" : "opacity-0 duration-[1400ms]"
+          }`}
+          autoPlay={index === 0}
           loop
           muted={muted}
           playsInline

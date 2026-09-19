@@ -11,8 +11,8 @@ const QUICK_DURATION_S = 0.25;
 const HOLD_CAP_MS = 100;
 const STATUS_MESSAGES = ["Preparing your experience…", "Loading New Zealand…", "Almost ready…"];
 
-// Preloads in parallel with the timeline below — never shortens it, only
-// (rarely) extends the hold at 100%, capped at HOLD_CAP_MS.
+// Preloads in parallel with the timeline below. The poster gives the hero an
+// immediate visual while the video continues loading without blocking entry.
 function waitForAssets(): Promise<void> {
   const poster = new Promise<void>((resolve) => {
     const img = new Image();

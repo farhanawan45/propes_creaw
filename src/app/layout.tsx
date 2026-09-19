@@ -85,6 +85,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${interTight.variable} ${geist.variable} ${geistMono.variable} h-full scroll-smooth antialiased preload-lock`}
     >
+      <head>
+        <link rel="preload" href={site.hero.video.mp4[0]} as="video" type="video/mp4" />
+      </head>
       <body className="min-h-full flex flex-col bg-pounamu-night text-ivory font-body">
         <MotionConfig reducedMotion="user">
           <MenuProvider>

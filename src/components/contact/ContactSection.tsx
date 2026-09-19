@@ -12,7 +12,7 @@ import LiveClock from "@/components/ui/LiveClock";
 
 export default function ContactSection() {
   return (
-    <section id="contact" className="section-pad relative overflow-hidden bg-pounamu-night">
+    <section id="contact" className="relative overflow-hidden bg-pounamu-night pb-8 pt-12 sm:pb-10 sm:pt-16 lg:pb-12 lg:pt-20">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="grid h-full w-full grid-cols-1 opacity-45 lg:w-[55%] lg:grid-cols-[1.4fr_.6fr]">
           <div className="relative h-full">
