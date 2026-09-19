@@ -20,8 +20,8 @@ const rows = [
 
 function MomentCard({ moment }: { moment: (typeof moments)[number] }) {
   return (
-    <article className="event-moment-card group relative aspect-square w-[76vw] max-w-[280px] shrink-0 overflow-hidden rounded-[18px] border-2 border-pounamu-night/20 bg-white sm:w-[340px] sm:max-w-none lg:w-[410px]">
-      <Image src={moment.src} alt={moment.title} fill sizes="(max-width: 639px) 280px, (max-width: 1023px) 340px, 410px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" unoptimized />
+    <article className="event-moment-card group relative aspect-square w-[60vw] max-w-[220px] shrink-0 overflow-hidden rounded-[14px] border-2 border-pounamu-night/20 bg-white sm:w-[340px] sm:max-w-none sm:rounded-[18px] lg:w-[410px]">
+      <Image src={moment.src} alt={moment.title} fill sizes="(max-width: 639px) 220px, (max-width: 1023px) 340px, 410px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" unoptimized />
       <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full border border-pounamu-night/10 bg-white/95 px-3 py-2 text-pounamu-night shadow-[0_5px_16px_rgba(12,31,28,.12)] backdrop-blur-sm sm:left-4 sm:top-4 sm:max-w-[calc(100%-2rem)]">
         <span className="h-2 w-2 shrink-0 rounded-full bg-copper" />
         <span className="truncate text-xs font-semibold leading-none sm:text-sm">{moment.label}</span>
@@ -43,14 +43,14 @@ export default function EventPossibilities() {
         </p>
       </div>
 
-      <div className="event-marquee relative space-y-5 sm:space-y-7">
+      <div className="event-marquee relative space-y-3 sm:space-y-7">
         <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-5 bg-gradient-to-r from-ivory/80 to-transparent sm:w-12" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-5 bg-gradient-to-l from-ivory/80 to-transparent sm:w-12" />
         {rows.map((row, rowIndex) => (
           <div key={rowIndex} className="overflow-hidden">
-            <div className={`event-marquee-track flex w-max gap-5 sm:gap-7 ${rowIndex === 1 ? "event-marquee-reverse" : ""}`}>
+            <div className={`event-marquee-track flex w-max gap-3 sm:gap-7 ${rowIndex === 1 ? "event-marquee-reverse" : ""}`}>
               {[0, 1, 2].map((copy) => (
-                <div key={copy} className="flex gap-5 sm:gap-7" aria-hidden={copy > 0}>
+                <div key={copy} className="flex gap-3 sm:gap-7" aria-hidden={copy > 0}>
                   {row.map((moment) => <MomentCard key={`${copy}-${moment.src}`} moment={moment} />)}
                 </div>
               ))}
@@ -59,8 +59,10 @@ export default function EventPossibilities() {
         ))}
       </div>
 
-      <div className="mx-auto mt-10 flex max-w-[1440px] items-center justify-center gap-3 px-4 font-mono-label text-[9px] text-pounamu-night/55 sm:px-8">
-        <span className="h-px w-12 bg-copper/45" /> Hover to pause · Crafted across New Zealand <span className="h-px w-12 bg-copper/45" />
+      <div className="mx-auto mt-8 flex max-w-[1440px] items-center justify-center px-4 font-mono-label text-[8px] text-pounamu-night/55 sm:mt-10 sm:gap-3 sm:px-8 sm:text-[9px]">
+        <span className="hidden h-px w-12 bg-copper/45 sm:block" />
+        <span className="whitespace-nowrap text-center">Hover to pause · Crafted across New Zealand</span>
+        <span className="hidden h-px w-12 bg-copper/45 sm:block" />
       </div>
     </section>
   );
