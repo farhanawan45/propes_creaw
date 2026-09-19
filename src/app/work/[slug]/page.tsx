@@ -61,14 +61,28 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto grid max-w-[1200px] gap-12 lg:grid-cols-[1fr_1.4fr]">
-          <div><div className="font-mono-label text-copper">Case overview</div><h2 className="mt-4 font-display text-4xl font-semibold sm:text-5xl">An experience designed end to end.</h2></div>
+        <div className="mx-auto grid max-w-[1200px] gap-x-16 gap-y-12 rounded-[28px] border border-deep-line bg-ivory/[0.025] p-6 shadow-[0_28px_80px_-50px_rgba(0,0,0,.65)] sm:p-10 lg:grid-cols-[1fr_1.25fr] lg:p-14">
           <div>
-            <p className="text-xl font-light leading-relaxed text-mist sm:text-2xl">{project.description}</p>
-            <div className="mt-10 grid grid-cols-3 border-y border-deep-line py-7">
-              {project.keyFacts.map((fact) => <div key={fact.label}><div className="text-lg font-semibold sm:text-2xl">{fact.value}</div><div className="mt-2 font-mono-label text-[8px] text-mist">{fact.label}</div></div>)}
+            <div className="flex items-center gap-3 font-mono-label text-copper">
+              <span className="h-px w-10 bg-copper/70" /> Case overview
             </div>
-            <p className="mt-8 text-sm leading-7 text-mist/75">Full project photography, scope and verified results will be added when supplied by the client.</p>
+            <h2 className="mt-5 max-w-[12ch] font-display text-[clamp(2.5rem,4vw,4rem)] font-semibold leading-[.98] tracking-[-0.035em]">
+              An experience designed end to end.
+            </h2>
+          </div>
+          <div className="flex items-center lg:border-l lg:border-copper/35 lg:pl-12">
+            <p className="max-w-2xl text-xl font-light leading-relaxed text-mist sm:text-2xl">{project.description}</p>
+          </div>
+          <div className="lg:col-span-2">
+            <div className="grid grid-cols-3 overflow-hidden rounded-2xl border border-deep-line bg-pounamu/45">
+              {project.keyFacts.map((fact, factIndex) => (
+                <div key={fact.label} className={`min-w-0 px-4 py-6 sm:px-8 ${factIndex > 0 ? "border-l border-deep-line" : ""}`}>
+                  <div className="truncate text-lg font-semibold text-ivory sm:text-2xl">{fact.value}</div>
+                  <div className="mt-2 font-mono-label text-[8px] text-mist">{fact.label}</div>
+                </div>
+              ))}
+            </div>
+            <p className="mt-6 text-sm leading-7 text-mist/65">Full project photography, scope and verified results will be added when supplied by the client.</p>
           </div>
         </div>
       </section>
