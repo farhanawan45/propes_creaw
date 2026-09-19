@@ -14,7 +14,6 @@ const imageBlur = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.
 export default function ServicesSection() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
-  const [paused, setPaused] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const { requestEnquiry } = useEnquiry();
@@ -22,22 +21,20 @@ export default function ServicesSection() {
 
   const select = (next: number) => {
     const normalized = (next + site.services.length) % site.services.length;
-    setDirection(normalized >= active ? 1 : -1);
+    setDirection(next > active ? 1 : -1);
     setActive(normalized);
   };
 
   useEffect(() => {
-    if (paused || reduceMotion) return;
-    const timer = window.setInterval(() => {
-      setDirection(1);
-      setActive((current) => (current + 1) % site.services.length);
-    }, 5000);
-    return () => window.clearInterval(timer);
-  }, [paused, reduceMotion]);
+    const nav = navRef.current;
+    const button = nav?.querySelector<HTMLButtonElement>(`[data-service-index="${active}"]`);
+    if (!nav || !button) return;
 
-  useEffect(() => {
-    const button = navRef.current?.querySelector<HTMLButtonElement>(`[data-service-index="${active}"]`);
-    button?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", inline: "center", block: "nearest" });
+    // Centre the active tab inside the horizontal navigation only.
+    // scrollIntoView() also moves the page vertically, which caused the site
+    // to jump from the hero to this section when the carousel auto-advanced.
+    const left = button.offsetLeft - (nav.clientWidth - button.offsetWidth) / 2;
+    nav.scrollTo({ left: Math.max(0, left), behavior: reduceMotion ? "auto" : "smooth" });
   }, [active, reduceMotion]);
 
   useEffect(() => {
@@ -101,15 +98,33 @@ export default function ServicesSection() {
           </div>
         </div>
 
-        <div className="mt-5" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+        <div className="relative mt-5">
+          <button
+            type="button"
+            onClick={() => select(active - 1)}
+            aria-label="Previous service"
+            className="absolute left-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/35 bg-pounamu-night/85 text-ivory shadow-[0_10px_30px_rgba(0,0,0,.28)] backdrop-blur-md transition-colors hover:border-copper hover:bg-copper hover:text-pounamu-night focus-ring sm:left-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-left-6 xl:-left-16"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </button>
+
+          <button
+            type="button"
+            onClick={() => select(active + 1)}
+            aria-label="Next service"
+            className="absolute right-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-copper bg-copper text-pounamu-night shadow-[0_10px_30px_rgba(0,0,0,.28)] transition-colors hover:bg-copper-light focus-ring sm:right-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-right-6 xl:-right-16"
+          >
+            <ArrowRight className="h-5 w-5" />
+          </button>
+
           <AnimatePresence mode="wait" custom={direction} initial={false}>
             <motion.article
               key={service.id}
               custom={direction}
-              initial={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * 70, clipPath: direction > 0 ? "inset(0 0 0 22%)" : "inset(0 22% 0 0)" }}
-              animate={{ opacity: 1, x: 0, clipPath: "inset(0 0 0 0)" }}
-              exit={reduceMotion ? { opacity: 0 } : { opacity: 0, x: direction * -45, clipPath: direction > 0 ? "inset(0 22% 0 0)" : "inset(0 0 0 22%)" }}
-              transition={{ duration: reduceMotion ? 0.15 : 0.62, ease: [0.22, 1, 0.36, 1] }}
+              initial={reduceMotion ? false : { opacity: 0.94, scale: 0.995 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={reduceMotion ? { opacity: 1 } : { opacity: 0.94, scale: 0.995 }}
+              transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }}
               drag={reduceMotion ? false : "x"}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.08}
@@ -161,17 +176,6 @@ export default function ServicesSection() {
               </div>
             </motion.article>
           </AnimatePresence>
-
-          <div className="mt-5 grid items-center gap-4 sm:grid-cols-[auto_1fr_auto]">
-            <div className="font-mono-label text-[10px] text-mist"><span className="text-copper-light">{service.index}</span> / 14</div>
-            <div className="grid gap-1.5" style={{ gridTemplateColumns: `repeat(${site.services.length}, minmax(0, 1fr))` }} aria-hidden="true">
-              {site.services.map((item, index) => <button key={item.id} type="button" tabIndex={-1} onClick={() => select(index)} className={`h-1 rounded-full transition-colors duration-300 ${index === active ? "bg-copper-light" : "bg-ivory/15"}`} />)}
-            </div>
-            <div className="flex gap-2 sm:justify-end">
-              <button type="button" onClick={() => select(active - 1)} aria-label="Previous service" className="flex h-12 w-12 items-center justify-center rounded-[10px] border border-ivory/20 text-ivory transition-colors hover:border-copper hover:bg-copper hover:text-pounamu-night focus-ring"><ArrowLeft className="h-5 w-5" /></button>
-              <button type="button" onClick={() => select(active + 1)} aria-label="Next service" className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-copper text-pounamu-night transition-colors hover:bg-copper-light focus-ring"><ArrowRight className="h-5 w-5" /></button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

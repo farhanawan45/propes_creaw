@@ -32,7 +32,7 @@ function MomentCard({ moment }: { moment: (typeof moments)[number] }) {
 
 export default function EventPossibilities() {
   return (
-    <section className="overflow-hidden bg-ivory py-20 sm:py-24 lg:py-28" aria-labelledby="possibilities-title">
+    <section className="overflow-hidden bg-ivory pb-10 pt-20 sm:pb-12 sm:pt-24 lg:pb-14 lg:pt-28" aria-labelledby="possibilities-title">
       <div className="mx-auto mb-12 max-w-[1440px] px-4 text-center sm:px-8 lg:mb-14 lg:px-10 xl:px-12">
         <div className="font-mono-label text-copper">REAL MOMENTS · LIMITLESS POSSIBILITIES</div>
         <h2 id="possibilities-title" className="mx-auto mt-4 max-w-5xl font-display font-semibold leading-[.94] tracking-[-0.045em] text-pounamu-night" style={{ fontSize: "clamp(44px, 6vw, 88px)" }}>

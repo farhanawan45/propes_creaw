@@ -103,7 +103,7 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="about-section section-pad relative overflow-hidden bg-ivory text-ink"
+      className="about-section section-pad-bottom relative overflow-hidden bg-ivory pt-8 text-ink sm:pt-10 lg:pt-12"
     >
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="border-t border-ink/20 pt-6 sm:pt-8">

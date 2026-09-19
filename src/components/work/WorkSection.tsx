@@ -23,7 +23,7 @@ export default function WorkSection() {
   const filteredProjects = projects.filter((project) => matchesFilter(project, activeFilter));
 
   return (
-    <section id="work" className="relative overflow-visible bg-ivory section-pad-top pb-[120px]">
+    <section id="work" className="relative overflow-visible bg-ivory pb-[120px] pt-10 sm:pt-12 lg:pt-14">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-8 lg:px-12">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -66,7 +66,6 @@ export default function WorkSection() {
               index={i}
               total={filteredProjects.length}
               imageOnLeft={i % 2 === 1}
-              isLast={i === filteredProjects.length - 1}
               onView={() => setLightboxIndex(i)}
             />
           ))}

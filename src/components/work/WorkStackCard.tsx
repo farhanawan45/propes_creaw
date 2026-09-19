@@ -13,13 +13,11 @@ interface WorkStackCardProps {
   index: number;
   total: number;
   imageOnLeft: boolean;
-  isLast: boolean;
   onView: () => void;
 }
 
-export default function WorkStackCard({ project, index, total, imageOnLeft, isLast, onView }: WorkStackCardProps) {
+export default function WorkStackCard({ project, index, total, imageOnLeft, onView }: WorkStackCardProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
   const imagePanelRef = useRef<HTMLDivElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
   const revealScopeRef = useRef<HTMLDivElement>(null);
@@ -60,22 +58,6 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
 
       if (reduced) return;
 
-      // Scale-down + darken while the NEXT card's scroll range plays out —
-      // scrub only, no pin. The last card never needs to recede.
-      if (!isLast && cardRef.current) {
-        gsap.to(cardRef.current, {
-          scale: 0.92,
-          filter: "brightness(0.6)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      }
-
       // Subtle parallax on the image — desktop only, transform/opacity-only.
       if (imageWrapRef.current && window.matchMedia("(min-width: 1024px)").matches) {
         gsap.fromTo(
@@ -100,7 +82,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
         });
       };
     },
-    { scope: wrapperRef, dependencies: [isLast] }
+    { scope: wrapperRef }
   );
 
   return (
@@ -115,9 +97,8 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
       }
     >
       <div
-        ref={cardRef}
         className="relative h-full w-full overflow-hidden rounded-[24px] border border-[rgba(17,24,20,0.08)] bg-pounamu-night shadow-[0_30px_80px_-40px_rgba(17,24,20,0.45)] lg:rounded-[28px]"
-        style={{ transformOrigin: "top center" }}
+        style={{ filter: "none", transform: "none" }}
       >
         <div ref={revealScopeRef} className={`flex h-full flex-col lg:flex-row ${imageOnLeft ? "lg:flex-row-reverse" : ""}`}>
           {/* TEXT PANEL */}

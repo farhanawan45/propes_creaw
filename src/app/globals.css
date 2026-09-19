@@ -210,13 +210,6 @@ body {
   padding-bottom: clamp(96px, 12vw, 180px);
 }
 
-/* Keep the first content section close to the mobile hero. */
-@media (max-width: 639px) {
-  .about-section {
-    padding-top: 48px;
-  }
-}
-
 .divider-line {
   height: 1px;
   background: var(--color-deep-line);
