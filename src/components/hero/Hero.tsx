@@ -110,8 +110,8 @@ export default function Hero() {
         />
       </div>
 
-      <div className="relative z-10 w-full px-5 pb-8 pt-32 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
-        <div className="mx-auto max-w-[1440px]">
+      <div className="relative z-10 w-full px-5 pb-32 pt-36 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
+        <div className="relative top-[10px] mx-auto max-w-[1440px] sm:top-0">
           <div
             ref={labelRef}
             className="mb-5 inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full bg-pounamu-night/55 px-3 py-2 backdrop-blur-md sm:gap-2 sm:px-4"
@@ -188,7 +188,7 @@ export default function Hero() {
 
           <div
             ref={bottomBarRef}
-            className="mt-14 flex flex-wrap items-center justify-between gap-6 border-t border-deep-line pt-6 sm:mt-20"
+            className="mt-20 flex flex-wrap items-center justify-between gap-6 border-t border-deep-line pt-6"
           >
             <ServiceTicker />
 

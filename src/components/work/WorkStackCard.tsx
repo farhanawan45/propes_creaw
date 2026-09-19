@@ -129,7 +129,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, isLa
                 <span className="font-display text-2xl font-semibold text-copper sm:text-3xl">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="font-mono-label rounded-full border border-ivory/25 px-3 py-1 text-ivory">
+                <span className="font-mono-label rounded-[10px] border border-ivory/25 px-3 py-1 text-ivory">
                   {project.category}
                 </span>
               </div>

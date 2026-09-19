@@ -8,7 +8,7 @@ export default function BrandLogo({ size = "sm", className = "" }: BrandLogoProp
 
   return (
     <span
-      className={`inline-flex shrink-0 items-center rounded-full border border-copper/40 bg-pounamu-night/80 shadow-[0_8px_28px_rgba(3,15,13,0.22),inset_0_1px_0_rgba(245,241,232,0.08)] backdrop-blur-md ${
+      className={`inline-flex shrink-0 items-center rounded-[10px] border border-copper/40 bg-pounamu-night/80 shadow-[0_8px_28px_rgba(3,15,13,0.22),inset_0_1px_0_rgba(245,241,232,0.08)] backdrop-blur-md ${
         medium ? "gap-3 p-1.5 pr-4" : "gap-2.5 p-1 pr-3"
       } ${className}`}
       aria-label="Props & Crew"

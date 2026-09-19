@@ -166,8 +166,11 @@ export default function About() {
               <div className="absolute inset-x-5 bottom-6 z-20 sm:inset-x-8 sm:bottom-8 lg:inset-x-12 lg:bottom-11">
                 <div className="grid items-end gap-7 lg:grid-cols-[1fr_auto]">
                   <div>
-                    <div className="font-mono-label text-[9px] text-copper sm:text-[11px]">
-                      0{activeSlide + 1} / {slides[activeSlide].eyebrow}
+                    <div className="inline-flex items-center gap-2.5 rounded-[10px] border border-copper/55 bg-pounamu-night/80 px-3.5 py-2.5 font-mono-label text-[10px] font-bold tracking-[0.13em] text-copper-light shadow-[0_10px_30px_rgba(0,0,0,.32),inset_0_1px_0_rgba(255,255,255,.08)] backdrop-blur-xl sm:px-4 sm:text-[11px]">
+                      <span className="size-1.5 shrink-0 rounded-full bg-copper shadow-[0_0_10px_rgba(240,176,122,.9)]" />
+                      <span>0{activeSlide + 1}</span>
+                      <span className="text-white/35">/</span>
+                      <span className="text-ivory">{slides[activeSlide].eyebrow}</span>
                     </div>
                     <AnimatePresence mode="wait">
                       <motion.h3
@@ -183,7 +186,7 @@ export default function About() {
                     </AnimatePresence>
                   </div>
 
-                  <div className="flex items-center gap-1.5 rounded-full border border-white/20 bg-ink/45 p-1.5 shadow-xl backdrop-blur-md">
+                  <div className="flex w-full items-center justify-between gap-1.5 rounded-full border border-white/20 bg-ink/45 p-1.5 shadow-xl backdrop-blur-md lg:w-auto">
                     <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous slide" className="flex size-10 items-center justify-center rounded-full text-white/80 transition duration-300 hover:bg-white/10 hover:text-white sm:size-11">
                       <ArrowLeft size={18} strokeWidth={1.6} />
                     </button>
