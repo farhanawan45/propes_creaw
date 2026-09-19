@@ -57,7 +57,7 @@ export default function WorkSection() {
 
         <div
           key={activeFilter}
-          className="relative [--stack-top-base:80px] [--stack-top-step:14px] sm:[--stack-top-base:100px] sm:[--stack-top-step:18px] lg:[--stack-top-base:110px] lg:[--stack-top-step:24px]"
+          className="relative [--stack-top-base:80px] sm:[--stack-top-base:100px] lg:[--stack-top-base:110px]"
         >
           {filteredProjects.map((project, i) => (
             <WorkStackCard

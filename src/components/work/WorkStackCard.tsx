@@ -46,9 +46,9 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
 
         gsap.fromTo(
           imagePanelRef.current,
-          { clipPath: "inset(0 0 100% 0 round 24px)" },
+          { clipPath: "inset(0 0 100% 0)" },
           {
-            clipPath: "inset(0 0 0% 0 round 24px)",
+            clipPath: "inset(0 0 0% 0)",
             duration: 1.15,
             ease: "power4.inOut",
             scrollTrigger: { trigger: wrapperRef.current, start: "top 82%", once: true },
@@ -91,7 +91,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
       className="sticky z-[var(--stack-z)] h-[85svh] lg:h-[560px] xl:h-[580px]"
       style={
         {
-          top: `calc(var(--stack-top-base) + ${index} * var(--stack-top-step))`,
+          top: "var(--stack-top-base)",
           "--stack-z": index + 1,
         } as React.CSSProperties
       }

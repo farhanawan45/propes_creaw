@@ -14,7 +14,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="section-pad relative overflow-hidden bg-pounamu-night">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="grid h-full w-full grid-cols-1 opacity-30 lg:w-[55%] lg:grid-cols-[1.4fr_.6fr]">
+        <div className="grid h-full w-full grid-cols-1 opacity-45 lg:w-[55%] lg:grid-cols-[1.4fr_.6fr]">
           <div className="relative h-full">
             <Image src="/images/service-event-management.jpg" alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
           </div>
@@ -22,7 +22,7 @@ export default function ContactSection() {
             <Image src="/images/service-decor-fabrications.jpg" alt="" fill sizes="18vw" className="object-cover" />
           </div>
         </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,27,23,.7)_0%,rgba(5,27,23,.9)_48%,rgba(5,27,23,1)_68%)] max-lg:bg-pounamu-night/75" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,27,23,.45)_0%,rgba(5,27,23,.72)_48%,rgba(5,27,23,.98)_68%)] max-lg:bg-pounamu-night/55" />
         <div className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-copper/10 blur-[140px]" />
       </div>
 
