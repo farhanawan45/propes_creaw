@@ -173,7 +173,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
             <div ref={imageWrapRef} className="absolute inset-0 lg:-inset-y-[8%]">
               <Image
                 src={project.image}
-                alt={`${project.title} — ${project.location}`}
+                alt={`${project.title}, ${project.location}`}
                 fill
                 quality={72}
                 sizes="(min-width: 1024px) 58vw, 100vw"

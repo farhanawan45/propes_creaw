@@ -92,7 +92,7 @@ export const site = {
       { text: "Unforgettable", emphasis: true },
       { text: " experiences." },
     ],
-    lead: "Luxury events, MICE and journeys across New Zealand — thoughtfully crafted from first idea to final farewell.",
+    lead: "Luxury events, MICE and journeys across New Zealand, thoughtfully crafted from first idea to final farewell.",
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
@@ -115,10 +115,10 @@ export const site = {
   },
 
   about: {
-    label: "01 — WHO WE ARE",
+    label: "01 WHO WE ARE",
     title: "About Props & Crew",
     statement:
-      "We create and deliver exceptional events, corporate programmes and journeys across New Zealand — combining local expertise with a crew that understands your culture, expectations and every detail.",
+      "We create and deliver exceptional events, corporate programmes and journeys across New Zealand, combining local expertise with a crew that understands your culture, expectations and every detail.",
     images: [
       "/images/service-event-management.jpg",
       "/images/service-decor-fabrications.jpg",
@@ -143,7 +143,7 @@ export const site = {
       },
       {
         title: "Personal",
-        text: "Every itinerary is shaped around you — your culture, pace and taste.",
+        text: "Every itinerary is shaped around your culture, pace and taste.",
         icon: "HeartHandshake",
       },
       {
@@ -170,7 +170,7 @@ export const site = {
       name: "MICE",
       image: "/images/service-mice.webp",
       description:
-        "Meetings, incentives, conferences and exhibitions — flawlessly produced for Indian corporate groups.",
+        "Meetings, incentives, conferences and exhibitions, flawlessly produced for Indian corporate groups.",
       highlights: ["Conference production", "Incentive travel design", "Delegate management"],
     },
     {
@@ -284,7 +284,7 @@ export const site = {
   ] satisfies Service[],
 
   work: {
-    label: "03 — SELECTED EVENTS",
+    label: "03 SELECTED EVENTS",
     title: "Our Work",
     intro:
       "From destination weddings and leadership summits to incentive journeys and private celebrations, explore a selection of experiences brought to life across New Zealand through thoughtful planning, creative production and seamless on-ground delivery.",
@@ -371,7 +371,7 @@ export const site = {
   },
 
   contact: {
-    label: "04 — GET IN TOUCH",
+    label: "04 GET IN TOUCH",
     title: "Let's create something extraordinary",
     sub: "Tell us about your event or journey and share your dates, group size and vision. Our New Zealand-based team will review every detail and respond within one business day with the right next steps.",
     phone: "+64 9 123 4567",
@@ -392,6 +392,6 @@ export const site = {
 
   footer: {
     brandLine:
-      "New Zealand event and destination management — events, MICE, luxury travel and entertainment, crafted end to end.",
+      "New Zealand event and destination management. Events, MICE, luxury travel and entertainment, crafted end to end.",
   },
 } as const;

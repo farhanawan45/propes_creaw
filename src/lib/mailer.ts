@@ -36,7 +36,7 @@ export async function sendContactEmail(data: ContactFormValues) {
     .join(", ") || "Not specified";
 
   const html = `
-    <h2>New enquiry — ${escapeHtml(site.name)}</h2>
+    <h2>New enquiry from ${escapeHtml(site.name)}</h2>
     <p><strong>Name:</strong> ${escapeHtml(data.fullName)}</p>
     <p><strong>Email:</strong> ${escapeHtml(data.email)}</p>
     <p><strong>Phone:</strong> ${escapeHtml(data.phone)}</p>
@@ -51,7 +51,7 @@ export async function sendContactEmail(data: ContactFormValues) {
     to,
     from,
     replyTo: data.email,
-    subject: `New enquiry from ${data.fullName} — ${site.name}`,
+    subject: `New enquiry from ${data.fullName}, ${site.name}`,
     html,
   });
 }

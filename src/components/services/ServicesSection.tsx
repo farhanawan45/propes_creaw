@@ -68,13 +68,13 @@ export default function ServicesSection() {
       <div className="relative mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10 xl:px-12">
         <div className="mx-auto max-w-5xl text-center">
           <div>
-            <div className="font-mono-label text-copper">02 — WHAT WE DO</div>
+            <div className="font-mono-label text-copper">02 WHAT WE DO</div>
             <h2 className="mt-4 font-display font-semibold tracking-[-0.045em] text-ivory" style={{ fontSize: "clamp(44px, 6vw, 88px)", lineHeight: ".94" }}>
               One crew. <span className="text-copper-light">Every detail.</span>
             </h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-mist sm:text-base">
-            Fourteen specialist capabilities working as one—from first concept and guest arrival to production, travel and the final farewell.
+            Fourteen specialist capabilities working as one, from first concept and guest arrival to production, travel and the final farewell.
           </p>
         </div>
 
@@ -117,8 +117,9 @@ export default function ServicesSection() {
             <ArrowRight className="h-5 w-5" />
           </button>
 
-          <AnimatePresence mode="wait" custom={direction} initial={false}>
-            <motion.article
+          <div className="grid">
+            <AnimatePresence custom={direction} initial={false}>
+              <motion.article
               key={service.id}
               custom={direction}
               initial={reduceMotion ? false : { opacity: 0.94, scale: 0.995 }}
@@ -132,7 +133,7 @@ export default function ServicesSection() {
                 if (info.offset.x < -55) select(active + 1);
                 if (info.offset.x > 55) select(active - 1);
               }}
-              className="grid overflow-hidden rounded-[10px] border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,.28)] lg:grid-cols-[1.08fr_.92fr]"
+              className="col-start-1 row-start-1 grid overflow-hidden rounded-[10px] border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,.28)] lg:grid-cols-[1.08fr_.92fr]"
               style={{ backgroundColor: cardThemes[active % cardThemes.length] }}
             >
               <div className="relative min-h-[300px] overflow-hidden sm:min-h-[400px] lg:min-h-[590px]">
@@ -174,8 +175,9 @@ export default function ServicesSection() {
                   Enquire about this service <ArrowUpRight className="h-4 w-4" />
                 </button>
               </div>
-            </motion.article>
-          </AnimatePresence>
+              </motion.article>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
     </section>

@@ -91,7 +91,7 @@ export default function ContactForm() {
       }
 
       setStatus("success");
-      setStatusMessage("Thank you — your enquiry has been sent. We'll be in touch within one business day.");
+      setStatusMessage("Thank you, your enquiry has been sent. We'll be in touch within one business day.");
       setForm(initialForm);
     } catch {
       setStatus("error");
