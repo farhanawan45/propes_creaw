@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue } from "framer-motion";
 
 const FORM_FIELD_SELECTOR = "form, input, textarea, select, label, [contenteditable='true']";
 const INTERACTIVE_SELECTOR = "a, button, [role='button'], summary";
@@ -15,10 +15,6 @@ export default function CustomCursor() {
 
   const x = useMotionValue(-100);
   const y = useMotionValue(-100);
-  const springX = useSpring(x, { stiffness: 500, damping: 40, mass: 0.4 });
-  const springY = useSpring(y, { stiffness: 500, damping: 40, mass: 0.4 });
-  const ringX = useSpring(x, { stiffness: 200, damping: 30, mass: 0.6 });
-  const ringY = useSpring(y, { stiffness: 200, damping: 30, mass: 0.6 });
 
   useEffect(() => {
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
@@ -94,51 +90,28 @@ export default function CustomCursor() {
   return (
     <>
       <motion.div
-        className="custom-cursor rounded-full bg-copper"
+        className="custom-cursor flex items-center justify-center"
         style={{
-          x: springX,
-          y: springY,
-          width: 6,
-          height: 6,
-          translateX: "-50%",
-          translateY: "-50%",
-        }}
-        animate={{ opacity: hidden ? 0 : 1, scale: pressed ? 0.55 : 1 }}
-        transition={{ duration: 0.15 }}
-      />
-      <motion.div
-        className="custom-cursor flex items-center justify-center rounded-full border border-copper"
-        style={{
-          x: ringX,
-          y: ringY,
+          x,
+          y,
           translateX: "-50%",
           translateY: "-50%",
         }}
         animate={{
-          width: active ? 46 : 32,
-          height: active ? 46 : 32,
-          scale: pressed ? 0.82 : 1,
+          width: active ? 24 : 18,
+          height: active ? 24 : 18,
+          scale: pressed ? 0.72 : 1,
           opacity: hidden ? 0 : 1,
-          borderColor: active ? "rgba(240,176,122,0.95)" : "rgba(201,119,74,0.75)",
-          boxShadow: active ? "0 0 22px rgba(201,119,74,0.28), inset 0 0 14px rgba(201,119,74,0.1)" : "0 0 0 rgba(201,119,74,0)",
         }}
-        transition={{ duration: 0.22, ease: "easeOut" }}
+        transition={{ duration: 0.08, ease: "easeOut" }}
       >
-        {active && (
-          <motion.span
-            className="absolute inset-[-4px] rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 2.8, ease: "linear", repeat: Infinity }}
-          >
-            <span className="absolute left-1/2 top-0 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-copper-light shadow-[0_0_9px_rgba(240,176,122,.9)]" />
-            <span className="absolute bottom-0 left-1/2 h-1 w-1 -translate-x-1/2 translate-y-1/2 rounded-full bg-copper" />
-          </motion.span>
-        )}
+        <span className={`absolute inset-0 rotate-45 rounded-[3px] border transition-colors duration-100 ${active ? "border-copper-light bg-copper/20 shadow-[0_0_14px_rgba(201,119,74,.4)]" : "border-copper/80 bg-pounamu-night/15"}`} />
+        <span className="relative h-1.5 w-1.5 rounded-full bg-copper-light shadow-[0_0_7px_rgba(240,176,122,.9)]" />
         {label && (
           <motion.span
             initial={{ opacity: 0, x: -4 }}
             animate={{ opacity: 1, x: 0 }}
-            className="pointer-events-none absolute left-[calc(100%+10px)] whitespace-nowrap rounded-full border border-copper/30 bg-pounamu-night/90 px-2.5 py-1 font-mono-label text-[8px] text-copper-light shadow-[0_8px_24px_rgba(0,0,0,.24)] backdrop-blur-md"
+            className="pointer-events-none absolute left-[calc(100%+9px)] whitespace-nowrap rounded-[6px] border border-copper/30 bg-pounamu-night/90 px-2.5 py-1 font-mono-label text-[8px] text-copper-light shadow-[0_8px_24px_rgba(0,0,0,.24)] backdrop-blur-md"
           >
             {label}
           </motion.span>
