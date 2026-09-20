@@ -150,8 +150,7 @@ export default function About() {
                       src={slide.image}
                       alt={slide.title}
                       fill
-                      priority={index === 0}
-                      loading={index === 0 ? undefined : "eager"}
+                      loading="lazy"
                       quality={72}
                       sizes="(min-width: 1024px) 58vw, 100vw"
                       className="select-none object-cover"

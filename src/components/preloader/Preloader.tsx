@@ -43,6 +43,7 @@ export default function Preloader() {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
+      window.dispatchEvent(new Event("intro:entered"));
       setEntered(true);
       document.documentElement.classList.remove("preload-lock");
     }, 900);

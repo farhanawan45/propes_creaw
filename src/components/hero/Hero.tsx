@@ -20,6 +20,7 @@ export default function Hero() {
   const bottomBarRef = useRef<HTMLDivElement>(null);
 
   const [videoFailed, setVideoFailed] = useState(false);
+  const [mediaReady, setMediaReady] = useState(false);
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(true);
   // Server has no `window`, so it always renders the video branch. Reading
@@ -32,6 +33,13 @@ export default function Hero() {
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setReduced(prefersReducedMotion());
+  }, []);
+
+  useEffect(() => {
+    const revealMedia = () => setMediaReady(true);
+    if (!document.documentElement.classList.contains("preload-lock")) revealMedia();
+    window.addEventListener("intro:entered", revealMedia, { once: true });
+    return () => window.removeEventListener("intro:entered", revealMedia);
   }, []);
 
   useGSAP(
@@ -91,7 +99,12 @@ export default function Hero() {
       className="relative flex min-h-0 w-full items-start overflow-hidden bg-pounamu-night sm:min-h-[100svh] sm:items-end"
     >
       <div ref={mediaRef} className="absolute inset-0 origin-bottom overflow-hidden">
-        {!videoFailed && !reduced ? (
+        {!mediaReady ? (
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${site.hero.video.poster})` }}
+          />
+        ) : !videoFailed && !reduced ? (
           <VideoBackground
             sources={site.hero.video.mp4}
             poster={site.hero.video.poster}

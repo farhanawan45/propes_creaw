@@ -144,9 +144,7 @@ export default function ServicesSection() {
                   sizes="(max-width: 1023px) 100vw, 55vw"
                   className="select-none object-cover"
                   quality={68}
-                  loading="eager"
-                  fetchPriority="high"
-                  unoptimized
+                  loading="lazy"
                   placeholder="blur"
                   blurDataURL={imageBlur}
                   draggable={false}
