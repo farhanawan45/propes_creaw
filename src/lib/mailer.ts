@@ -1,5 +1,6 @@
 import nodemailer from "nodemailer";
 import type { ContactFormValues } from "./validation";
+import type { NewsletterValues } from "./validation";
 import { site } from "@/content/site";
 
 export function getTransporter() {
@@ -53,5 +54,19 @@ export async function sendContactEmail(data: ContactFormValues) {
     replyTo: data.email,
     subject: `New enquiry from ${data.fullName}, ${site.name}`,
     html,
+  });
+}
+
+export async function sendNewsletterSignup(data: NewsletterValues) {
+  const transporter = getTransporter();
+  const to = process.env.NEWSLETTER_TO_EMAIL || process.env.CONTACT_TO_EMAIL || site.contact.email;
+  const from = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER!;
+
+  await transporter.sendMail({
+    to,
+    from,
+    replyTo: data.email,
+    subject: `Newsletter signup: ${data.email}`,
+    html: `<h2>New newsletter signup</h2><p><strong>Email:</strong> ${escapeHtml(data.email)}</p><p>This subscriber consented through the ${escapeHtml(site.name)} website newsletter form.</p>`,
   });
 }

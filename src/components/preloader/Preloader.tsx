@@ -1,329 +1,203 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
-import { useGSAP } from "@gsap/react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { site } from "@/content/site";
-
-const SESSION_KEY = "pc-preloader-shown";
-const QUICK_DURATION_S = 0.25;
-const HOLD_CAP_MS = 100;
-const STATUS_MESSAGES = ["Preparing your experience…", "Loading New Zealand…", "Almost ready…"];
-
-// Preloads in parallel with the timeline below. The poster gives the hero an
-// immediate visual while the video continues loading without blocking entry.
-function waitForAssets(): Promise<void> {
-  const poster = new Promise<void>((resolve) => {
-    const img = new Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve();
-    img.src = site.hero.video.poster;
-  });
-  const video = new Promise<void>((resolve) => {
-    const v = document.createElement("video");
-    v.preload = "metadata";
-    v.onloadedmetadata = () => resolve();
-    v.onerror = () => resolve();
-    v.src = site.hero.video.mp4[0];
-    v.load();
-  });
-  const fonts =
-    typeof document !== "undefined" && "fonts" in document ? document.fonts.ready.then(() => {}) : Promise.resolve();
-  return Promise.all([poster, video, fonts]).then(() => {});
-}
-
-function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 export default function Preloader() {
   const pathname = usePathname();
-  const initialPathRef = useRef(pathname);
-  const hasPlayedRef = useRef(false);
-  // Read (never write) synchronously during the initial render via a lazy
-  // initializer — this is what actually matters. Reading twice (React
-  // Strict Mode replays initializers in dev) is safe because it's a pure
-  // read; correcting `mode` a tick later via a layout-effect + setState
-  // was the previous approach, and it doesn't work: useGSAP defers/skips
-  // cleanup between dependency-array changes by design (see its source —
-  // `deferCleanup` only reverts on true unmount once `mounted` is true),
-  // so switching `mode` after mount left the old 7s timeline running
-  // forever alongside the new one, both fighting over the same DOM. With
-  // `mode` correct from the very first render, useGSAP only ever runs
-  // once and its normal mount/unmount cleanup applies.
-  const [mode] = useState<"full" | "quick">(() => {
-    if (typeof window === "undefined") return "full";
-    return sessionStorage.getItem(SESSION_KEY) ? "quick" : "full";
-  });
+  const firstPath = useRef(pathname);
+  const played = useRef(false);
   const containerRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const fillRef = useRef<HTMLDivElement>(null);
-  const centerRef = useRef<HTMLDivElement>(null);
-  const wordmarkRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const coreRef = useRef<HTMLDivElement>(null);
+  const interfaceRef = useRef<HTMLDivElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
-  const statusRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const panelLeftRef = useRef<HTMLDivElement>(null);
-  const panelRightRef = useRef<HTMLDivElement>(null);
-  const skippedRef = useRef(false);
+  const barRef = useRef<HTMLDivElement>(null);
+  const burstRef = useRef(0);
+  const rendererActiveRef = useRef(true);
 
   useLayoutEffect(() => {
-    if (pathname !== "/") {
-      document.documentElement.classList.remove("preload-lock");
-      return;
-    }
-    // Idempotent — safe to run more than once (Strict Mode), and doesn't
-    // affect this visit's own `mode`, only future ones this session.
-    sessionStorage.setItem(SESSION_KEY, "1");
+    if (pathname !== "/") document.documentElement.classList.remove("preload-lock");
   }, [pathname]);
 
-  useGSAP(
-    () => {
-      const container = containerRef.current;
-      if (!container) return;
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const host = containerRef.current;
+    if (!canvas || !host || pathname !== "/") return;
+    const context = canvas.getContext("2d");
+    if (!context) return;
+    rendererActiveRef.current = true;
+    let frame = 0;
+    let width = 0;
+    let height = 0;
+    let particles: Array<{ x: number; y: number; vx: number; vy: number; size: number; phase: number }> = [];
 
-      const finish = () => {
-        document.documentElement.classList.remove("preload-lock");
-        gsap.set(container, { display: "none" });
-      };
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      particles = Array.from({ length: Math.min(150, Math.max(70, Math.floor(width / 10))) }, (_, index) => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.32,
+        vy: (Math.random() - 0.5) * 0.32,
+        size: 1.2 + Math.random() * 2.1,
+        phase: index * 0.37,
+      }));
+    };
 
-      // The root layout persists between routes. When returning from a case
-      // study, the preloader DOM mounts again but the intro must not replay.
-      if (hasPlayedRef.current || initialPathRef.current !== "/") {
-        finish();
-        return;
-      }
-      hasPlayedRef.current = true;
-
-      if (prefersReducedMotion()) {
-        finish();
-        return;
-      }
-
-      const quick = mode === "quick";
-      const duration = quick ? QUICK_DURATION_S : site.preloader.durationSeconds;
-
-      // Started immediately, in parallel with the timeline — not chained
-      // after it. By the time the short timeline completes, this
-      // has almost always already resolved.
-      const assetsReadyRef = { current: false };
-      const assetsPromise = waitForAssets().then(() => {
-        assetsReadyRef.current = true;
-      });
-
-      const setCounter = (v: number) => {
-        if (counterRef.current) counterRef.current.textContent = String(Math.round(v)).padStart(3, "0");
-      };
-      // The logo's position is never a separate value — it's always
-      // exactly the tweened progress percentage, so it can never drift
-      // out of sync with the counter.
-      const setLogoPosition = (v: number) => {
-        const pct = Math.min(100, Math.max(0, v));
-        if (logoRef.current) logoRef.current.style.left = `${pct}%`;
-        if (fillRef.current) fillRef.current.style.width = `${pct}%`;
-      };
-
-      const runExit = () => {
-        const exitDuration = 0.2;
-        const splitDuration = 0.45;
-        const tl = gsap.timeline({ onComplete: finish });
-        tl.to(logoRef.current, {
-          x: () => -(logoRef.current!.getBoundingClientRect().left) + 28,
-          y: () => -(logoRef.current!.getBoundingClientRect().top) + 24,
-          scale: 0.42,
-          duration: exitDuration,
-          ease: "power3.inOut",
-        })
-          .to(centerRef.current, { opacity: 0, duration: 0.25 }, "<")
-          .to(
-            panelLeftRef.current,
-            { clipPath: "inset(0 100% 0 0)", duration: splitDuration, ease: "power4.inOut" },
-            "-=0.1"
-          )
-          .to(panelRightRef.current, { clipPath: "inset(0 0 0 100%)", duration: splitDuration, ease: "power4.inOut" }, "<");
-      };
-
-      const masterTl = gsap.timeline();
-      const statusTl = gsap.timeline();
-
-      const skip = () => {
-        if (skippedRef.current) return;
-        skippedRef.current = true;
-        masterTl.kill();
-        statusTl.kill();
-        gsap.killTweensOf([logoRef.current, counterRef.current]);
-        gsap.set([logoRef.current, counterRef.current], { opacity: 1 });
-        setCounter(100);
-        setLogoPosition(100);
-        runExit();
-      };
-      const skipBtn = container.querySelector<HTMLButtonElement>("[data-skip]");
-      skipBtn?.addEventListener("click", skip);
-
-      // Letters reveal one-by-one across the first 40% of the run.
-      const letters = wordmarkRef.current?.querySelectorAll("[data-letter]");
-      const letterWindow = duration * 0.4;
-      masterTl.fromTo(
-        letters ?? [],
-        { opacity: 0, y: 6 },
-        { opacity: 1, y: 0, duration: 0.35, stagger: letterWindow / (letters?.length || 1) },
-        0
-      );
-
-      // The counter — a plain tweened object updated every frame, never
-      // jumping. The logo position and the line fill read the exact same
-      // value, so everything stays perfectly in sync.
-      const progress = { value: 0 };
-      masterTl.to(
-        progress,
-        {
-          value: 100,
-          duration,
-          ease: "power2.inOut",
-          onUpdate: () => {
-            setCounter(progress.value);
-            setLogoPosition(progress.value);
-          },
-        },
-        0
-      );
-
-      // Status text — cross-fades through the three lines across the run.
-      const segment = duration / STATUS_MESSAGES.length;
-      statusRefs.current.forEach((el, i) => {
-        if (!el) return;
-        if (i === 0) statusTl.set(el, { opacity: 1 }, 0);
-        else statusTl.to(el, { opacity: 1, duration: 0.4 }, i * segment);
-        if (i < STATUS_MESSAGES.length - 1) statusTl.to(el, { opacity: 0, duration: 0.4 }, (i + 1) * segment - 0.4);
-      });
-
-      masterTl.eventCallback("onComplete", async () => {
-        if (skippedRef.current) return;
-
-        if (!assetsReadyRef.current) {
-          // Hold at 100 with a subtle pulse until assets are ready,
-          // capped so a slow asset can never stall the reveal for long.
-          const pulse = gsap.to([logoRef.current, counterRef.current], {
-            opacity: 0.55,
-            duration: 0.6,
-            yoyo: true,
-            repeat: -1,
-            ease: "sine.inOut",
-          });
-          await Promise.race([assetsPromise, delay(HOLD_CAP_MS)]);
-          pulse.kill();
-          if (skippedRef.current) return;
-          gsap.set([logoRef.current, counterRef.current], { opacity: 1 });
+    const draw = (time: number) => {
+      if (!rendererActiveRef.current) return;
+      context.clearRect(0, 0, width, height);
+      const cx = width / 2;
+      const cy = height / 2;
+      const burst = burstRef.current;
+      for (let i = 0; i < particles.length; i += 1) {
+        const particle = particles[i];
+        const dx = cx - particle.x;
+        const dy = cy - particle.y;
+        const distance = Math.max(1, Math.hypot(dx, dy));
+        const orbit = Math.sin(time * 0.0007 + particle.phase) * 0.018;
+        particle.vx += (dx / distance) * 0.002 + (-dy / distance) * orbit;
+        particle.vy += (dy / distance) * 0.002 + (dx / distance) * orbit;
+        if (burst > 0) {
+          particle.vx -= (dx / distance) * burst * 0.18;
+          particle.vy -= (dy / distance) * burst * 0.18;
         }
+        particle.vx *= 0.985;
+        particle.vy *= 0.985;
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+        if (particle.x < -30 || particle.x > width + 30 || particle.y < -30 || particle.y > height + 30) {
+          particle.x = Math.random() * width;
+          particle.y = Math.random() * height;
+          particle.vx = 0;
+          particle.vy = 0;
+        }
+        context.beginPath();
+        context.shadowBlur = i % 5 === 0 ? 12 : 7;
+        context.shadowColor = i % 5 === 0 ? "rgba(233,154,105,.9)" : "rgba(127,210,184,.7)";
+        context.fillStyle = i % 5 === 0 ? "rgba(233,154,105,.95)" : "rgba(193,229,217,.78)";
+        context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        context.fill();
+        for (let j = i + 1; j < Math.min(i + 6, particles.length); j += 1) {
+          const other = particles[j];
+          const gap = Math.hypot(particle.x - other.x, particle.y - other.y);
+          if (gap < 105) {
+            context.beginPath();
+            context.shadowBlur = 0;
+            context.strokeStyle = `rgba(127,210,184,${(1 - gap / 105) * 0.25})`;
+            context.moveTo(particle.x, particle.y);
+            context.lineTo(other.x, other.y);
+            context.stroke();
+          }
+        }
+      }
+      frame = window.requestAnimationFrame(draw);
+    };
+    resize();
+    window.addEventListener("resize", resize);
+    frame = window.requestAnimationFrame(draw);
+    return () => {
+      rendererActiveRef.current = false;
+      window.removeEventListener("resize", resize);
+      window.cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
 
-        statusTl.kill();
-        await delay(80);
-        if (!skippedRef.current) runExit();
-      });
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    const finish = () => {
+      played.current = true;
+      rendererActiveRef.current = false;
+      document.documentElement.classList.remove("preload-lock");
+      container.style.display = "none";
+    };
+    if (played.current || firstPath.current !== "/" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finish();
+      return;
+    }
+    const animations: Animation[] = [];
+    if (coreRef.current) {
+      animations.push(coreRef.current.animate(
+        [{ opacity: 0, transform: "scale(.45) rotate(-18deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }],
+        { duration: 750, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" }
+      ));
+      animations.push(coreRef.current.animate(
+        [{ transform: "scale(1)", opacity: 1, filter: "blur(0) brightness(1)" }, { transform: "scale(5.5)", opacity: 0, filter: "blur(8px) brightness(1.8)" }],
+        { delay: 1720, duration: 580, easing: "cubic-bezier(.7,0,.84,0)", fill: "forwards" }
+      ));
+    }
+    if (interfaceRef.current) animations.push(interfaceRef.current.animate(
+      [{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "translateY(0)" }, { opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-12px)" }],
+      { duration: 1830, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" }
+    ));
+    if (barRef.current) animations.push(barRef.current.animate(
+      [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
+      { delay: 120, duration: 1500, easing: "cubic-bezier(.45,0,.55,1)", fill: "forwards" }
+    ));
+    animations.push(container.animate(
+      [{ clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(0% at 50% 50%)" }],
+      { duration: 2480, easing: "cubic-bezier(.76,0,.24,1)", fill: "forwards" }
+    ));
 
-      return () => {
-        skipBtn?.removeEventListener("click", skip);
-        statusTl.kill();
-        masterTl.kill();
-      };
-    },
-    { scope: containerRef, dependencies: [pathname], revertOnUpdate: true }
-  );
+    const start = performance.now();
+    let frame = 0;
+    const update = (now: number) => {
+      const elapsed = now - start;
+      const value = Math.round(Math.min(1, Math.max(0, (elapsed - 120) / 1500)) * 100);
+      if (counterRef.current) counterRef.current.textContent = String(value).padStart(2, "0");
+      burstRef.current = Math.min(1, Math.max(0, (elapsed - 1520) / 380));
+      if (elapsed >= 2520) {
+        finish();
+        return;
+      }
+      frame = window.requestAnimationFrame(update);
+    };
+    frame = window.requestAnimationFrame(update);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      animations.forEach((animation) => animation.cancel());
+    };
+  }, [pathname]);
 
   if (pathname !== "/") return null;
-
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[100] overflow-hidden bg-pounamu-night" role="status" aria-label="Site loading">
-      <div ref={panelLeftRef} className="absolute inset-y-0 left-0 w-1/2 bg-pounamu-night" />
-      <div ref={panelRightRef} className="absolute inset-y-0 right-0 w-1/2 bg-pounamu-night" />
+    <div ref={containerRef} className="fixed inset-0 z-[100] overflow-hidden bg-[#03110f]" role="status" aria-label="Initialising experience" style={{ clipPath: "circle(150% at 50% 50%)" }}>
+      <canvas ref={canvasRef} className="absolute inset-0" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,119,74,.10),transparent_28%),radial-gradient(circle_at_center,transparent_42%,rgba(1,10,9,.88)_88%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:40px_40px]" />
 
-      <div
-        className="pointer-events-none absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(90deg, transparent 0%, rgba(201,119,74,0.045) 50%, transparent 100%)",
-          maskImage: "radial-gradient(ellipse at center, black, transparent 76%)",
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(201,119,74,0.16), transparent 67%)" }}
-        aria-hidden="true"
-      />
-      <div className="pointer-events-none absolute inset-x-[8%] top-[18%] h-px bg-gradient-to-r from-transparent via-ivory/10 to-transparent" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-x-[8%] bottom-[18%] h-px bg-gradient-to-r from-transparent via-ivory/10 to-transparent" aria-hidden="true" />
-
-      <div data-track className="absolute inset-x-[10%] top-[61%] -translate-y-1/2 sm:inset-x-[8%] sm:top-[62%]">
-        <div
-          className="relative h-[3px] w-full overflow-visible bg-deep-line"
-          style={{
-            backgroundImage: "repeating-linear-gradient(90deg, rgba(245,241,232,0.14) 0 1px, transparent 1px 32px)",
-          }}
-        >
-          <div
-            ref={fillRef}
-            className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#8f3d28] via-copper to-[#f0b07a] shadow-[0_0_20px_rgba(201,119,74,0.72)]"
-            style={{ width: "0%" }}
-          />
-        </div>
-
-        <div
-          ref={logoRef}
-          className="absolute top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-copper/70 bg-pounamu-night sm:h-14 sm:w-14"
-          style={{ left: "0%", boxShadow: "0 0 0 6px rgba(201,119,74,0.06), 0 0 32px rgba(201,119,74,0.58)" }}
-        >
-          <span className="absolute inset-1 animate-spin-slower rounded-full border border-dashed border-copper/45" />
-          <span className="absolute -inset-2 rounded-full border border-copper/15" />
-          <span className="font-display text-xs font-semibold text-copper sm:text-sm">P&amp;C</span>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div ref={coreRef} className="relative flex h-36 w-36 items-center justify-center sm:h-44 sm:w-44">
+          <div className="absolute inset-0 rounded-[38%] border border-copper/50 bg-copper/[0.055] shadow-[0_0_90px_rgba(201,119,74,.32)] rotate-45" />
+          <div className="absolute inset-3 rounded-[38%] border border-dashed border-mist/20 animate-spin-slower" />
+          <div className="absolute inset-8 rounded-full border border-copper/40 bg-[#061b17]/80 backdrop-blur-xl" />
+          <span className="relative font-display text-2xl font-semibold tracking-[-0.06em] text-copper-light sm:text-3xl">P&amp;C</span>
+          <span className="absolute -inset-10 rounded-full border border-copper/[0.09]" />
+          <span className="absolute -inset-20 rounded-full border border-mist/[0.05]" />
         </div>
       </div>
 
-      <div ref={centerRef} className="absolute inset-0 flex -translate-y-[8%] flex-col items-center justify-center px-5 sm:-translate-y-[7%]">
-        <div className="mb-5 flex items-center gap-3 font-mono-label text-[8px] text-copper/80 sm:text-[9px]">
-          <span className="h-px w-8 bg-gradient-to-r from-transparent to-copper/70" />
-          NEW ZEALAND · EVENTS · EXPERIENCES
-          <span className="h-px w-8 bg-gradient-to-l from-transparent to-copper/70" />
+      <div ref={interfaceRef} className="absolute inset-0 flex flex-col justify-between px-5 py-6 sm:px-10 sm:py-9">
+        <div className="flex justify-between font-mono-label text-[8px] tracking-[0.24em] text-mist/40">
+          <span>PC_OS / EXPERIENCE ENGINE</span><span>AKL 36.8509 S</span>
         </div>
-        <div
-          ref={wordmarkRef}
-          className="flex max-w-full gap-[0.08em] overflow-hidden whitespace-nowrap font-display font-semibold leading-none tracking-[0.08em] text-ivory sm:gap-[0.12em] sm:tracking-[0.12em]"
-          style={{ fontSize: "clamp(29px, 8vw, 50px)" }}
-        >
-          {site.name.toUpperCase().split("").map((char, i) => (
-            <span key={i} data-letter className="inline-block drop-shadow-[0_0_18px_rgba(245,241,232,0.16)]">
-              {char === " " ? " " : char}
-            </span>
-          ))}
-        </div>
-        <div className="mt-7 flex items-baseline gap-2 font-mono-label tabular-nums text-copper">
-          <span ref={counterRef} className="text-[22px] tracking-[0.14em] sm:text-[26px]">000</span>
-          <span className="text-[10px] text-mist/50">%</span>
-        </div>
-        <div className="relative mt-3 h-5 w-full text-center">
-          {STATUS_MESSAGES.map((msg, i) => (
-            <span
-              key={msg}
-              ref={(el) => {
-                statusRefs.current[i] = el;
-              }}
-              className="font-mono-label absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap text-mist/70 opacity-0"
-              style={{ fontSize: "10px", letterSpacing: "0.16em" }}
-            >
-              {msg}
-            </span>
-          ))}
+        <div className="mx-auto mb-[18vh] w-full max-w-[560px] sm:mb-[13vh]">
+          <div className="mb-3 flex items-end justify-between font-mono-label tracking-[0.22em]">
+            <span className="text-[8px] text-mist/45">SYNTHESISING YOUR ARRIVAL</span>
+            <span className="text-copper-light"><span ref={counterRef} data-loader-counter className="text-2xl tracking-[-0.04em]">--</span><span className="ml-1 text-[8px]">%</span></span>
+          </div>
+          <div className="h-px overflow-hidden bg-mist/10 animate-pulse"><div ref={barRef} data-loader-bar className="h-full origin-left scale-x-0 bg-gradient-to-r from-transparent via-copper to-copper-light shadow-[0_0_16px_rgba(201,119,74,.9)]" /></div>
+          <div className="mt-3 flex justify-between font-mono-label text-[7px] tracking-[0.18em] text-mist/25"><span>CONNECT</span><span>COMPOSE</span><span>REVEAL</span></div>
         </div>
       </div>
-
-      <button
-        type="button"
-        data-skip
-        className="btn-gradient-outline absolute bottom-8 right-8 rounded-full px-5 py-2 font-mono-label text-[10px] text-ivory focus-ring"
-      >
-        Skip intro
-      </button>
-
     </div>
   );
 }

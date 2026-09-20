@@ -7,6 +7,7 @@ import ServicesSection from "@/components/services/ServicesSection";
 import EventPossibilities from "@/components/showcase/EventPossibilities";
 import WorkSection from "@/components/work/WorkSection";
 import ContactSection from "@/components/contact/ContactSection";
+import NewsletterSection from "@/components/newsletter/NewsletterSection";
 import JsonLd from "@/components/seo/JsonLd";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
           <EventPossibilities />
           <WorkSection />
           <ContactSection />
+          <NewsletterSection />
         </main>
       </div>
       <Footer />
