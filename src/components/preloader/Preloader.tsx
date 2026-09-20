@@ -1,203 +1,129 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
+import { ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { site } from "@/content/site";
+
+const ENTER_UNLOCK_SECONDS = 30;
 
 export default function Preloader() {
   const pathname = usePathname();
-  const firstPath = useRef(pathname);
-  const played = useRef(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const coreRef = useRef<HTMLDivElement>(null);
-  const interfaceRef = useRef<HTMLDivElement>(null);
-  const counterRef = useRef<HTMLSpanElement>(null);
-  const barRef = useRef<HTMLDivElement>(null);
-  const burstRef = useRef(0);
-  const rendererActiveRef = useRef(true);
-
-  useLayoutEffect(() => {
-    if (pathname !== "/") document.documentElement.classList.remove("preload-lock");
-  }, [pathname]);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const exitTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [playedSeconds, setPlayedSeconds] = useState(0);
+  const [muted, setMuted] = useState(true);
+  const [exiting, setExiting] = useState(false);
+  const [entered, setEntered] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+  const canEnter = playedSeconds >= ENTER_UNLOCK_SECONDS;
+  const remaining = Math.max(0, ENTER_UNLOCK_SECONDS - Math.floor(playedSeconds));
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const host = containerRef.current;
-    if (!canvas || !host || pathname !== "/") return;
-    const context = canvas.getContext("2d");
-    if (!context) return;
-    rendererActiveRef.current = true;
-    let frame = 0;
-    let width = 0;
-    let height = 0;
-    let particles: Array<{ x: number; y: number; vx: number; vy: number; size: number; phase: number }> = [];
-
-    const resize = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
-      width = window.innerWidth;
-      height = window.innerHeight;
-      canvas.width = width * ratio;
-      canvas.height = height * ratio;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      context.setTransform(ratio, 0, 0, ratio, 0, 0);
-      particles = Array.from({ length: Math.min(150, Math.max(70, Math.floor(width / 10))) }, (_, index) => ({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.32,
-        vy: (Math.random() - 0.5) * 0.32,
-        size: 1.2 + Math.random() * 2.1,
-        phase: index * 0.37,
-      }));
-    };
-
-    const draw = (time: number) => {
-      if (!rendererActiveRef.current) return;
-      context.clearRect(0, 0, width, height);
-      const cx = width / 2;
-      const cy = height / 2;
-      const burst = burstRef.current;
-      for (let i = 0; i < particles.length; i += 1) {
-        const particle = particles[i];
-        const dx = cx - particle.x;
-        const dy = cy - particle.y;
-        const distance = Math.max(1, Math.hypot(dx, dy));
-        const orbit = Math.sin(time * 0.0007 + particle.phase) * 0.018;
-        particle.vx += (dx / distance) * 0.002 + (-dy / distance) * orbit;
-        particle.vy += (dy / distance) * 0.002 + (dx / distance) * orbit;
-        if (burst > 0) {
-          particle.vx -= (dx / distance) * burst * 0.18;
-          particle.vy -= (dy / distance) * burst * 0.18;
-        }
-        particle.vx *= 0.985;
-        particle.vy *= 0.985;
-        particle.x += particle.vx;
-        particle.y += particle.vy;
-        if (particle.x < -30 || particle.x > width + 30 || particle.y < -30 || particle.y > height + 30) {
-          particle.x = Math.random() * width;
-          particle.y = Math.random() * height;
-          particle.vx = 0;
-          particle.vy = 0;
-        }
-        context.beginPath();
-        context.shadowBlur = i % 5 === 0 ? 12 : 7;
-        context.shadowColor = i % 5 === 0 ? "rgba(233,154,105,.9)" : "rgba(127,210,184,.7)";
-        context.fillStyle = i % 5 === 0 ? "rgba(233,154,105,.95)" : "rgba(193,229,217,.78)";
-        context.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-        context.fill();
-        for (let j = i + 1; j < Math.min(i + 6, particles.length); j += 1) {
-          const other = particles[j];
-          const gap = Math.hypot(particle.x - other.x, particle.y - other.y);
-          if (gap < 105) {
-            context.beginPath();
-            context.shadowBlur = 0;
-            context.strokeStyle = `rgba(127,210,184,${(1 - gap / 105) * 0.25})`;
-            context.moveTo(particle.x, particle.y);
-            context.lineTo(other.x, other.y);
-            context.stroke();
-          }
-        }
-      }
-      frame = window.requestAnimationFrame(draw);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-    frame = window.requestAnimationFrame(draw);
+    if (pathname !== "/" || entered) document.documentElement.classList.remove("preload-lock");
+    else document.documentElement.classList.add("preload-lock");
     return () => {
-      rendererActiveRef.current = false;
-      window.removeEventListener("resize", resize);
-      window.cancelAnimationFrame(frame);
+      if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
     };
-  }, [pathname]);
+  }, [entered, pathname]);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    const finish = () => {
-      played.current = true;
-      rendererActiveRef.current = false;
+    if (pathname !== "/" || entered) return;
+    videoRef.current?.play().catch(() => setVideoError(true));
+  }, [entered, pathname]);
+
+  const enterWebsite = () => {
+    if (!canEnter || exiting) return;
+    setExiting(true);
+    videoRef.current?.pause();
+    exitTimerRef.current = setTimeout(() => {
+      const lenis = (window as Window & { __lenis?: { scrollTo: (target: number, options?: { immediate?: boolean; force?: boolean }) => void; start: () => void } }).__lenis;
+      lenis?.scrollTo(0, { immediate: true, force: true });
+      lenis?.start();
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      setEntered(true);
       document.documentElement.classList.remove("preload-lock");
-      container.style.display = "none";
-    };
-    if (played.current || firstPath.current !== "/" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      finish();
-      return;
-    }
-    const animations: Animation[] = [];
-    if (coreRef.current) {
-      animations.push(coreRef.current.animate(
-        [{ opacity: 0, transform: "scale(.45) rotate(-18deg)" }, { opacity: 1, transform: "scale(1) rotate(0deg)" }],
-        { duration: 750, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" }
-      ));
-      animations.push(coreRef.current.animate(
-        [{ transform: "scale(1)", opacity: 1, filter: "blur(0) brightness(1)" }, { transform: "scale(5.5)", opacity: 0, filter: "blur(8px) brightness(1.8)" }],
-        { delay: 1720, duration: 580, easing: "cubic-bezier(.7,0,.84,0)", fill: "forwards" }
-      ));
-    }
-    if (interfaceRef.current) animations.push(interfaceRef.current.animate(
-      [{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "translateY(0)" }, { opacity: 1, transform: "translateY(0)" }, { opacity: 0, transform: "translateY(-12px)" }],
-      { duration: 1830, easing: "cubic-bezier(.16,1,.3,1)", fill: "forwards" }
-    ));
-    if (barRef.current) animations.push(barRef.current.animate(
-      [{ transform: "scaleX(0)" }, { transform: "scaleX(1)" }],
-      { delay: 120, duration: 1500, easing: "cubic-bezier(.45,0,.55,1)", fill: "forwards" }
-    ));
-    animations.push(container.animate(
-      [{ clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(150% at 50% 50%)" }, { clipPath: "circle(0% at 50% 50%)" }],
-      { duration: 2480, easing: "cubic-bezier(.76,0,.24,1)", fill: "forwards" }
-    ));
+    }, 900);
+  };
 
-    const start = performance.now();
-    let frame = 0;
-    const update = (now: number) => {
-      const elapsed = now - start;
-      const value = Math.round(Math.min(1, Math.max(0, (elapsed - 120) / 1500)) * 100);
-      if (counterRef.current) counterRef.current.textContent = String(value).padStart(2, "0");
-      burstRef.current = Math.min(1, Math.max(0, (elapsed - 1520) / 380));
-      if (elapsed >= 2520) {
-        finish();
-        return;
-      }
-      frame = window.requestAnimationFrame(update);
-    };
-    frame = window.requestAnimationFrame(update);
-    return () => {
-      window.cancelAnimationFrame(frame);
-      animations.forEach((animation) => animation.cancel());
-    };
-  }, [pathname]);
+  const toggleSound = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setMuted(video.muted);
+    video.play().catch(() => {});
+  };
 
-  if (pathname !== "/") return null;
+  if (pathname !== "/" || entered) return null;
+
   return (
-    <div ref={containerRef} className="fixed inset-0 z-[100] overflow-hidden bg-[#03110f]" role="status" aria-label="Initialising experience" style={{ clipPath: "circle(150% at 50% 50%)" }}>
-      <canvas ref={canvasRef} className="absolute inset-0" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(201,119,74,.10),transparent_28%),radial-gradient(circle_at_center,transparent_42%,rgba(1,10,9,.88)_88%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.035] [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)] [background-size:40px_40px]" />
+    <div
+      className={`fixed inset-0 z-[100] overflow-hidden bg-black transition-[clip-path,opacity] duration-[900ms] ease-[cubic-bezier(.76,0,.24,1)] ${exiting ? "opacity-0 [clip-path:circle(0%_at_50%_50%)]" : "opacity-100 [clip-path:circle(150%_at_50%_50%)]"}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Client introduction video"
+    >
+      <video
+        ref={videoRef}
+        src={site.hero.video.mp4[0]}
+        poster={site.hero.video.poster}
+        autoPlay
+        muted={muted}
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover"
+        onTimeUpdate={(event) => setPlayedSeconds(event.currentTarget.currentTime)}
+        onLoadedMetadata={(event) => event.currentTarget.play().catch(() => setVideoError(true))}
+        onError={() => setVideoError(true)}
+      />
 
-      <div className="absolute inset-0 flex items-center justify-center">
-        <div ref={coreRef} className="relative flex h-36 w-36 items-center justify-center sm:h-44 sm:w-44">
-          <div className="absolute inset-0 rounded-[38%] border border-copper/50 bg-copper/[0.055] shadow-[0_0_90px_rgba(201,119,74,.32)] rotate-45" />
-          <div className="absolute inset-3 rounded-[38%] border border-dashed border-mist/20 animate-spin-slower" />
-          <div className="absolute inset-8 rounded-full border border-copper/40 bg-[#061b17]/80 backdrop-blur-xl" />
-          <span className="relative font-display text-2xl font-semibold tracking-[-0.06em] text-copper-light sm:text-3xl">P&amp;C</span>
-          <span className="absolute -inset-10 rounded-full border border-copper/[0.09]" />
-          <span className="absolute -inset-20 rounded-full border border-mist/[0.05]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-black/35" />
+      <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
+
+      <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5 sm:p-8">
+        <div className="rounded-[10px] border border-white/20 bg-black/30 px-3 py-2 font-mono-label text-[7px] tracking-[0.16em] text-white/75 backdrop-blur-md sm:px-4 sm:text-[8px] sm:tracking-[0.2em]">
+          PROPS &amp; CREW PRESENTS
         </div>
+        <button type="button" onClick={toggleSound} className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-white/20 bg-black/30 px-3 text-white backdrop-blur-md transition-colors hover:border-copper hover:text-copper focus-ring sm:px-4" aria-label={muted ? "Turn intro sound on" : "Turn intro sound off"}>
+          {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
+          <span className="hidden font-mono-label text-[8px] tracking-[0.14em] sm:inline">{muted ? "SOUND ON" : "SOUND OFF"}</span>
+        </button>
       </div>
 
-      <div ref={interfaceRef} className="absolute inset-0 flex flex-col justify-between px-5 py-6 sm:px-10 sm:py-9">
-        <div className="flex justify-between font-mono-label text-[8px] tracking-[0.24em] text-mist/40">
-          <span>PC_OS / EXPERIENCE ENGINE</span><span>AKL 36.8509 S</span>
-        </div>
-        <div className="mx-auto mb-[18vh] w-full max-w-[560px] sm:mb-[13vh]">
-          <div className="mb-3 flex items-end justify-between font-mono-label tracking-[0.22em]">
-            <span className="text-[8px] text-mist/45">SYNTHESISING YOUR ARRIVAL</span>
-            <span className="text-copper-light"><span ref={counterRef} data-loader-counter className="text-2xl tracking-[-0.04em]">--</span><span className="ml-1 text-[8px]">%</span></span>
+      <div className="absolute inset-x-0 bottom-[7svh] p-5 sm:bottom-[7svh] sm:p-8 lg:p-10">
+        <div className="mx-auto flex max-w-[1440px] flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl sm:-translate-y-14 lg:-translate-y-32">
+            <div className="font-mono-label text-[8px] tracking-[0.2em] text-copper-light sm:text-[9px] sm:tracking-[0.24em]">WELCOME TO NEW ZEALAND</div>
+            <h1 className="mt-2 max-w-[13ch] font-display text-[clamp(1.9rem,4.4vw,4.5rem)] font-semibold leading-[.94] tracking-[-0.05em] text-white sm:mt-3">
+              Every experience starts with a story.
+            </h1>
           </div>
-          <div className="h-px overflow-hidden bg-mist/10 animate-pulse"><div ref={barRef} data-loader-bar className="h-full origin-left scale-x-0 bg-gradient-to-r from-transparent via-copper to-copper-light shadow-[0_0_16px_rgba(201,119,74,.9)]" /></div>
-          <div className="mt-3 flex justify-between font-mono-label text-[7px] tracking-[0.18em] text-mist/25"><span>CONNECT</span><span>COMPOSE</span><span>REVEAL</span></div>
+
+          <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:min-w-[230px] sm:-translate-y-5 sm:items-end lg:-translate-y-10">
+            {!canEnter ? (
+              <div className="rounded-[10px] border border-white/15 bg-black/35 px-5 py-3 text-center font-mono-label text-[8px] tracking-[0.14em] text-white/70 backdrop-blur-md sm:text-[9px] sm:tracking-[0.16em]" aria-live="polite">
+                ENTER UNLOCKS IN {remaining}s
+              </div>
+            ) : (
+              <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(201,119,74,.35)] focus-ring">
+                Enter Website
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            )}
+            <div className="h-[2px] w-full overflow-hidden bg-white/15 sm:w-[230px]">
+              <div className="h-full bg-gradient-to-r from-copper-dark to-copper-light transition-[width] duration-300 ease-linear" style={{ width: `${Math.min(100, (playedSeconds / ENTER_UNLOCK_SECONDS) * 100)}%` }} />
+            </div>
+          </div>
         </div>
       </div>
+
+      {videoError && (
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-red-300/30 bg-black/70 px-5 py-4 text-center text-sm text-white backdrop-blur-md">
+          The introduction video could not play. Please refresh and try again.
+        </div>
+      )}
     </div>
   );
 }
