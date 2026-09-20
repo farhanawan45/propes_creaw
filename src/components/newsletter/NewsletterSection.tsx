@@ -36,7 +36,7 @@ export default function NewsletterSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-pounamu-night px-5 pb-8 pt-4 sm:px-8 sm:pb-10 lg:px-12 lg:pb-12" aria-labelledby="newsletter-title">
+    <section className="relative overflow-hidden bg-pounamu-night px-5 pb-8 pt-8 sm:px-8 sm:pb-10 sm:pt-10 lg:px-12 lg:pb-12 lg:pt-12" aria-labelledby="newsletter-title">
       <motion.div
         initial={{ opacity: 0, y: 36 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ export default function NewsletterSection() {
         <div className="relative min-h-[180px] overflow-hidden sm:min-h-[220px] lg:min-h-[260px]">
           <Image src="/images/service-event-management.webp" alt="An elegant event setting in New Zealand" fill sizes="(max-width: 1023px) 100vw, 42vw" className="object-cover transition-transform duration-[1600ms] hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0b2822]/30" />
-          <div className="absolute bottom-5 left-5 rounded-full border border-white/25 bg-pounamu-night/65 px-4 py-2 font-mono-label text-[8px] tracking-[0.18em] text-ivory backdrop-blur-md sm:bottom-7 sm:left-7">
+          <div className="absolute bottom-5 left-5 rounded-[10px] border border-white/25 bg-pounamu-night/35 px-4 py-2 font-mono-label text-[8px] tracking-[0.18em] text-ivory backdrop-blur-md sm:bottom-7 sm:left-7">
             INSIDE PROPS &amp; CREW
           </div>
         </div>
