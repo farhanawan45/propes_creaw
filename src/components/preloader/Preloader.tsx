@@ -29,8 +29,13 @@ export default function Preloader() {
 
   useEffect(() => {
     if (pathname !== "/" || entered) return;
-    videoRef.current?.play().catch(() => setVideoError(true));
+    videoRef.current?.play().catch(() => {});
   }, [entered, pathname]);
+
+  const handleVideoError = () => {
+    setVideoError(true);
+    setPlayedSeconds(ENTER_UNLOCK_SECONDS);
+  };
 
   const enterWebsite = () => {
     if (!canEnter || exiting) return;
@@ -76,8 +81,9 @@ export default function Preloader() {
         preload="auto"
         className="absolute inset-0 h-full w-full object-cover"
         onTimeUpdate={(event) => setPlayedSeconds(event.currentTarget.currentTime)}
-        onLoadedMetadata={(event) => event.currentTarget.play().catch(() => setVideoError(true))}
-        onError={() => setVideoError(true)}
+        onLoadedMetadata={(event) => event.currentTarget.play().catch(() => {})}
+        onCanPlay={() => setVideoError(false)}
+        onError={handleVideoError}
       />
 
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/5 to-black/35" />
@@ -120,11 +126,7 @@ export default function Preloader() {
         </div>
       </div>
 
-      {videoError && (
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-xl border border-red-300/30 bg-black/70 px-5 py-4 text-center text-sm text-white backdrop-blur-md">
-          The introduction video could not play. Please refresh and try again.
-        </div>
-      )}
+      {videoError && <span className="sr-only">Introduction video unavailable. You can continue to the website.</span>}
     </div>
   );
 }
