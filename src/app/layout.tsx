@@ -5,7 +5,6 @@ import "./globals.css";
 import { site } from "@/content/site";
 import { LenisProvider } from "@/context/LenisContext";
 import { MenuProvider } from "@/context/MenuContext";
-import CustomCursor from "@/components/ui/CustomCursor";
 import GrainOverlay from "@/components/ui/GrainOverlay";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
@@ -95,7 +94,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <LenisProvider>
               <GrainOverlay />
               <ScrollProgress />
-              <CustomCursor />
               {children}
               <WhatsAppButton />
             </LenisProvider>

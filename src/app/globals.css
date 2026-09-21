@@ -237,28 +237,6 @@ body {
   background-size: 180px 180px;
 }
 
-.custom-cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 110;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.has-custom-cursor,
-.has-custom-cursor a,
-.has-custom-cursor button {
-  cursor: none;
-}
-
-.has-custom-cursor input,
-.has-custom-cursor textarea,
-.has-custom-cursor select,
-.has-custom-cursor label {
-  cursor: auto;
-}
-
 ::-webkit-scrollbar {
   width: 8px;
 }
