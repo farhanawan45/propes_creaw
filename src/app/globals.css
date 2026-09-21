@@ -237,6 +237,27 @@ body {
   background-size: 180px 180px;
 }
 
+.cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  width: 22px;
+  height: 22px;
+  border: 1px solid var(--color-copper);
+  border-radius: 50%;
+  background: rgb(201 119 74 / 8%);
+  box-shadow: 0 0 12px rgb(201 119 74 / 20%);
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform;
+  transition: opacity 120ms ease-out;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .cursor-trail { display: none; }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

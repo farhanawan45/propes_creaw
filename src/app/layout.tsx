@@ -6,6 +6,7 @@ import { site } from "@/content/site";
 import { LenisProvider } from "@/context/LenisContext";
 import { MenuProvider } from "@/context/MenuContext";
 import GrainOverlay from "@/components/ui/GrainOverlay";
+import CursorTrail from "@/components/ui/CursorTrail";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import Preloader from "@/components/preloader/Preloader";
@@ -93,6 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Preloader />
             <LenisProvider>
               <GrainOverlay />
+              <CursorTrail />
               <ScrollProgress />
               {children}
               <WhatsAppButton />
