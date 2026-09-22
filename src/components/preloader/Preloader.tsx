@@ -18,7 +18,6 @@ export default function Preloader() {
   const [entered, setEntered] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const canEnter = playedSeconds >= ENTER_UNLOCK_SECONDS;
-  const remaining = Math.max(0, ENTER_UNLOCK_SECONDS - Math.floor(playedSeconds));
 
   useEffect(() => {
     if (pathname !== "/" || entered) document.documentElement.classList.remove("preload-lock");
@@ -101,16 +100,14 @@ export default function Preloader() {
       <div className="absolute inset-x-0 bottom-[7svh] p-5 sm:bottom-[7svh] sm:p-8 lg:p-10">
         <div className="mx-auto flex max-w-[1440px] justify-end">
           <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:min-w-[230px] sm:-translate-y-5 sm:items-end lg:-translate-y-10">
-            {!canEnter ? (
-              <div className="rounded-[10px] border border-white/15 bg-black/35 px-5 py-3 text-center font-mono-label text-[8px] tracking-[0.14em] text-white/70 backdrop-blur-md sm:text-[9px] sm:tracking-[0.16em]" aria-live="polite">
-                ENTER UNLOCKS IN {remaining}s
-              </div>
-            ) : (
-              <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(201,119,74,.35)] focus-ring">
-                Enter
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </button>
-            )}
+            <div className="flex min-h-[52px] items-end justify-center sm:justify-end">
+              {canEnter && (
+                <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(201,119,74,.35)] focus-ring">
+                  Enter
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              )}
+            </div>
             <div className="h-[2px] w-full overflow-hidden bg-white/15 sm:w-[230px]">
               <div className="h-full bg-gradient-to-r from-copper-dark to-copper-light transition-[width] duration-300 ease-linear" style={{ width: `${Math.min(100, (playedSeconds / ENTER_UNLOCK_SECONDS) * 100)}%` }} />
             </div>
