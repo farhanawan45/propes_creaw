@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Volume2, VolumeX } from "lucide-react";
 import { site } from "@/content/site";
+import BrandLogo from "@/components/ui/BrandLogo";
 
 const ENTER_UNLOCK_SECONDS = 30;
 
@@ -90,9 +91,7 @@ export default function Preloader() {
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
       <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5 sm:p-8">
-        <div className="rounded-[10px] border border-white/20 bg-black/30 px-3 py-2 font-mono-label text-[7px] tracking-[0.16em] text-white/75 backdrop-blur-md sm:px-4 sm:text-[8px] sm:tracking-[0.2em]">
-          PROPS &amp; CREW PRESENTS
-        </div>
+        <BrandLogo />
         <button type="button" onClick={toggleSound} className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-white/20 bg-black/30 px-3 text-white backdrop-blur-md transition-colors hover:border-copper hover:text-copper focus-ring sm:px-4" aria-label={muted ? "Turn intro sound on" : "Turn intro sound off"}>
           {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           <span className="hidden font-mono-label text-[8px] tracking-[0.14em] sm:inline">{muted ? "SOUND ON" : "SOUND OFF"}</span>
@@ -102,8 +101,7 @@ export default function Preloader() {
       <div className="absolute inset-x-0 bottom-[7svh] p-5 sm:bottom-[7svh] sm:p-8 lg:p-10">
         <div className="mx-auto flex max-w-[1440px] flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-xl sm:-translate-y-14 lg:-translate-y-32">
-            <div className="font-mono-label text-[8px] tracking-[0.2em] text-copper-light sm:text-[9px] sm:tracking-[0.24em]">WELCOME TO NEW ZEALAND</div>
-            <h1 className="mt-2 max-w-[13ch] font-display text-[clamp(1.9rem,4.4vw,4.5rem)] font-semibold leading-[.94] tracking-[-0.05em] text-white sm:mt-3">
+            <h1 className="max-w-[13ch] font-display text-[clamp(1.9rem,4.4vw,4.5rem)] font-semibold leading-[.94] tracking-[-0.05em] text-white">
               Every experience starts with a story.
             </h1>
           </div>
@@ -115,7 +113,7 @@ export default function Preloader() {
               </div>
             ) : (
               <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(201,119,74,.35)] focus-ring">
-                Enter Website
+                Enter
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             )}

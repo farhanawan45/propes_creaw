@@ -144,7 +144,7 @@ export default function Hero() {
               // vh-capped too: at 150px on a short/wide 1080p viewport, three
               // stacked lines overflow the bottom-anchored hero and get cut
               // off by the header — clamp on whichever axis is tighter.
-              fontSize: "clamp(46px, min(6.2vw, 8vh), 104px)",
+              fontSize: "clamp(54px, min(8vw, 11vh), 128px)",
               lineHeight: 0.96,
               letterSpacing: "-0.03em",
             }}

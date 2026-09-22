@@ -89,8 +89,8 @@ export const site = {
   hero: {
     label: "NEW ZEALAND · EVENTS · MICE",
     headline: [
-      { text: "Unforgettable", emphasis: true },
-      { text: " experiences." },
+      { text: "We Create" },
+      { text: " Experiences", emphasis: true },
     ],
     lead: "Luxury events, MICE and journeys across New Zealand, thoughtfully crafted from first idea to final farewell.",
     ctaPrimary: { label: "Explore Services", href: "#services" },
