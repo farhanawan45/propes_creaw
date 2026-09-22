@@ -11,7 +11,7 @@ export default function BrandLogo({ size = "sm", className = "" }: BrandLogoProp
   return (
     <span className={`inline-flex shrink-0 items-center justify-center rounded-[10px] border border-white/20 bg-[#fffdf8] shadow-[0_8px_28px_rgba(3,15,13,0.2)] ${medium ? "px-3 py-2" : "px-2.5 py-1.5"} ${className}`}>
       <Image
-        src="/images/pnc-client-logo.svg"
+        src="/images/pnc-client-logo-v2.png"
         alt="Props-n-Crew"
         width={medium ? 150 : 110}
         height={medium ? 69 : 51}
