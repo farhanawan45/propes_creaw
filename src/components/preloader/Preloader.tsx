@@ -99,13 +99,7 @@ export default function Preloader() {
       </div>
 
       <div className="absolute inset-x-0 bottom-[7svh] p-5 sm:bottom-[7svh] sm:p-8 lg:p-10">
-        <div className="mx-auto flex max-w-[1440px] flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <div className="max-w-xl sm:-translate-y-14 lg:-translate-y-32">
-            <h1 className="max-w-[13ch] font-display text-[clamp(1.9rem,4.4vw,4.5rem)] font-semibold leading-[.94] tracking-[-0.05em] text-white">
-              Every experience starts with a story.
-            </h1>
-          </div>
-
+        <div className="mx-auto flex max-w-[1440px] justify-end">
           <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:min-w-[230px] sm:-translate-y-5 sm:items-end lg:-translate-y-10">
             {!canEnter ? (
               <div className="rounded-[10px] border border-white/15 bg-black/35 px-5 py-3 text-center font-mono-label text-[8px] tracking-[0.14em] text-white/70 backdrop-blur-md sm:text-[9px] sm:tracking-[0.16em]" aria-live="polite">

@@ -13,7 +13,7 @@ import ServiceTicker from "@/components/hero/ServiceTicker";
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
-  const labelRef = useRef<HTMLDivElement>(null);
+  const taglineRef = useRef<HTMLParagraphElement>(null);
   const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const subRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
@@ -47,14 +47,14 @@ export default function Hero() {
       const tl = gsap.timeline({ delay: reduced ? 0 : 0.25 });
 
       tl.fromTo(
-        labelRef.current,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }
-      )
-        .fromTo(
           wordRefs.current,
           { yPercent: 110 },
           { yPercent: 0, duration: 0.7, stagger: 0.035, ease: "power4.out" },
+        )
+        .fromTo(
+          taglineRef.current,
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" },
           "-=0.3"
         )
         .fromTo(
@@ -125,19 +125,6 @@ export default function Hero() {
 
       <div className="relative z-10 w-full px-5 pb-6 pt-36 sm:px-8 sm:pb-24 sm:pt-40 lg:px-12 lg:pb-28">
         <div className="relative top-[10px] mx-auto max-w-[1440px] sm:top-0">
-          <div
-            ref={labelRef}
-            className="mb-5 inline-flex max-w-full items-center gap-1.5 whitespace-nowrap rounded-full bg-pounamu-night/55 px-3 py-2 backdrop-blur-md sm:gap-2 sm:px-4"
-          >
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-copper" />
-            <span
-              className="font-mono-label text-ivory"
-              style={{ fontSize: "clamp(7px, 2.25vw, 13px)", letterSpacing: "0.08em" }}
-            >
-              {site.hero.label}
-            </span>
-          </div>
-
           <h1
             className="font-display font-semibold tracking-tight text-ivory"
             style={{
@@ -165,9 +152,13 @@ export default function Hero() {
             ))}
           </h1>
 
+          <p ref={taglineRef} className="mt-4 font-mono-label text-[clamp(13px,1.25vw,18px)] tracking-[0.12em] text-copper-light sm:mt-5">
+            Every Experience Starts With A Story
+          </p>
+
           <p
             ref={subRef}
-            className="mt-5 max-w-[480px] font-light text-ivory/85"
+            className="mt-6 max-w-[480px] font-light text-ivory/85"
             style={{ fontSize: "clamp(16px, 1.35vw, 19px)", lineHeight: 1.45 }}
           >
             {site.hero.lead}

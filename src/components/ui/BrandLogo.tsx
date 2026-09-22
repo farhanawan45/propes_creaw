@@ -9,13 +9,13 @@ export default function BrandLogo({ size = "sm", className = "" }: BrandLogoProp
   const medium = size === "md";
 
   return (
-    <span className={`inline-flex shrink-0 items-center justify-center rounded-[10px] border border-white/20 bg-[#fffdf8] shadow-[0_8px_28px_rgba(3,15,13,0.2)] ${medium ? "px-3 py-2" : "px-2.5 py-1.5"} ${className}`}>
+    <span className={`inline-flex shrink-0 items-center justify-center ${className}`}>
       <Image
-        src="/images/pnc-client-logo-v2.png"
+        src="/images/pnc-client-logo-light-v1.png"
         alt="Props-n-Crew"
         width={medium ? 150 : 110}
         height={medium ? 69 : 51}
-        className={medium ? "h-[56px] w-[120px] object-contain" : "h-[38px] w-[82px] object-contain sm:h-[44px] sm:w-[96px]"}
+        className={medium ? "h-[56px] w-[120px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,.55)]" : "h-[38px] w-[82px] object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,.55)] sm:h-[44px] sm:w-[96px]"}
         unoptimized
       />
     </span>
