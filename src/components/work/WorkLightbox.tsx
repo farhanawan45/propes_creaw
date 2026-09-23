@@ -106,35 +106,37 @@ export default function WorkLightbox({
         <ChevronRight className="h-5 w-5" strokeWidth={1.8} />
       </button>
 
-      <AnimatePresence mode="sync" initial={false}>
-        <motion.div
-          key={project.id}
-          initial={{ opacity: 0, x: direction > 0 ? 80 : -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: direction > 0 ? -80 : 80 }}
-          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.4}
-          onDragEnd={handleDragEnd}
-          className="relative flex w-full max-w-5xl flex-col items-center"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <div
-            role="img"
-            aria-label={project.title}
-            className="relative aspect-[16/10] w-full touch-pan-y overflow-hidden rounded-2xl bg-pounamu bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url("${project.image}")` }}
+      <div className="grid w-full max-w-5xl">
+        <AnimatePresence mode="sync" initial={false}>
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, x: direction > 0 ? 80 : -80 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction > 0 ? -80 : 80 }}
+            transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.4}
+            onDragEnd={handleDragEnd}
+            className="relative col-start-1 row-start-1 flex w-full flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-pounamu-night/20 to-transparent" />
-          </div>
-          <div className="mt-6 text-center">
-            <div className="font-mono-label text-copper">{project.location}, New Zealand</div>
-            <h3 className="mt-2 font-display text-2xl font-semibold text-ivory">{project.title}</h3>
-            <p className="mt-2 text-sm text-mist">Case study coming soon.</p>
-          </div>
-        </motion.div>
-      </AnimatePresence>
+            <div
+              role="img"
+              aria-label={project.title}
+              className="relative aspect-[16/10] w-full touch-pan-y overflow-hidden rounded-2xl bg-pounamu bg-cover bg-center bg-no-repeat"
+              style={{ backgroundImage: `url("${project.image}")` }}
+            >
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-pounamu-night/20 to-transparent" />
+            </div>
+            <div className="mt-6 text-center">
+              <div className="font-mono-label text-copper">{project.location}, New Zealand</div>
+              <h3 className="mt-2 font-display text-2xl font-semibold text-ivory">{project.title}</h3>
+              <p className="mt-2 text-sm text-mist">Case study coming soon.</p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+      </div>
 
       <div className="mt-6 font-mono-label tabular-nums text-mist sm:hidden">
         <span className="text-copper">{String(index + 1).padStart(2, "0")}</span>
