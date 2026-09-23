@@ -63,7 +63,7 @@ export default function NewsletterSection() {
               Receive event inspiration, destination insights, new experiences and considered offers from our crew.
             </p>
 
-            <form onSubmit={submit} className="mt-5 lg:max-w-[640px]" noValidate>
+            <form onSubmit={submit} className="mt-5 lg:max-w-[560px]" noValidate>
               <label htmlFor="newsletter-email" className="sr-only">Email address</label>
               <div className="flex rounded-[14px] border border-ivory/15 bg-pounamu-night/70 p-1.5 transition-colors focus-within:border-copper/70">
                 <Mail className="ml-3 hidden h-4 w-4 self-center text-copper sm:block" strokeWidth={1.6} aria-hidden="true" />
