@@ -164,7 +164,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-deep-line text-ivory focus-ring"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/25 bg-pounamu-night/85 text-ivory shadow-[0_8px_24px_rgba(4,22,63,.35)] backdrop-blur-md transition-colors hover:border-copper hover:bg-pounamu focus-ring"
               aria-label="Open menu"
               aria-expanded={open}
               data-cursor="Menu"
