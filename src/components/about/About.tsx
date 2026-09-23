@@ -128,7 +128,7 @@ export default function About() {
 
             </div>
 
-            <div ref={imageAref} className="relative overflow-hidden rounded-[28px] bg-ink shadow-[0_28px_80px_rgba(7,29,25,0.18)] lg:col-span-7">
+            <div ref={imageAref} className="relative overflow-hidden rounded-[28px] bg-ink shadow-[0_28px_80px_rgba(4,22,63,0.2)] lg:col-span-7">
             <div className="relative h-[500px] sm:h-[620px] lg:h-[680px]">
               <div ref={parallaxA} className="absolute inset-0 -top-[4%] h-[108%]">
                 {slides.map((slide, index) => (
@@ -166,7 +166,7 @@ export default function About() {
                 <div className="grid items-end gap-7 lg:grid-cols-[1fr_auto]">
                   <div>
                     <div className="inline-flex items-center gap-2.5 rounded-[10px] border border-white/25 bg-pounamu-night/[0.18] px-3.5 py-2.5 font-mono-label text-[10px] font-bold tracking-[0.13em] text-copper-light shadow-[0_5px_16px_rgba(0,0,0,.12)] [text-shadow:0_1px_5px_rgba(0,0,0,.85)] backdrop-blur-[2px] sm:px-4 sm:text-[11px]">
-                      <span className="size-1.5 shrink-0 rounded-full bg-copper shadow-[0_0_10px_rgba(240,176,122,.9)]" />
+                      <span className="size-1.5 shrink-0 rounded-full bg-copper shadow-[0_0_10px_rgba(255,122,89,.9)]" />
                       <span>0{activeSlide + 1}</span>
                       <span className="text-white/35">/</span>
                       <span className="text-ivory">{slides[activeSlide].eyebrow}</span>
@@ -186,10 +186,10 @@ export default function About() {
                   </div>
 
                   <div className="flex w-full items-center justify-between lg:w-auto lg:gap-3">
-                    <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(210,111,65,.3)] transition duration-300 hover:bg-[#e08458] sm:size-12">
+                    <button type="button" onClick={() => moveSlide(-1)} aria-label="Previous slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(251,83,44,.3)] transition duration-300 hover:bg-copper-light sm:size-12">
                       <ArrowLeft size={18} strokeWidth={1.6} />
                     </button>
-                    <button type="button" onClick={() => moveSlide(1)} aria-label="Next slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(210,111,65,.3)] transition duration-300 hover:bg-[#e08458] sm:size-12">
+                    <button type="button" onClick={() => moveSlide(1)} aria-label="Next slide" className="flex size-11 items-center justify-center rounded-[10px] border border-copper/70 bg-copper text-white shadow-[0_8px_24px_rgba(251,83,44,.3)] transition duration-300 hover:bg-copper-light sm:size-12">
                       <ArrowRight size={18} strokeWidth={1.6} />
                     </button>
                   </div>

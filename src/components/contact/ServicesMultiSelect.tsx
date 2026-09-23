@@ -50,7 +50,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                 setOpen((o) => !o);
               }
             }}
-            className={`flex h-12 w-full cursor-pointer items-center gap-2 rounded-[14px] border bg-[rgba(245,241,232,0.04)] px-4 outline-none transition-colors focus:ring-[3px] ${
+            className={`flex h-12 w-full cursor-pointer items-center gap-2 rounded-[14px] border bg-[rgba(255,253,248,0.04)] px-4 outline-none transition-colors focus:ring-[3px] ${
               error
                 ? "border-[#E5484D] focus:border-[#E5484D] focus:ring-[#E5484D]/20"
                 : "border-deep-line focus:border-copper focus:ring-copper/25"
@@ -131,7 +131,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                             key={s.id}
                             value={s.name}
                             onSelect={() => toggle(s.id)}
-                            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-ivory outline-none transition-colors data-[selected=true]:bg-[rgba(245,241,232,0.06)]"
+                            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-ivory outline-none transition-colors data-[selected=true]:bg-[rgba(255,253,248,0.06)]"
                           >
                             <span
                               className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-[5px] border transition-colors ${

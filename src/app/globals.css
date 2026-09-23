@@ -122,7 +122,7 @@
 }
 
 .hero-cinematic-flash {
-  background: linear-gradient(108deg, transparent 28%, rgba(240, 176, 122, 0.16) 48%, rgba(245, 241, 232, 0.1) 52%, transparent 72%);
+  background: linear-gradient(108deg, transparent 28%, rgba(255, 122, 89, 0.16) 48%, rgba(255, 253, 248, 0.1) 52%, transparent 72%);
   animation: heroCinematicFlash 1.35s cubic-bezier(0.16, 1, 0.3, 1) both;
   mix-blend-mode: screen;
 }
@@ -298,7 +298,7 @@ body {
 }
 
 .btn-gradient {
-  border: 1px solid rgba(245, 241, 232, 0.18);
+  border: 1px solid rgba(255, 253, 248, 0.18);
   background: linear-gradient(120deg, #d83b1a 0%, #fb532c 38%, #ff8a68 52%, #f14a25 72%, #b92e13 100%);
   background-size: 220% 220%;
   color: var(--color-ivory);
@@ -446,7 +446,7 @@ input[type="date"] {
 }
 .pc-daypicker .rdp-button_next:hover,
 .pc-daypicker .rdp-button_previous:hover {
-  background: rgba(245, 241, 232, 0.08);
+  background: rgba(255, 253, 248, 0.08);
 }
 
 /* Event possibilities — two seamless, counter-moving showcase rows. */
@@ -475,7 +475,7 @@ input[type="date"] {
 }
 
 .event-moment-card {
-  box-shadow: 0 10px 24px rgba(12, 31, 28, 0.12);
+  box-shadow: 0 10px 24px rgba(4, 22, 63, 0.14);
 }
 
 @media (prefers-reduced-motion: reduce) {

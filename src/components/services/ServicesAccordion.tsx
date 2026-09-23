@@ -15,7 +15,7 @@ export default function ServicesAccordion() {
   return (
     <div>
       <div className="mb-10 flex justify-center">
-        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-copper bg-pounamu font-display text-xl font-semibold text-ivory shadow-[0_0_40px_-10px_rgba(201,119,74,0.55)]">
+        <div className="relative flex h-24 w-24 items-center justify-center rounded-full border border-copper bg-pounamu font-display text-xl font-semibold text-ivory shadow-[0_0_40px_-10px_rgba(251,83,44,0.55)]">
           <span className="text-copper">P&amp;C</span>
           <span className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-deep-line" />
         </div>

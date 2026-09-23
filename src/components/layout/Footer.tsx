@@ -45,7 +45,7 @@ export default function Footer() {
   const wordmarkRef = useRef<HTMLDivElement>(null);
   const spotX = useMotionValue(50);
   const spotY = useMotionValue(50);
-  const spotlight = useMotionTemplate`radial-gradient(360px circle at ${spotX}% ${spotY}%, rgba(201,119,74,0.32), transparent 70%)`;
+  const spotlight = useMotionTemplate`radial-gradient(360px circle at ${spotX}% ${spotY}%, rgba(251,83,44,0.32), transparent 70%)`;
 
   useGSAP(
     () => {
@@ -103,10 +103,10 @@ export default function Footer() {
                 {site.services.map((s) => (
                   <span key={s.id} className="flex items-center gap-8">
                     <span
-                      className="font-display font-semibold text-ivory/85 drop-shadow-[0_2px_16px_rgba(245,241,232,.08)]"
+                      className="font-display font-semibold text-ivory/85 drop-shadow-[0_2px_16px_rgba(255,253,248,.08)]"
                       style={{
                         fontSize: "clamp(28px, 4vw, 56px)",
-                        WebkitTextStroke: "0.4px rgba(245,241,232,0.35)",
+                        WebkitTextStroke: "0.4px rgba(255,253,248,0.35)",
                       }}
                     >
                       {s.name}
@@ -137,7 +137,7 @@ export default function Footer() {
                   whileHover={{ y: -4, scale: 1.15 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: "spring", stiffness: 420, damping: 16 }}
-                  className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-deep-line text-ivory/80 transition-[border-color,color,box-shadow] duration-500 hover:border-copper hover:text-copper hover:shadow-[0_0_24px_rgba(201,119,74,0.45)]"
+                  className="group relative flex h-9 w-9 items-center justify-center rounded-full border border-deep-line text-ivory/80 transition-[border-color,color,box-shadow] duration-500 hover:border-copper hover:text-copper hover:shadow-[0_0_24px_rgba(251,83,44,0.45)]"
                 >
                   <span className="absolute inset-1 rounded-full border border-copper opacity-0 transition-all duration-700 group-hover:scale-[1.7] group-hover:opacity-40" />
                   <span className="relative transition-transform duration-700 ease-out group-hover:rotate-[360deg] group-hover:scale-110">

@@ -60,7 +60,7 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
           <span className="font-mono-label text-[9px] text-stone">0{index + 1}</span>
           <span className="h-px flex-1 bg-gradient-to-r from-copper/50 to-transparent mx-3" />
         </div>
-        <div className="relative mt-5 flex h-12 w-12 items-center justify-center rounded-full border border-copper/30 bg-ivory shadow-[0_10px_35px_rgba(201,119,74,.1)] transition-all duration-500 group-hover:border-copper group-hover:shadow-[0_0_30px_rgba(201,119,74,.24)] lg:h-14 lg:w-14">
+        <div className="relative mt-5 flex h-12 w-12 items-center justify-center rounded-full border border-copper/30 bg-ivory shadow-[0_10px_35px_rgba(251,83,44,.1)] transition-all duration-500 group-hover:border-copper group-hover:shadow-[0_0_30px_rgba(251,83,44,.24)] lg:h-14 lg:w-14">
           <span className="absolute inset-1.5 rounded-full border border-copper/10" />
           <Icon
             className="h-5 w-5 text-copper transition-all duration-500 group-hover:rotate-12 group-hover:scale-110"
@@ -77,7 +77,7 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
 
 export default function ValuesRow() {
   return (
-    <div className="overflow-hidden rounded-[28px] border border-linen-border bg-linen shadow-[0_25px_70px_-50px_rgba(17,24,20,.35)] sm:rounded-[38px]">
+    <div className="overflow-hidden rounded-[28px] border border-linen-border bg-linen shadow-[0_25px_70px_-50px_rgba(4,22,63,.35)] sm:rounded-[38px]">
       <div className="grid grid-cols-2 lg:grid-cols-4">
         {site.about.values.map((value, i) => (
           <div key={value.title} className={`${i % 2 === 1 ? "border-l border-linen-border" : ""} ${i >= 2 ? "border-t border-linen-border lg:border-t-0" : ""} ${i > 0 ? "lg:border-l lg:border-linen-border" : ""}`}>

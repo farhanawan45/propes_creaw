@@ -113,7 +113,7 @@ export default function Preloader() {
           <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:min-w-[230px] sm:-translate-y-5 sm:items-end lg:-translate-y-10">
             <div className="flex min-h-[52px] items-end justify-center sm:justify-end">
               {canEnter && (
-                <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(201,119,74,.35)] focus-ring">
+                <button type="button" onClick={enterWebsite} className="btn-gradient group flex items-center justify-center gap-3 rounded-[10px] px-6 py-4 text-sm font-semibold text-white shadow-[0_14px_45px_rgba(251,83,44,.35)] focus-ring">
                   Enter
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </button>

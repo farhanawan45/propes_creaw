@@ -106,7 +106,7 @@ export default function StatsStrip() {
             className={`group relative min-w-0 px-3 py-5 sm:px-6 lg:px-8 ${i % 2 === 1 ? "border-l border-deep-line" : ""} ${i >= 2 ? "border-t border-deep-line lg:border-t-0" : ""} ${i > 0 ? "lg:border-l lg:border-deep-line" : ""}`}
             style={{ "--mx": "50%", "--my": "50%" } as React.CSSProperties}
           >
-            <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(220px circle at var(--mx) var(--my), rgba(201,119,74,.18), transparent 68%)" }} />
+            <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(220px circle at var(--mx) var(--my), rgba(251,83,44,.18), transparent 68%)" }} />
             <div className="relative flex items-center gap-3">
               <span className="font-mono-label text-[9px] text-copper-light">{String(i + 1).padStart(2, "0")}</span>
               <span className="h-px flex-1 bg-gradient-to-r from-copper/60 to-transparent" />

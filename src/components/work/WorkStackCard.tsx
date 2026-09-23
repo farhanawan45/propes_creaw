@@ -97,7 +97,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
       }
     >
       <div
-        className="relative h-full w-full overflow-hidden rounded-[24px] border border-[rgba(17,24,20,0.08)] bg-pounamu-night shadow-[0_30px_80px_-40px_rgba(17,24,20,0.45)] lg:rounded-[28px]"
+        className="relative h-full w-full overflow-hidden rounded-[24px] border border-[rgba(4,22,63,0.08)] bg-pounamu-night shadow-[0_30px_80px_-40px_rgba(4,22,63,0.45)] lg:rounded-[28px]"
         style={{ filter: "none", transform: "none" }}
       >
         <div ref={revealScopeRef} className={`flex h-full flex-col lg:flex-row ${imageOnLeft ? "lg:flex-row-reverse" : ""}`}>

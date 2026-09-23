@@ -26,7 +26,7 @@ export default function PhoneField({ countryCode, phoneNumber, onCountryChange, 
         Phone
       </FieldLabel>
       <div
-        className={`flex h-12 items-stretch rounded-[14px] border bg-[rgba(245,241,232,0.04)] transition-colors focus-within:ring-[3px] ${
+        className={`flex h-12 items-stretch rounded-[14px] border bg-[rgba(255,253,248,0.04)] transition-colors focus-within:ring-[3px] ${
           error
             ? "border-[#E5484D] focus-within:border-[#E5484D] focus-within:ring-[#E5484D]/20"
             : "border-deep-line focus-within:border-copper focus-within:ring-copper/25"
