@@ -88,7 +88,7 @@ export default function ServicesSection() {
                 type="button"
                 data-service-index={index}
                 onClick={() => select(index)}
-                className={`shrink-0 rounded-[10px] px-4 py-2.5 text-left transition-colors duration-300 focus-ring ${active === index ? "bg-copper text-pounamu-night" : "bg-ivory/[0.06] text-mist hover:bg-ivory/10 hover:text-ivory"}`}
+                className={`shrink-0 rounded-[10px] px-4 py-2.5 text-left transition-colors duration-300 focus-ring ${active === index ? "bg-copper text-white" : "bg-ivory/[0.06] text-mist hover:bg-ivory/10 hover:text-ivory"}`}
                 aria-current={active === index ? "true" : undefined}
               >
                 <span className="mr-2 font-mono-label text-[8px] opacity-70">{item.index}</span>
@@ -103,7 +103,7 @@ export default function ServicesSection() {
             type="button"
             onClick={() => select(active - 1)}
             aria-label="Previous service"
-            className="absolute left-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/35 bg-pounamu-night/85 text-ivory shadow-[0_10px_30px_rgba(0,0,0,.28)] backdrop-blur-md transition-colors hover:border-copper hover:bg-copper hover:text-pounamu-night focus-ring sm:left-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-left-6 xl:-left-16"
+            className="absolute left-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-ivory/35 bg-pounamu-night/85 text-ivory shadow-[0_10px_30px_rgba(0,0,0,.28)] backdrop-blur-md transition-colors hover:border-copper hover:bg-copper hover:text-white focus-ring sm:left-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-left-6 xl:-left-16"
           >
             <ArrowLeft className="h-5 w-5" />
           </button>
@@ -112,7 +112,7 @@ export default function ServicesSection() {
             type="button"
             onClick={() => select(active + 1)}
             aria-label="Next service"
-            className="absolute right-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-copper bg-copper text-pounamu-night shadow-[0_10px_30px_rgba(0,0,0,.28)] transition-colors hover:bg-copper-light focus-ring sm:right-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-right-6 xl:-right-16"
+            className="absolute right-2 top-[150px] z-20 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-copper bg-copper text-white shadow-[0_10px_30px_rgba(0,0,0,.28)] transition-colors hover:bg-copper-light focus-ring sm:right-4 sm:top-1/2 sm:h-12 sm:w-12 lg:-right-6 xl:-right-16"
           >
             <ArrowRight className="h-5 w-5" />
           </button>
