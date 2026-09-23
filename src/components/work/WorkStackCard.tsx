@@ -29,14 +29,14 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
       // One-time reveal of the text content as the card enters view.
       const items = revealScopeRef.current?.querySelectorAll<HTMLElement>("[data-reveal]");
       if (reduced) {
-        gsap.set(items ?? [], { opacity: 1, yPercent: 0 });
+        gsap.set(items ?? [], { opacity: 1, xPercent: 0 });
       } else if (items?.length) {
         gsap.fromTo(
           items,
-          { opacity: 0, yPercent: 100 },
+          { opacity: 0, xPercent: imageOnLeft ? 18 : -18 },
           {
             opacity: 1,
-            yPercent: 0,
+            xPercent: 0,
             duration: 0.7,
             stagger: 0.07,
             ease: "power4.out",
@@ -46,7 +46,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
 
         gsap.fromTo(
           imagePanelRef.current,
-          { clipPath: "inset(0 0 100% 0)" },
+          { clipPath: imageOnLeft ? "inset(0 100% 0 0)" : "inset(0 0 0 100%)" },
           {
             clipPath: "inset(0 0 0% 0)",
             duration: 1.15,

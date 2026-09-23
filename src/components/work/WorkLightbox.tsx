@@ -17,12 +17,19 @@ export default function WorkLightbox({
   onClose: () => void;
 }) {
   const [index, setIndex] = useState(initialIndex);
+  const [direction, setDirection] = useState(1);
   const project = projects[index];
   const previousProject = projects[(index - 1 + projects.length) % projects.length];
   const nextProject = projects[(index + 1) % projects.length];
 
-  const goPrev = () => setIndex((i) => (i - 1 + projects.length) % projects.length);
-  const goNext = () => setIndex((i) => (i + 1) % projects.length);
+  const goPrev = () => {
+    setDirection(-1);
+    setIndex((i) => (i - 1 + projects.length) % projects.length);
+  };
+  const goNext = () => {
+    setDirection(1);
+    setIndex((i) => (i + 1) % projects.length);
+  };
 
   useEffect(() => {
     [project, previousProject, nextProject].forEach((item) => {
@@ -35,8 +42,14 @@ export default function WorkLightbox({
     document.body.style.overflow = "hidden";
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") setIndex((i) => (i - 1 + projects.length) % projects.length);
-      if (e.key === "ArrowRight") setIndex((i) => (i + 1) % projects.length);
+      if (e.key === "ArrowLeft") {
+        setDirection(-1);
+        setIndex((i) => (i - 1 + projects.length) % projects.length);
+      }
+      if (e.key === "ArrowRight") {
+        setDirection(1);
+        setIndex((i) => (i + 1) % projects.length);
+      }
     };
     window.addEventListener("keydown", handleKey);
     return () => {
@@ -96,10 +109,10 @@ export default function WorkLightbox({
       <AnimatePresence mode="sync" initial={false}>
         <motion.div
           key={project.id}
-          initial={{ opacity: 0, x: 12 }}
+          initial={{ opacity: 0, x: direction > 0 ? 80 : -80 }}
           animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -12 }}
-          transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+          exit={{ opacity: 0, x: direction > 0 ? -80 : 80 }}
+          transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.4}
