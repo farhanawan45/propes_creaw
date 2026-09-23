@@ -48,7 +48,7 @@ export default function WorkSection() {
               type="button"
               onClick={() => { setActiveFilter(filter); setLightboxIndex(null); }}
               aria-pressed={activeFilter === filter}
-              className={`shrink-0 rounded-full border px-5 py-2.5 text-sm font-medium transition-all focus-ring ${activeFilter === filter ? "border-pounamu-night bg-pounamu-night text-ivory shadow-[0_8px_24px_rgba(12,31,28,.16)]" : "border-linen-border bg-white text-stone hover:border-copper hover:text-copper-deep"}`}
+              className={`shrink-0 rounded-full border px-5 py-2.5 text-sm font-medium transition-all focus-ring ${activeFilter === filter ? "border-pounamu-night bg-pounamu-night text-ivory shadow-[0_8px_24px_rgba(4,22,63,.18)]" : "border-linen-border bg-white text-stone hover:border-copper hover:text-copper-deep"}`}
             >
               {filter}
             </button>

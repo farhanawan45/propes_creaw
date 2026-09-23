@@ -119,7 +119,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/90 via-pounamu-night/25 to-black/10" />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, rgba(12,31,28,0.68), rgba(12,31,28,0.08) 72%)" }}
+          style={{ background: "linear-gradient(to right, rgba(4,22,63,0.72), rgba(4,22,63,0.08) 72%)" }}
         />
       </div>
 

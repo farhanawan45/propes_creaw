@@ -22,7 +22,7 @@ function MomentCard({ moment }: { moment: (typeof moments)[number] }) {
   return (
     <article className="event-moment-card group relative aspect-square w-[60vw] max-w-[220px] shrink-0 overflow-hidden rounded-[14px] border-2 border-pounamu-night/20 bg-white sm:w-[340px] sm:max-w-none sm:rounded-[18px] lg:w-[410px]">
       <Image src={moment.src} alt={moment.title} fill sizes="(max-width: 639px) 220px, (max-width: 1023px) 340px, 410px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" unoptimized />
-      <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full border border-pounamu-night/10 bg-white/95 px-3 py-2 text-pounamu-night shadow-[0_5px_16px_rgba(12,31,28,.12)] backdrop-blur-sm sm:left-4 sm:top-4 sm:max-w-[calc(100%-2rem)]">
+      <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full border border-pounamu-night/10 bg-white/95 px-3 py-2 text-pounamu-night shadow-[0_5px_16px_rgba(4,22,63,.14)] backdrop-blur-sm sm:left-4 sm:top-4 sm:max-w-[calc(100%-2rem)]">
         <span className="h-2 w-2 shrink-0 rounded-full bg-copper" />
         <span className="truncate text-xs font-semibold leading-none sm:text-sm">{moment.label}</span>
       </div>

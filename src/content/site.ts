@@ -97,7 +97,7 @@ export const site = {
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
       mp4: [
-        "/videos/client-intro.mp4?v=faststart-20260920",
+        "/videos/client-hero.mp4?v=client-revision-20260923",
       ],
       showreelMp4: "https://videos.pexels.com/video-files/7791920/7791920-hd_1920_1080_25fps.mp4",
       poster: "/images/hero-event-poster.jpg",

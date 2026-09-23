@@ -22,7 +22,7 @@ export default function ContactSection() {
             <Image src="/images/service-decor-fabrications.jpg" alt="" fill sizes="18vw" className="object-cover" />
           </div>
         </div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,27,23,.45)_0%,rgba(5,27,23,.72)_48%,rgba(5,27,23,.98)_68%)] max-lg:bg-pounamu-night/55" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,22,63,.45)_0%,rgba(4,22,63,.72)_48%,rgba(4,22,63,.98)_68%)] max-lg:bg-pounamu-night/55" />
         <div className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-copper/10 blur-[140px]" />
       </div>
 

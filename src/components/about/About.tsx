@@ -160,7 +160,7 @@ export default function About() {
               </div>
 
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/5 to-ink/20" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-[linear-gradient(180deg,transparent,rgba(5,27,23,.9))]" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-2/3 bg-[linear-gradient(180deg,transparent,rgba(4,22,63,.9))]" />
 
               <div className="absolute inset-x-5 bottom-6 z-20 sm:inset-x-8 sm:bottom-8 lg:inset-x-12 lg:bottom-11">
                 <div className="grid items-end gap-7 lg:grid-cols-[1fr_auto]">

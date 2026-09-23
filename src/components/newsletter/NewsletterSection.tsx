@@ -42,11 +42,11 @@ export default function NewsletterSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-80px" }}
         transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}
-        className="relative mx-auto grid max-w-[1344px] overflow-hidden rounded-[24px] border border-copper/25 bg-[#0b2822] shadow-[0_30px_100px_rgba(0,0,0,.35)] lg:grid-cols-[.85fr_1.15fr]"
+        className="relative mx-auto grid max-w-[1344px] overflow-hidden rounded-[24px] border border-copper/25 bg-[#06205b] shadow-[0_30px_100px_rgba(0,0,0,.35)] lg:grid-cols-[.85fr_1.15fr]"
       >
         <div className="relative min-h-[180px] overflow-hidden sm:min-h-[220px] lg:min-h-[260px]">
           <Image src="/images/service-event-management.webp" alt="An elegant event setting in New Zealand" fill sizes="(max-width: 1023px) 100vw, 42vw" className="object-cover transition-transform duration-[1600ms] hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#0b2822]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#06205b]/30" />
           <div className="absolute bottom-5 left-5 rounded-[10px] border border-white/25 bg-pounamu-night/35 px-4 py-2 font-mono-label text-[8px] tracking-[0.18em] text-ivory backdrop-blur-md sm:bottom-7 sm:left-7">
             INSIDE PROPS &amp; CREW
           </div>
@@ -63,7 +63,7 @@ export default function NewsletterSection() {
               Receive event inspiration, destination insights, new experiences and considered offers from our crew.
             </p>
 
-            <form onSubmit={submit} className="mt-5" noValidate>
+            <form onSubmit={submit} className="mt-5 lg:max-w-[640px]" noValidate>
               <label htmlFor="newsletter-email" className="sr-only">Email address</label>
               <div className="flex rounded-[14px] border border-ivory/15 bg-pounamu-night/70 p-1.5 transition-colors focus-within:border-copper/70">
                 <Mail className="ml-3 hidden h-4 w-4 self-center text-copper sm:block" strokeWidth={1.6} aria-hidden="true" />

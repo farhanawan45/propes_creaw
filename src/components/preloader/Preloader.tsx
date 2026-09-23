@@ -37,8 +37,8 @@ export default function Preloader() {
     setPlayedSeconds(ENTER_UNLOCK_SECONDS);
   };
 
-  const enterWebsite = () => {
-    if (!canEnter || exiting) return;
+  const completeIntro = () => {
+    if (exiting) return;
     setExiting(true);
     videoRef.current?.pause();
     exitTimerRef.current = setTimeout(() => {
@@ -52,6 +52,16 @@ export default function Preloader() {
       setEntered(true);
       document.documentElement.classList.remove("preload-lock");
     }, 900);
+  };
+
+  const enterWebsite = () => {
+    if (!canEnter) return;
+    completeIntro();
+  };
+
+  const handleVideoEnded = () => {
+    setPlayedSeconds(ENTER_UNLOCK_SECONDS);
+    completeIntro();
   };
 
   const toggleSound = () => {
@@ -83,6 +93,7 @@ export default function Preloader() {
         onTimeUpdate={(event) => setPlayedSeconds(event.currentTarget.currentTime)}
         onLoadedMetadata={(event) => event.currentTarget.play().catch(() => {})}
         onCanPlay={() => setVideoError(false)}
+        onEnded={handleVideoEnded}
         onError={handleVideoError}
       />
 

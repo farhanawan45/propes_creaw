@@ -109,7 +109,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                   exit={{ opacity: 0, y: -6 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
                   className="z-50 overflow-hidden rounded-[14px] border border-deep-line shadow-2xl"
-                  style={{ backgroundColor: "#153A33" }}
+                  style={{ backgroundColor: "#06205B" }}
                 >
                   <Command loop className="flex flex-col">
                     <div className="border-b border-deep-line px-4 py-3">

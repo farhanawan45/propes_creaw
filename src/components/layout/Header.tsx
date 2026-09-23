@@ -60,7 +60,7 @@ export default function Header() {
             paddingRight: scrolled ? 12 : 8,
             paddingTop: scrolled ? 10 : 14,
             paddingBottom: scrolled ? 10 : 14,
-            backgroundColor: scrolled ? "rgba(12,31,28,0.7)" : "rgba(12,31,28,0)",
+            backgroundColor: scrolled ? "rgba(4,22,63,0.78)" : "rgba(4,22,63,0)",
             borderColor: scrolled ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0)",
           }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
@@ -104,7 +104,7 @@ export default function Header() {
                 <a
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="group relative z-10 flex items-center rounded-full px-4 py-2 text-sm font-medium text-ivory focus-ring"
+                  className="group relative z-10 flex items-center rounded-full px-4 py-2 text-base font-medium text-ivory focus-ring"
                 >
                   {/* Two stacked copies of the label — on hover the top copy
                       slides up and out while the bottom copy slides up into

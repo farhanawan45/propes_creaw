@@ -8,7 +8,7 @@ import { site } from "@/content/site";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { scrollToHash } from "@/lib/scrollTo";
 
-const cardThemes = ["#e4eee9", "#ead9c8", "#d5e4dc", "#efb487"] as const;
+const cardThemes = ["#e8eef9", "#fff0eb", "#d8e4f7", "#ffb39f"] as const;
 const imageBlur = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 15'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3C/filter%3E%3Cpath fill='%23153a33' d='M0 0h12v15H0z'/%3E%3Cpath fill='%23c9774a' fill-opacity='.28' filter='url(%23b)' d='M-2 9l8-8 8 8-8 8z'/%3E%3C/svg%3E";
 
 export default function ServicesSection() {

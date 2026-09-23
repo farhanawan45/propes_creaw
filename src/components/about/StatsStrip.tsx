@@ -84,7 +84,7 @@ export default function StatsStrip() {
   };
 
   return (
-    <div ref={containerRef} className="relative overflow-hidden rounded-[28px] border border-copper/20 bg-pounamu-night px-5 py-7 shadow-[0_35px_90px_-45px_rgba(12,31,28,.7)] sm:rounded-[38px] sm:px-8 sm:py-10 lg:px-12 lg:py-12">
+    <div ref={containerRef} className="relative overflow-hidden rounded-[28px] border border-copper/20 bg-pounamu-night px-5 py-7 shadow-[0_35px_90px_-45px_rgba(4,22,63,.72)] sm:rounded-[38px] sm:px-8 sm:py-10 lg:px-12 lg:py-12">
       <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border border-copper/15" />
       <div className="pointer-events-none absolute -right-12 -top-12 h-48 w-48 animate-spin-slower rounded-full border border-dashed border-copper/20" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-2/3 -translate-x-1/2 bg-gradient-to-r from-transparent via-copper-light to-transparent" />
