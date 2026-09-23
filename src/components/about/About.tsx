@@ -16,6 +16,7 @@ export default function About() {
   const imageAref = useRef<HTMLDivElement>(null);
   const parallaxA = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [slideDirection, setSlideDirection] = useState(1);
 
   useGSAP(
     () => {
@@ -46,7 +47,7 @@ export default function About() {
 
       gsap.fromTo(
         imageAref.current,
-        { clipPath: "inset(100% 0% 0% 0%)" },
+        { clipPath: "inset(0% 100% 0% 0%)" },
         {
           clipPath: "inset(0% 0% 0% 0%)",
           duration: 1.2,
@@ -90,13 +91,21 @@ export default function About() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
+      setSlideDirection(1);
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 2000);
     return () => window.clearInterval(timer);
   }, [slides.length]);
 
   const moveSlide = (direction: number) => {
+    setSlideDirection(direction >= 0 ? 1 : -1);
     setActiveSlide((current) => (current + direction + slides.length) % slides.length);
+  };
+
+  const goToSlide = (index: number) => {
+    if (index === activeSlide) return;
+    setSlideDirection(index > activeSlide ? 1 : -1);
+    setActiveSlide(index);
   };
 
   return (
@@ -131,13 +140,14 @@ export default function About() {
             <div ref={imageAref} className="relative overflow-hidden rounded-[28px] bg-ink shadow-[0_28px_80px_rgba(4,22,63,0.2)] lg:col-span-7">
             <div className="relative h-[500px] sm:h-[620px] lg:h-[680px]">
               <div ref={parallaxA} className="absolute inset-0 -top-[4%] h-[108%]">
-                {slides.map((slide, index) => (
+                <AnimatePresence initial={false} mode="sync">
                   <motion.div
-                    key={slide.image}
-                    className={`absolute inset-0 ${index === activeSlide ? "z-10 cursor-grab active:cursor-grabbing" : "pointer-events-none z-0"}`}
-                    initial={false}
-                    animate={{ opacity: index === activeSlide ? 1 : 0, scale: index === activeSlide ? 1 : 1.025 }}
-                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    key={slides[activeSlide].image}
+                    className="absolute inset-0 cursor-grab active:cursor-grabbing"
+                    initial={{ x: slideDirection > 0 ? "10%" : "-10%", opacity: 0, scale: 1.02 }}
+                    animate={{ x: "0%", opacity: 1, scale: 1 }}
+                    exit={{ x: slideDirection > 0 ? "-10%" : "10%", opacity: 0, scale: 1.01 }}
+                    transition={{ duration: 0.58, ease: [0.22, 1, 0.36, 1] }}
                     drag="x"
                     dragConstraints={{ left: 0, right: 0 }}
                     dragElastic={0.12}
@@ -147,8 +157,8 @@ export default function About() {
                     }}
                   >
                     <Image
-                      src={slide.image}
-                      alt={slide.title}
+                      src={slides[activeSlide].image}
+                      alt={slides[activeSlide].title}
                       fill
                       loading="lazy"
                       quality={72}
@@ -156,7 +166,7 @@ export default function About() {
                       className="select-none object-cover"
                     />
                   </motion.div>
-                ))}
+                </AnimatePresence>
               </div>
 
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/5 to-ink/20" />
@@ -174,9 +184,9 @@ export default function About() {
                     <AnimatePresence mode="wait">
                       <motion.h3
                         key={slides[activeSlide].title}
-                        initial={{ y: 24, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -16, opacity: 0 }}
+                        initial={{ x: slideDirection > 0 ? 32 : -32, opacity: 0 }}
+                        animate={{ x: 0, opacity: 1 }}
+                        exit={{ x: slideDirection > 0 ? -24 : 24, opacity: 0 }}
                         transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
                         className="mt-3 max-w-[620px] font-display text-[clamp(32px,4vw,58px)] font-medium leading-[0.95] tracking-[-0.045em] text-white"
                       >
@@ -201,7 +211,7 @@ export default function About() {
                   </span>
                   <div className="grid flex-1 grid-cols-3 gap-2 sm:gap-3">
                   {slides.map((slide, index) => (
-                    <button key={slide.title} type="button" onClick={() => setActiveSlide(index)} aria-label={`View slide ${index + 1}`} className="group py-2">
+                    <button key={slide.title} type="button" onClick={() => goToSlide(index)} aria-label={`View slide ${index + 1}`} className="group py-2">
                       <span className="block h-[2px] overflow-hidden rounded-full bg-white/20">
                         <motion.span
                           className="block h-full origin-left rounded-full bg-copper"
