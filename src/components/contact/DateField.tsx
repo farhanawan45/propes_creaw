@@ -32,12 +32,12 @@ export default function DateField({ value, onChange, error }: DateFieldProps) {
           <button
             type="button"
             id="eventDate"
-            className={`flex h-12 w-full items-center justify-between rounded-[14px] border bg-[rgba(255,253,248,0.04)] px-4 text-left text-base outline-none transition-colors focus:ring-[3px] ${
-              value ? "text-ivory" : "text-mist/60"
+            className={`flex h-12 w-full items-center justify-between rounded-[14px] border bg-white px-4 text-left text-base outline-none transition-colors focus:ring-[3px] ${
+              value ? "text-pounamu-night" : "text-stone/70"
             } ${
               error
                 ? "border-[#E5484D] focus:border-[#E5484D] focus:ring-[#E5484D]/20"
-                : "border-deep-line focus:border-copper focus:ring-copper/25"
+                : "border-pounamu-night/15 focus:border-copper focus:ring-copper/25"
             }`}
           >
             <span>{value ? formatDate(value) : "Select a date"}</span>

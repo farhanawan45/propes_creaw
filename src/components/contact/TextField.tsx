@@ -4,8 +4,8 @@ import type { InputHTMLAttributes, TextareaHTMLAttributes } from "react";
 import FieldLabel from "@/components/contact/FieldLabel";
 
 const baseInput =
-  "w-full rounded-[14px] border bg-[rgba(255,253,248,0.04)] text-base text-ivory placeholder:text-mist/60 outline-none transition-colors focus:ring-[3px]";
-const okBorder = "border-deep-line focus:border-copper focus:ring-copper/25";
+  "w-full rounded-[14px] border bg-white text-base text-pounamu-night placeholder:text-stone/70 outline-none transition-colors focus:ring-[3px]";
+const okBorder = "border-pounamu-night/15 focus:border-copper focus:ring-copper/25";
 const errBorder = "border-[#E5484D] focus:border-[#E5484D] focus:ring-[#E5484D]/20";
 
 interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "name"> {

@@ -50,21 +50,21 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                 setOpen((o) => !o);
               }
             }}
-            className={`flex h-12 w-full cursor-pointer items-center gap-2 rounded-[14px] border bg-[rgba(255,253,248,0.04)] px-4 outline-none transition-colors focus:ring-[3px] ${
+            className={`flex h-12 w-full cursor-pointer items-center gap-2 rounded-[14px] border bg-white px-4 outline-none transition-colors focus:ring-[3px] ${
               error
                 ? "border-[#E5484D] focus:border-[#E5484D] focus:ring-[#E5484D]/20"
-                : "border-deep-line focus:border-copper focus:ring-copper/25"
+                : "border-pounamu-night/15 focus:border-copper focus:ring-copper/25"
             }`}
           >
             <div className="flex min-w-0 flex-1 flex-wrap items-center gap-1.5">
               {selectedServices.length === 0 ? (
-                <span className="text-base text-mist/60">Select services</span>
+                <span className="text-base text-stone/70">Select services</span>
               ) : (
                 <>
                   {visibleChips.map((s) => (
                     <span
                       key={s.id}
-                      className="flex items-center gap-1 rounded-full bg-copper/15 py-1 pl-2.5 pr-1.5 text-xs font-medium text-ivory"
+                      className="flex items-center gap-1 rounded-full bg-copper/15 py-1 pl-2.5 pr-1.5 text-xs font-medium text-pounamu-night"
                     >
                       {s.name}
                       <button
@@ -74,7 +74,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                           removeOne(s.id);
                         }}
                         aria-label={`Remove ${s.name}`}
-                        className="flex h-4 w-4 items-center justify-center rounded-full text-mist transition-colors hover:bg-copper hover:text-pounamu-night"
+                        className="flex h-4 w-4 items-center justify-center rounded-full text-stone transition-colors hover:bg-copper hover:text-white"
                       >
                         <X className="h-2.5 w-2.5" strokeWidth={2.5} />
                       </button>
@@ -87,7 +87,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
               )}
             </div>
             <ChevronDown
-              className={`h-4 w-4 shrink-0 text-mist transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+              className={`h-4 w-4 shrink-0 text-stone transition-transform duration-200 ${open ? "rotate-180" : ""}`}
               strokeWidth={2}
             />
           </div>
