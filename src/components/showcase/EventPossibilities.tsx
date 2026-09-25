@@ -1,14 +1,14 @@
 import Image from "next/image";
 
 const moments = [
-  { src: "/images/showcase/destination-wedding.webp", label: "Event Management", title: "Destination weddings" },
-  { src: "/images/showcase/corporate-gala.webp", label: "MICE", title: "Black-tie galas" },
+  { src: "/images/showcase/destination-wedding.webp", label: "Event Management", title: "Luxury destination celebrations" },
+  { src: "/images/showcase/corporate-gala.webp", label: "MICE", title: "Corporate networking experiences" },
   { src: "/images/showcase/conference.webp", label: "Event Technical Support", title: "Leadership conferences" },
-  { src: "/images/showcase/live-entertainment.webp", label: "Local/Hindi Entertainment", title: "Entertainment that moves" },
-  { src: "/images/showcase/private-cruise.webp", label: "Private Cruises", title: "Private fiord cruises" },
-  { src: "/images/showcase/incentive-travel.webp", label: "Adventure Experiences", title: "Alpine arrivals" },
-  { src: "/images/showcase/event-design.webp", label: "Decor & Fabrications", title: "Tables made memorable" },
-  { src: "/images/showcase/technical-production.webp", label: "Event Technical Support", title: "World-class showcraft" },
+  { src: "/images/showcase/live-entertainment.webp", label: "Local/Hindi Entertainment", title: "Live entertainment experiences" },
+  { src: "/images/showcase/private-cruise.webp", label: "Private Cruises", title: "Private alpine cruises" },
+  { src: "/images/showcase/incentive-travel.webp", label: "Adventure Experiences", title: "Helicopter mountain adventures" },
+  { src: "/images/showcase/event-design.webp", label: "Decor & Fabrications", title: "Refined event design" },
+  { src: "/images/showcase/technical-production.webp", label: "Sightseeing", title: "Unforgettable scenic journeys" },
 ] as const;
 
 // Mix bright, dark, people-led and scenic frames across both tracks so each
