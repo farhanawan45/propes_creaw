@@ -53,3 +53,14 @@ export async function PATCH(request: Request) {
   return NextResponse.json({ ok: true, updated: result.affectedRows });
 }
 
+export async function DELETE(request: Request) {
+  if (!(await isAdminAuthenticated())) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+  const body = (await request.json().catch(() => ({}))) as { id?: number; type?: "enquiry" | "subscriber" };
+  if (!body.id || !["enquiry", "subscriber"].includes(body.type || "")) {
+    return NextResponse.json({ message: "Invalid delete request" }, { status: 422 });
+  }
+  await ensureSchema();
+  const table = body.type === "enquiry" ? "enquiries" : "newsletter_subscribers";
+  const [result] = await getDb().execute<ResultSetHeader>(`DELETE FROM ${table} WHERE id = ?`, [body.id]);
+  return NextResponse.json({ ok: true, deleted: result.affectedRows });
+}
