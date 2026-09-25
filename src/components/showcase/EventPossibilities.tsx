@@ -1,21 +1,27 @@
 import Image from "next/image";
 
 const moments = [
-  { src: "/images/showcase/destination-wedding.webp", label: "Event Management", title: "Luxury destination celebrations" },
-  { src: "/images/showcase/corporate-gala.webp", label: "MICE", title: "Corporate networking experiences" },
-  { src: "/images/showcase/conference.webp", label: "Event Technical Support", title: "Leadership conferences" },
-  { src: "/images/showcase/live-entertainment.webp", label: "Local/Hindi Entertainment", title: "Live entertainment experiences" },
-  { src: "/images/showcase/private-cruise.webp", label: "Private Cruises", title: "Private alpine cruises" },
-  { src: "/images/showcase/incentive-travel.webp", label: "Adventure Experiences", title: "Helicopter mountain adventures" },
-  { src: "/images/showcase/event-design.webp", label: "Decor & Fabrications", title: "Refined event design" },
-  { src: "/images/showcase/technical-production.webp", label: "Sightseeing", title: "Unforgettable scenic journeys" },
+  { src: "/images/showcase/wedding-celebration.webp", label: "Wedding Celebrations", title: "A real wedding celebration" },
+  { src: "/images/showcase/corporate-networking.webp", label: "Corporate Events", title: "Guests networking at a corporate event" },
+  { src: "/images/showcase/conference-audience.webp", label: "Conferences", title: "A live conference audience" },
+  { src: "/images/showcase/concert-crowd.webp", label: "Live Entertainment", title: "A crowd enjoying a live concert" },
+  { src: "/images/showcase/event-decor.webp", label: "Event Styling", title: "A styled event table" },
+  { src: "/images/showcase/event-venue.webp", label: "Venue Transformations", title: "A decorated event venue" },
+  { src: "/images/showcase/conference-production.webp", label: "Technical Production", title: "Conference production in action" },
+  { src: "/images/showcase/helicopter-adventure.webp", label: "Helicopter Experiences", title: "A helicopter mountain experience" },
+  { src: "/images/showcase/luxury-yacht.webp", label: "Private Cruises", title: "A private luxury yacht cruise" },
+  { src: "/images/showcase/live-entertainment.webp", label: "Concert Production", title: "A professionally produced live show" },
+  { src: "/images/showcase/destination-event.webp", label: "Destination Events", title: "A destination wedding reception" },
+  { src: "/images/showcase/private-cruise.webp", label: "Scenic Experiences", title: "A scenic alpine experience" },
+  { src: "/images/showcase/wedding-table.webp", label: "Hospitality & Dining", title: "Outdoor event dining" },
+  { src: "/images/showcase/technical-production.webp", label: "Adventure Experiences", title: "A guided mountain adventure" },
 ] as const;
 
 // Mix bright, dark, people-led and scenic frames across both tracks so each
 // row has an intentional editorial rhythm rather than a single colour mood.
 const rows = [
-  [moments[0], moments[2], moments[5], moments[7]],
-  [moments[4], moments[1], moments[6], moments[3]],
+  [moments[0], moments[2], moments[8], moments[5], moments[3], moments[10], moments[12]],
+  [moments[7], moments[1], moments[9], moments[4], moments[11], moments[6], moments[13]],
 ] as const;
 
 function MomentCard({ moment }: { moment: (typeof moments)[number] }) {

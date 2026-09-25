@@ -1,12 +1,18 @@
 # Showcase image credits
 
-The showcase photographs are sourced from Unsplash and optimized locally as WebP assets.
+All 14 showcase assets are camera photographs sourced from Unsplash and optimized locally as WebP files.
 
-- `destination-wedding.webp` — Konark Weddings (`AzvGCVHGPCE`)
-- `corporate-gala.webp` — Filip Rankovic Grobgaard (`fKzdMDr6wEo`)
-- `conference.webp` — Carlos Gil (`AMWQIpdsSHY`)
+- `wedding-celebration.webp` — Fotógrafo Samuel Cruz (`wJll9v7WLiU`)
+- `corporate-networking.webp` — Filip Rankovic Grobgaard (`fKzdMDr6wEo`)
+- `conference-audience.webp` — Carlos Gil (`CvG2lnWbm8s`)
+- `concert-crowd.webp` — Konstantin Kitsenuik (`DSvSuQtlDP0`)
+- `wedding-table.webp` — Rhamely (`kbOlsfQ5fPE`)
+- `event-decor.webp` — Jennifer Kalenberg (`9fopoHO4MUk`)
+- `conference-production.webp` — Stem List (`EVgsAbL51Rk`)
+- `helicopter-adventure.webp` — Kevin Schmid (`wkJetggZSdo`)
+- `luxury-yacht.webp` — Nicholas Martinelli (`u-cMU5PYfJs`)
 - `live-entertainment.webp` — Jonathan Ikemura (`z0R4XB25ozI`)
 - `private-cruise.webp` — Valentin Zickner (`reRq6dit2xI`)
-- `incentive-travel.webp` — Slava Auchynnikau (`I1Pzm_z9W98`)
-- `event-design.webp` — Filip Rankovic Grobgaard (`pa4S4aQs40o`)
 - `technical-production.webp` — Daniel Seßler (`P2UnRiIAxSM`)
+- `destination-event.webp` — David Diaz (`ASGOqQl-LJY`)
+- `event-venue.webp` — Unsplash contributor (`65mh04qlcBU`)
