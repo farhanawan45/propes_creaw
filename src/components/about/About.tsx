@@ -91,7 +91,7 @@ export default function About() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
-    }, 2000);
+    }, 5000);
     return () => window.clearInterval(timer);
   }, [slides.length]);
 
@@ -113,7 +113,7 @@ export default function About() {
           </div>
 
           <div className="mt-10 grid items-stretch gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">
-            <div className="flex flex-col justify-center lg:col-span-5 lg:py-8">
+            <div className="flex flex-col justify-center lg:col-span-6 lg:py-8">
               <h2 className="font-display text-[clamp(52px,6vw,96px)] font-medium leading-[0.86] tracking-[-0.065em] text-ink">
                 We turn
                 <span className="block">ideas into</span>
@@ -128,8 +128,8 @@ export default function About() {
 
             </div>
 
-            <div ref={imageAref} className="relative overflow-hidden rounded-[28px] bg-ink shadow-[0_28px_80px_rgba(4,22,63,0.2)] lg:col-span-7">
-            <div className="relative h-[500px] sm:h-[620px] lg:h-[680px]">
+            <div ref={imageAref} className="relative overflow-hidden rounded-[28px] bg-ink shadow-[0_28px_80px_rgba(4,22,63,0.2)] lg:col-span-6 lg:mx-auto lg:w-full lg:max-w-[680px]">
+            <div className="relative h-[460px] sm:h-[560px] lg:h-[600px]">
               <div ref={parallaxA} className="absolute inset-0 -top-[4%] h-[108%]">
                 {slides.map((slide, index) => (
                   <motion.div
@@ -207,7 +207,7 @@ export default function About() {
                           className="block h-full origin-left rounded-full bg-copper"
                           initial={false}
                           animate={{ scaleX: index === activeSlide ? 1 : 0 }}
-                          transition={{ duration: index === activeSlide ? 2 : 0.25, ease: "linear" }}
+                          transition={{ duration: index === activeSlide ? 5 : 0.25, ease: "linear" }}
                         />
                       </span>
                     </button>
