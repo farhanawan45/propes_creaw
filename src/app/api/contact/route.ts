@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { contactSchema } from "@/lib/validation";
 import { isRateLimited } from "@/lib/rate-limit";
 import { sendContactEmail } from "@/lib/mailer";
+import { createEnquiry, setEnquiryEmailStatus } from "@/lib/db";
 
 export async function POST(req: NextRequest) {
   const ip =
@@ -40,23 +41,24 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true });
   }
 
+  let enquiryId: number;
   try {
-    await sendContactEmail(parsed.data);
+    enquiryId = await createEnquiry(parsed.data, ip);
   } catch (error) {
-    console.error("Failed to send contact email:", error);
-    const configurationMissing =
-      error instanceof Error && error.message === "SMTP environment variables are not configured";
+    console.error("Failed to store contact enquiry:", error);
     return NextResponse.json(
-      {
-        ok: false,
-        code: configurationMissing ? "EMAIL_NOT_CONFIGURED" : "EMAIL_SEND_FAILED",
-        message: configurationMissing
-          ? "Online enquiries are being configured. Please email us directly for now."
-          : "Something went wrong sending your enquiry. Please try again or email us directly.",
-      },
-      { status: configurationMissing ? 503 : 500 }
+      { ok: false, message: "We could not save your enquiry. Please try again or email us directly." },
+      { status: 503 }
     );
   }
 
-  return NextResponse.json({ ok: true });
+  try {
+    await sendContactEmail(parsed.data);
+    await setEnquiryEmailStatus(enquiryId, "sent");
+  } catch (error) {
+    console.error("Failed to send contact email:", error);
+    await setEnquiryEmailStatus(enquiryId, "failed").catch(console.error);
+  }
+
+  return NextResponse.json({ ok: true, reference: `PNC-${enquiryId}` });
 }
