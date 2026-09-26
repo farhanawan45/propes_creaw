@@ -96,6 +96,7 @@ export const site = {
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
+      introMp4: "/videos/client-intro-v2.mp4?v=client-v2-20260926",
       mp4: [
         "/videos/client-hero.mp4?v=client-revision-20260923",
       ],
@@ -103,10 +104,10 @@ export const site = {
       poster: "/images/hero-event-poster.jpg",
     },
     kenBurnsFallback: [
-      "/images/kenburns-1.jpg",
-      "/images/kenburns-2.jpg",
-      "/images/kenburns-3.jpg",
-      "/images/kenburns-4.jpg",
+      "/images/client/client-event-04.webp",
+      "/images/client/client-event-08.webp",
+      "/images/client/client-event-09.webp",
+      "/images/client/client-event-12.webp",
     ],
   },
 
@@ -116,9 +117,9 @@ export const site = {
     statement:
       "We create and deliver exceptional events, corporate programmes and journeys across New Zealand, combining local expertise with a crew that understands your culture, expectations and every detail.",
     images: [
-      "/images/service-event-management.jpg",
-      "/images/service-decor-fabrications.jpg",
-      "/images/about-corporate-group.jpg",
+      "/images/client/client-event-05.webp",
+      "/images/client/client-event-11.webp",
+      "/images/client/client-event-01.webp",
     ],
     stats: [
       { value: 500, suffix: "+", label: "Events Delivered" },
@@ -155,7 +156,7 @@ export const site = {
       id: "event-management",
       index: "01",
       name: "Event Management",
-      image: "/images/service-event-management.webp",
+      image: "/images/client/client-event-01.webp",
       description:
         "End-to-end planning and on-ground execution for weddings, corporate events and celebrations across New Zealand.",
       highlights: ["Full-cycle planning", "On-site delivery team", "Vendor & budget management"],
@@ -164,7 +165,7 @@ export const site = {
       id: "mice",
       index: "02",
       name: "MICE",
-      image: "/images/service-mice.webp",
+      image: "/images/client/client-event-07.webp",
       description:
         "Meetings, incentives, conferences and exhibitions, flawlessly produced for Indian corporate groups.",
       highlights: ["Conference production", "Incentive travel design", "Delegate management"],
@@ -236,7 +237,7 @@ export const site = {
       id: "event-technical-support",
       index: "10",
       name: "Event Technical Support",
-      image: "/images/service-event-technical-support.webp",
+      image: "/images/client/client-event-03.webp",
       description:
         "Sound, lighting, staging and AV production delivered by experienced technical crews.",
       highlights: ["Sound & lighting rigs", "Staging & AV", "Experienced crew"],
@@ -245,7 +246,7 @@ export const site = {
       id: "decor-fabrications",
       index: "11",
       name: "Decor & Fabrications",
-      image: "/images/showcase/event-decor.webp",
+      image: "/images/client/client-event-11.webp",
       description:
         "Bespoke decor, sets and fabrication that bring your theme and vision to life.",
       highlights: ["Custom set builds", "Floral & theming", "Concept to install"],
@@ -272,7 +273,7 @@ export const site = {
       id: "local-hindi-entertainment",
       index: "14",
       name: "Indian Entertainment Options",
-      image: "/images/showcase/concert-crowd.webp",
+      image: "/images/client/client-event-02.webp",
       description:
         "Live music, dance and performers spanning local New Zealand talent and Indian entertainment options.",
       highlights: ["Live music & dance", "Local & Indian performers", "Full stage production"],

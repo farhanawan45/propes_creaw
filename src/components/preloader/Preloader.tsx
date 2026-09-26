@@ -83,7 +83,7 @@ export default function Preloader() {
     >
       <video
         ref={videoRef}
-        src={site.hero.video.mp4[0]}
+        src={site.hero.video.introMp4}
         poster={site.hero.video.poster}
         autoPlay
         muted={muted}

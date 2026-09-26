@@ -10,10 +10,10 @@ import BrandLogo from "@/components/ui/BrandLogo";
 import LiveClock from "@/components/ui/LiveClock";
 
 const previewImages: Record<string, string> = {
-  "#home": "/images/hero-poster.jpg",
-  "#about": "/images/about-milford-sound.jpg",
-  "#services": "/images/service-event-management.jpg",
-  "#contact": "/images/service-mice.jpg",
+  "#home": "/images/client/client-event-04.webp",
+  "#about": "/images/client/client-event-05.webp",
+  "#services": "/images/client/client-event-08.webp",
+  "#contact": "/images/client/client-event-10.webp",
 };
 
 export default function FullscreenMenu({

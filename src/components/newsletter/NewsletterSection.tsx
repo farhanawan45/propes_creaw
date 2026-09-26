@@ -45,7 +45,7 @@ export default function NewsletterSection() {
         className="relative mx-auto grid max-w-[1344px] overflow-hidden rounded-[24px] border border-copper/25 bg-[#06205b] shadow-[0_30px_100px_rgba(0,0,0,.35)] lg:grid-cols-[.85fr_1.15fr]"
       >
         <div className="relative min-h-[180px] overflow-hidden sm:min-h-[220px] lg:min-h-[260px]">
-          <Image src="/images/service-event-management.webp" alt="An elegant event setting in New Zealand" fill sizes="(max-width: 1023px) 100vw, 42vw" className="object-cover transition-transform duration-[1600ms] hover:scale-105" />
+          <Image src="/images/client/client-event-06.webp" alt="A live event produced by Props N Crew" fill sizes="(max-width: 1023px) 100vw, 42vw" className="object-cover transition-transform duration-[1600ms] hover:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/70 via-transparent to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-[#06205b]/30" />
           <div className="absolute bottom-5 left-5 rounded-[10px] border border-white/25 bg-pounamu-night/35 px-4 py-2 font-mono-label text-[8px] tracking-[0.18em] text-ivory backdrop-blur-md sm:bottom-7 sm:left-7">
             INSIDE PROPS &amp; CREW

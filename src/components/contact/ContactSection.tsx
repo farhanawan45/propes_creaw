@@ -16,10 +16,10 @@ export default function ContactSection() {
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="grid h-full w-full grid-cols-1 opacity-45 lg:w-[55%] lg:grid-cols-[1.4fr_.6fr]">
           <div className="relative h-full">
-            <Image src="/images/service-event-management.jpg" alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
+            <Image src="/images/client/client-event-10.webp" alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="object-cover" />
           </div>
           <div className="relative hidden h-full lg:block">
-            <Image src="/images/service-decor-fabrications.jpg" alt="" fill sizes="18vw" className="object-cover" />
+            <Image src="/images/client/client-event-12.webp" alt="" fill sizes="18vw" className="object-cover" />
           </div>
         </div>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,22,63,.45)_0%,rgba(4,22,63,.72)_48%,rgba(4,22,63,.98)_68%)] max-lg:bg-pounamu-night/55" />
