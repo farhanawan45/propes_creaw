@@ -13,12 +13,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/terms`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const projectRoutes: MetadataRoute.Sitemap = site.work.projects.map((project) => ({
-    url: `${site.url}/work/${project.id}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
-  return [...staticRoutes, ...projectRoutes];
+  return staticRoutes;
 }

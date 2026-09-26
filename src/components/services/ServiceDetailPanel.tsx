@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Check } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import type { Service } from "@/content/site";
 import { site } from "@/content/site";
 import { scrollToHash } from "@/lib/scrollTo";
@@ -56,7 +56,7 @@ export default function ServiceDetailPanel({ service, progress }: ServiceDetailP
         <ul className="mt-5 space-y-2.5">
           {service.highlights.map((h) => (
             <li key={h} className="flex items-start gap-3 text-sm text-ivory/85">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-copper" strokeWidth={2} />
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 rotate-45 items-center justify-center rounded-[4px] bg-copper text-white"><Sparkles className="h-3 w-3 -rotate-45" strokeWidth={1.8} /></span>
               {h}
             </li>
           ))}

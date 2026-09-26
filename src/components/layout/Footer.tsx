@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useMotionValue, useMotionTemplate } from "framer-motion";
+import { motion } from "framer-motion";
 import { Clock3, Mail, MapPin, Phone } from "lucide-react";
 import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
 import { site } from "@/content/site";
 import { scrollToHash } from "@/lib/scrollTo";
 import MagneticButton from "@/components/ui/MagneticButton";
@@ -42,10 +42,6 @@ function SocialIcon({ label }: { label: string }) {
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
-  const wordmarkRef = useRef<HTMLDivElement>(null);
-  const spotX = useMotionValue(50);
-  const spotY = useMotionValue(50);
-  const spotlight = useMotionTemplate`radial-gradient(360px circle at ${spotX}% ${spotY}%, rgba(251,83,44,0.32), transparent 70%)`;
 
   useGSAP(
     () => {
@@ -61,36 +57,10 @@ export default function Footer() {
       marqueeRef.current?.addEventListener("mouseenter", () => marqueeTween.timeScale(0.25));
       marqueeRef.current?.addEventListener("mouseleave", () => marqueeTween.timeScale(1));
 
-      const words = wordmarkRef.current?.querySelectorAll("[data-letter]");
-      if (words?.length) {
-        gsap.fromTo(
-          words,
-          { yPercent: 100, opacity: 0 },
-          {
-            yPercent: 0,
-            opacity: 1,
-            duration: 0.9,
-            stagger: 0.02,
-            ease: "power4.out",
-            scrollTrigger: { trigger: wordmarkRef.current, start: "top 90%" },
-          }
-        );
-      }
-
-      return () => {
-        ScrollTrigger.getAll().forEach((t) => {
-          if (t.trigger === wordmarkRef.current) t.kill();
-        });
-      };
+      return () => marqueeTween.kill();
     },
     { scope: footerRef }
   );
-
-  const handleWordmarkMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    spotX.set(((e.clientX - rect.left) / rect.width) * 100);
-    spotY.set(((e.clientY - rect.top) / rect.height) * 100);
-  };
 
   return (
     <footer ref={footerRef} className="relative z-0 overflow-hidden bg-pounamu-night">
@@ -217,29 +187,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Giant wordmark */}
-      <div
-        ref={wordmarkRef}
-        onMouseMove={handleWordmarkMove}
-        className="relative select-none overflow-hidden border-t border-deep-line py-4"
-      >
-        <motion.div
-          className="pointer-events-none absolute inset-0 opacity-70"
-          style={{ background: spotlight }}
-        />
-        <div
-          className="whitespace-nowrap px-4 text-center font-display font-semibold leading-none text-ivory"
-          style={{ fontSize: "clamp(3.25rem, 12.5vw, 10.5rem)" }}
-        >
-          {"PROPS & CREW".split("").map((char, i) => (
-            <span key={i} data-letter className="inline-block overflow-hidden">
-              <span className="inline-block">{char === " " ? " " : char}</span>
-            </span>
-          ))}
-        </div>
-      </div>
-
-      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 px-5 py-6 text-xs text-mist sm:flex-row sm:px-8 sm:pr-24 lg:px-12 lg:pr-28">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 border-t border-deep-line px-5 py-6 text-xs text-mist sm:flex-row sm:px-8 sm:pr-24 lg:px-12 lg:pr-28">
         <p>
           &copy; {year} {site.name}. All rights reserved.
         </p>

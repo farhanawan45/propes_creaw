@@ -153,7 +153,7 @@ export default function Hero() {
           </h1>
 
           <p ref={taglineRef} className="mt-4 font-mono-label text-[clamp(13px,1.25vw,18px)] tracking-[0.12em] text-copper-light sm:mt-5">
-            Every Experience Starts With A Story
+            Every Experience Starts With a Story
           </p>
 
           <p

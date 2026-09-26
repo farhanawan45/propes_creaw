@@ -77,7 +77,7 @@ export default function Header() {
               onClick={(e) => handleNavClick(e, "#home")}
               className="flex items-center gap-2.5 focus-ring sm:gap-3"
               data-cursor="Home"
-              aria-label="Props & Crew Home"
+              aria-label="Props N Crew Home"
             >
               <BrandLogo />
             </Link>

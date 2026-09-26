@@ -30,7 +30,7 @@ export default function AdminLoginPage() {
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#04163f] px-5 py-12">
       <div className="w-full max-w-md rounded-[24px] border border-white/10 bg-white p-7 shadow-2xl sm:p-10">
-        <BrandLogo size="md" className="h-auto w-32" />
+        <BrandLogo size="md" />
         <div className="mt-8 flex h-12 w-12 items-center justify-center rounded-xl bg-[#061a4a] text-white"><LockKeyhole size={21} /></div>
         <h1 className="mt-5 text-3xl font-semibold tracking-tight">Admin portal</h1>
         <p className="mt-2 text-sm text-[#53617a]">Secure access to enquiries and newsletter subscribers.</p>

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowLeft, ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, Sparkles } from "lucide-react";
 import { site } from "@/content/site";
 import { useEnquiry } from "@/context/EnquiryContext";
 import { scrollToHash } from "@/lib/scrollTo";
@@ -74,14 +74,14 @@ export default function ServicesSection() {
             </h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-mist sm:text-base">
-            Fourteen specialist capabilities working as one, from first concept and guest arrival to production, travel and the final farewell.
+            Diverse specialist capabilities working as one, from first concept and guest arrival to production, travel and the final farewell.
           </p>
         </div>
 
         <div className="relative mt-10 border-y border-ivory/15 sm:mt-12">
           <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-8 bg-gradient-to-r from-pounamu-night to-transparent sm:w-14" aria-hidden="true" />
           <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-8 bg-gradient-to-l from-pounamu-night to-transparent sm:w-14" aria-hidden="true" />
-          <div ref={navRef} className="services-nav-scroll flex gap-2 overflow-x-auto py-3 scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden" aria-label="Choose a service">
+          <div ref={navRef} className="services-nav-scroll flex gap-2 overflow-x-auto px-9 py-3 scroll-smooth [scroll-padding-inline:2.25rem] [scrollbar-width:none] sm:px-14 sm:[scroll-padding-inline:3.5rem] [&::-webkit-scrollbar]:hidden" aria-label="Choose a service">
             {site.services.map((item, index) => (
               <button
                 key={item.id}
@@ -164,7 +164,7 @@ export default function ServicesSection() {
                 <ul className="mt-7 space-y-3 border-y border-pounamu-night/15 py-6">
                   {service.highlights.map((highlight) => (
                     <li key={highlight} className="flex items-center gap-3 text-sm font-medium text-pounamu-night/85 sm:text-base">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-pounamu-night text-ivory"><Check className="h-3.5 w-3.5" strokeWidth={2} /></span>
+                      <span className="flex h-6 w-6 shrink-0 rotate-45 items-center justify-center rounded-[5px] bg-copper text-white shadow-[0_5px_14px_rgba(251,83,44,.3)]"><Sparkles className="h-3.5 w-3.5 -rotate-45" strokeWidth={1.8} /></span>
                       {highlight}
                     </li>
                   ))}

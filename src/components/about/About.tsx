@@ -117,7 +117,7 @@ export default function About() {
               <h2 className="font-display text-[clamp(52px,6vw,96px)] font-medium leading-[0.86] tracking-[-0.065em] text-ink">
                 We turn
                 <span className="block">ideas into</span>
-                <span className="block font-serif italic font-normal text-copper">experiences.</span>
+                <span className="block text-copper">experiences.</span>
               </h2>
 
               <p ref={statementRef} className="mt-8 max-w-lg text-[15px] leading-7 text-stone sm:text-lg sm:leading-8 lg:mt-10">

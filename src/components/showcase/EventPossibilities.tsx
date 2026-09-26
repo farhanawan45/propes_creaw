@@ -10,7 +10,7 @@ const moments = [
   { src: "/images/showcase/conference-production.webp", label: "Technical Production", title: "Conference production in action" },
   { src: "/images/showcase/helicopter-adventure.webp", label: "Helicopter Experiences", title: "A helicopter mountain experience" },
   { src: "/images/showcase/luxury-yacht.webp", label: "Private Cruises", title: "A private luxury yacht cruise" },
-  { src: "/images/showcase/live-entertainment.webp", label: "Concert Production", title: "A professionally produced live show" },
+  { src: "/images/showcase/live-entertainment.webp", label: "Indian Entertainment Options", title: "A professionally produced live show" },
   { src: "/images/showcase/destination-event.webp", label: "Destination Events", title: "A destination wedding reception" },
   { src: "/images/showcase/private-cruise.webp", label: "Scenic Experiences", title: "A scenic alpine experience" },
   { src: "/images/showcase/wedding-table.webp", label: "Hospitality & Dining", title: "Outdoor event dining" },

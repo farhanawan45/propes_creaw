@@ -55,12 +55,12 @@ export default function NewsletterSection() {
         <div className="relative flex flex-col justify-center p-6 sm:p-8 lg:p-10 xl:p-11">
           <div className="pointer-events-none absolute right-0 top-0 h-64 w-64 rounded-full bg-copper/10 blur-[90px]" />
           <div className="relative">
-            <div className="font-mono-label text-[9px] tracking-[0.2em] text-copper">STAY IN THE KNOW</div>
+            <div className="font-mono-label text-[9px] tracking-[0.2em] text-copper">WE CREATE EXPERIENCES</div>
             <h2 id="newsletter-title" className="mt-3 max-w-[18ch] font-display text-[clamp(1.5rem,2.6vw,2.5rem)] font-semibold leading-[1.05] tracking-[-0.03em] text-ivory">
-              The best of New Zealand, delivered.
+              Every experience starts with a story. And yours is about to begin.
             </h2>
             <p className="mt-3 max-w-xl text-sm font-light leading-relaxed text-mist sm:text-base">
-              Receive event inspiration, destination insights, new experiences and considered offers from our crew.
+              Something memorable is taking shape behind the scenes. Stay tuned — we’re getting ready to create experiences worth remembering.
             </p>
 
             <form onSubmit={submit} className="mt-5 lg:max-w-[560px]" noValidate>

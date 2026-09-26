@@ -12,7 +12,7 @@ import LiveClock from "@/components/ui/LiveClock";
 const previewImages: Record<string, string> = {
   "#home": "/images/hero-poster.jpg",
   "#about": "/images/about-milford-sound.jpg",
-  "#work": "/images/work-queenstown-wedding.jpg",
+  "#services": "/images/service-event-management.jpg",
   "#contact": "/images/service-mice.jpg",
 };
 

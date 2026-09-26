@@ -37,7 +37,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <main className="min-h-screen bg-pounamu-night text-ivory">
       <header className="absolute inset-x-0 top-0 z-20 px-5 py-6 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between">
-          <Link href="/" aria-label="Props & Crew home"><BrandLogo /></Link>
+          <Link href="/" aria-label="Props N Crew home"><BrandLogo /></Link>
           <Link href="/#work" className="flex items-center gap-2 rounded-full border border-ivory/20 bg-pounamu-night/45 px-4 py-2.5 text-sm backdrop-blur-xl transition-colors hover:border-copper"><ArrowLeft className="h-4 w-4" /> All work</Link>
         </div>
       </header>

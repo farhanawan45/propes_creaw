@@ -54,15 +54,15 @@ export interface NavLink {
 }
 
 export const site = {
-  name: "Props & Crew",
+  name: "Props N Crew",
   shortName: "P&C",
   domain: "propsncrew.co.nz",
   url: "https://propsncrew.co.nz",
 
   meta: {
-    title: "Props & Crew | Luxury Events, MICE & Destination Management, New Zealand",
+    title: "Props N Crew | Luxury Events, MICE & Destination Management, New Zealand",
     description:
-      "Props & Crew (P&C) is a New Zealand event and destination management company crafting bespoke events, MICE, luxury transport, tours and entertainment for Indian corporate groups, weddings and luxury travellers.",
+      "Props N Crew is a New Zealand event and destination management company crafting bespoke events, MICE, luxury transport, tours and entertainment for Indian corporate groups, weddings and luxury travellers.",
     keywords: [
       "New Zealand event management",
       "MICE New Zealand",
@@ -78,7 +78,7 @@ export const site = {
   nav: [
     { label: "Home", href: "#home", index: "01" },
     { label: "About", href: "#about", index: "02" },
-    { label: "Work", href: "#work", index: "03" },
+    { label: "Services", href: "#services", index: "03" },
     { label: "Contact", href: "#contact", index: "04" },
   ] satisfies NavLink[],
 
@@ -112,7 +112,7 @@ export const site = {
 
   about: {
     label: "01 WHO WE ARE",
-    title: "About Props & Crew",
+    title: "About Props N Crew",
     statement:
       "We create and deliver exceptional events, corporate programmes and journeys across New Zealand, combining local expertise with a crew that understands your culture, expectations and every detail.",
     images: [
@@ -122,7 +122,7 @@ export const site = {
     ],
     stats: [
       { value: 500, suffix: "+", label: "Events Delivered" },
-      { value: 10, suffix: "+", label: "Years Experience" },
+      { value: 1, suffix: "", label: "One-Stop NZ Solution · Seasoned Professionals" },
       { value: 14, suffix: "", label: "Specialist Services" },
       { value: 100, suffix: "%", label: "New Zealand Coverage" },
     ],
@@ -144,7 +144,7 @@ export const site = {
       },
       {
         title: "Professional",
-        text: "A decade of destination expertise, delivered with quiet precision.",
+        text: "Seasoned professionals collaborating as one team, delivered with quiet precision.",
         icon: "Award",
       },
     ],
@@ -245,7 +245,7 @@ export const site = {
       id: "decor-fabrications",
       index: "11",
       name: "Decor & Fabrications",
-      image: "/images/service-decor-fabrications.webp",
+      image: "/images/showcase/event-decor.webp",
       description:
         "Bespoke decor, sets and fabrication that bring your theme and vision to life.",
       highlights: ["Custom set builds", "Floral & theming", "Concept to install"],
@@ -271,11 +271,11 @@ export const site = {
     {
       id: "local-hindi-entertainment",
       index: "14",
-      name: "Local/Hindi Entertainment",
-      image: "/images/service-local-hindi-entertainment.webp",
+      name: "Indian Entertainment Options",
+      image: "/images/showcase/concert-crowd.webp",
       description:
-        "Live music, dance and performers spanning local New Zealand talent and Hindi entertainment.",
-      highlights: ["Live music & dance", "Local & Hindi performers", "Full stage production"],
+        "Live music, dance and performers spanning local New Zealand talent and Indian entertainment options.",
+      highlights: ["Live music & dance", "Local & Indian performers", "Full stage production"],
     },
   ] satisfies Service[],
 
@@ -374,7 +374,7 @@ export const site = {
     phoneHref: "tel:+6491234567",
     whatsapp: "+64 21 123 4567",
     whatsappHref: "https://wa.me/6421123456",
-    email: "hello@propsncrew.co.nz",
+    email: "friends@propsncrew.co.nz",
     address: "Level 4, 123 Queen Street, Auckland CBD, Auckland 1010, New Zealand",
     timezone: "Pacific/Auckland",
     timezoneLabel: "AKL",
