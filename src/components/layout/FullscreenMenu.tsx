@@ -65,15 +65,10 @@ export default function FullscreenMenu({
   }, []);
 
   const handleNavigate = (href: string) => {
-    // Lenis stays paused and body scroll stays locked (both set above)
-    // until this component actually unmounts, which happens only after
-    // the exit animation finishes — well after the scroll call below
-    // would fire. Undo both immediately so the scroll-to actually
-    // animates instead of silently no-op'ing.
-    resume();
-    document.body.style.overflow = "";
+    // Cleanup unlocks scrolling when the 650ms exit animation unmounts
+    // the menu, so navigate immediately after the transition completes.
     onClose();
-    setTimeout(() => scrollToHash(href), 350);
+    window.setTimeout(() => scrollToHash(href), 700);
   };
 
   const previewHref = hovered ?? active;
