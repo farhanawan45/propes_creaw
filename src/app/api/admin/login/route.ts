@@ -1,17 +1,23 @@
 import { NextResponse } from "next/server";
 import { ADMIN_COOKIE, createAdminToken, verifyAdminPassword } from "@/lib/admin-auth";
-import { isRateLimited } from "@/lib/rate-limit";
+import { clearRateLimit, hasReachedRateLimit, recordRateLimitHit } from "@/lib/rate-limit";
 
 export async function POST(request: Request) {
   try {
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-    if (isRateLimited(`admin-login:${ip}`)) {
+    const rateLimitKey = `admin-login:${ip}`;
+    if (hasReachedRateLimit(rateLimitKey)) {
       return NextResponse.json({ message: "Too many attempts. Please wait and try again." }, { status: 429 });
     }
     const { password } = (await request.json().catch(() => ({}))) as { password?: string };
     if (!password || !verifyAdminPassword(password)) {
-      return NextResponse.json({ message: "Invalid password." }, { status: 401 });
+      const locked = recordRateLimitHit(rateLimitKey);
+      return NextResponse.json(
+        { message: locked ? "Too many incorrect attempts. Please wait 10 minutes and try again." : "Invalid password." },
+        { status: locked ? 429 : 401 }
+      );
     }
+    clearRateLimit(rateLimitKey);
     const response = NextResponse.json({ ok: true });
     response.cookies.set(ADMIN_COOKIE, createAdminToken(), {
       httpOnly: true,

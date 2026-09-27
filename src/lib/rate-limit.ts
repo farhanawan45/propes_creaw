@@ -7,26 +7,38 @@ const MAX_REQUESTS = 5;
 
 const hits = new Map<string, number[]>();
 
-export function isRateLimited(identifier: string): boolean {
-  const now = Date.now();
+function activeHits(identifier: string, now = Date.now()) {
   const timestamps = (hits.get(identifier) ?? []).filter(
-    (t) => now - t < WINDOW_MS
+    (timestamp) => now - timestamp < WINDOW_MS
   );
+  if (timestamps.length) hits.set(identifier, timestamps);
+  else hits.delete(identifier);
+  return timestamps;
+}
 
-  if (timestamps.length >= MAX_REQUESTS) {
-    hits.set(identifier, timestamps);
-    return true;
-  }
+export function hasReachedRateLimit(identifier: string): boolean {
+  return activeHits(identifier).length >= MAX_REQUESTS;
+}
 
+export function recordRateLimitHit(identifier: string): boolean {
+  const now = Date.now();
+  const timestamps = activeHits(identifier, now);
   timestamps.push(now);
   hits.set(identifier, timestamps);
 
-  // Opportunistic cleanup to avoid unbounded growth.
   if (hits.size > 5000) {
-    for (const [key, value] of hits) {
-      if (value.every((t) => now - t >= WINDOW_MS)) hits.delete(key);
-    }
+    for (const key of hits.keys()) activeHits(key, now);
   }
 
+  return timestamps.length >= MAX_REQUESTS;
+}
+
+export function clearRateLimit(identifier: string) {
+  hits.delete(identifier);
+}
+
+export function isRateLimited(identifier: string): boolean {
+  if (hasReachedRateLimit(identifier)) return true;
+  recordRateLimitHit(identifier);
   return false;
 }
