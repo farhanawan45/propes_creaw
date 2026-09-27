@@ -1,15 +1,25 @@
 import "server-only";
 
-import { createHmac, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 
 export const ADMIN_COOKIE = "pnc_admin_session";
 const SESSION_AGE = 60 * 60 * 8;
 
 function secret() {
-  const value = process.env.ADMIN_SESSION_SECRET;
-  if (!value || value.length < 32) throw new Error("ADMIN_SESSION_SECRET must be at least 32 characters");
-  return value;
+  const sessionSecret = process.env.ADMIN_SESSION_SECRET?.trim();
+  if (sessionSecret && sessionSecret.length >= 32) return sessionSecret;
+
+  // Some managed hosting releases do not refresh newly added secrets in the
+  // published runtime immediately. Keep sessions available by deriving a
+  // separate signing key from the already-required admin password.
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword || adminPassword.length < 12) {
+    throw new Error("ADMIN_PASSWORD must be at least 12 characters");
+  }
+  return createHash("sha256")
+    .update(`props-n-crew:admin-session:${adminPassword}`)
+    .digest("hex");
 }
 
 function signature(payload: string) {
