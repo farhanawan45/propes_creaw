@@ -1,12 +1,10 @@
 "use client";
 
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/navigation";
 import { LockKeyhole } from "lucide-react";
 import BrandLogo from "@/components/ui/BrandLogo";
 
 export default function AdminLoginPage() {
-  const router = useRouter();
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -15,16 +13,35 @@ export default function AdminLoginPage() {
     event.preventDefault();
     setLoading(true);
     setError("");
-    const response = await fetch("/api/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password }),
-    });
-    const result = await response.json();
-    setLoading(false);
-    if (!response.ok) return setError(result.message || "Unable to sign in.");
-    router.replace("/admin");
-    router.refresh();
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 15_000);
+
+    try {
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+        cache: "no-store",
+        signal: controller.signal,
+      });
+      const result = (await response.json().catch(() => ({}))) as { message?: string };
+      if (!response.ok) throw new Error(result.message || "Unable to sign in.");
+
+      // A full navigation makes the newly issued HttpOnly session cookie
+      // available immediately on managed/proxied hosting such as GoDaddy.
+      window.location.assign(new URL("/admin", window.location.origin).href);
+    } catch (error) {
+      setError(
+        error instanceof DOMException && error.name === "AbortError"
+          ? "Login timed out. Please check your connection and try again."
+          : error instanceof Error
+            ? error.message
+            : "Unable to sign in. Please try again."
+      );
+      setLoading(false);
+    } finally {
+      window.clearTimeout(timeout);
+    }
   }
 
   return (
