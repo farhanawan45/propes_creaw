@@ -29,9 +29,13 @@ export async function POST(request: Request) {
     return response;
   } catch (error) {
     console.error("Admin login configuration error", error);
+    const message = error instanceof Error ? error.message : "";
+    const configurationMessage = message.includes("ADMIN_PASSWORD")
+      ? "GoDaddy ADMIN_PASSWORD is missing or shorter than 12 characters. Update that secret, then restart the app."
+      : "Admin login configuration failed. Check the GoDaddy Runtime Logs for the exact server error.";
     return NextResponse.json(
-      { message: "Admin login is not configured correctly. Please contact the site administrator." },
-      { status: 500 }
+      { message: configurationMessage, code: "ADMIN_AUTH_CONFIGURATION_ERROR" },
+      { status: 500, headers: { "X-Admin-Auth-Version": "3" } }
     );
   }
 }
