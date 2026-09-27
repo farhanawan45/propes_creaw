@@ -63,6 +63,23 @@ export function ensureSchema() {
         INDEX idx_subscribers_status_created (status, created_at)
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
     `);
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS admin_credentials (
+        id TINYINT UNSIGNED NOT NULL PRIMARY KEY DEFAULT 1,
+        password_hash VARCHAR(255) NOT NULL,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
+    await db.execute(`
+      CREATE TABLE IF NOT EXISTS admin_password_resets (
+        id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        token_hash CHAR(64) NOT NULL UNIQUE,
+        expires_at DATETIME NOT NULL,
+        used_at DATETIME NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        INDEX idx_admin_reset_expiry (expires_at, used_at)
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+    `);
   })();
   return schemaReady;
 }

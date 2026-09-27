@@ -70,3 +70,14 @@ export async function sendNewsletterSignup(data: NewsletterValues) {
     html: `<h2>New newsletter signup</h2><p><strong>Email:</strong> ${escapeHtml(data.email)}</p><p>This subscriber consented through the ${escapeHtml(site.name)} website newsletter form.</p>`,
   });
 }
+
+export async function sendAdminPasswordReset(to: string, resetUrl: string) {
+  const transporter = getTransporter();
+  const from = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER!;
+  await transporter.sendMail({
+    to,
+    from,
+    subject: `${site.name} admin password reset`,
+    html: `<h2>Reset your admin password</h2><p>A password reset was requested for the ${escapeHtml(site.name)} admin portal.</p><p><a href="${escapeHtml(resetUrl)}">Reset admin password</a></p><p>This secure link expires in 30 minutes and can only be used once. If you did not request it, you can ignore this email.</p>`,
+  });
+}

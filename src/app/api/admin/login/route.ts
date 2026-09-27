@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: "Too many attempts. Please wait and try again." }, { status: 429 });
     }
     const { password } = (await request.json().catch(() => ({}))) as { password?: string };
-    if (!password || !verifyAdminPassword(password)) {
+    if (!password || !(await verifyAdminPassword(password))) {
       const locked = recordRateLimitHit(rateLimitKey);
       return NextResponse.json(
         { message: locked ? "Too many incorrect attempts. Please wait 10 minutes and try again." : "Invalid password." },

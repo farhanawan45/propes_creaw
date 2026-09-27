@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import Link from "next/link";
 import { LockKeyhole } from "lucide-react";
 import BrandLogo from "@/components/ui/BrandLogo";
 
@@ -57,6 +58,7 @@ export default function AdminLoginPage() {
           {error && <p className="mt-3 text-sm text-red-600" role="alert">{error}</p>}
           <button disabled={loading} className="mt-5 h-12 w-full rounded-[10px] bg-[#fb532c] font-semibold text-white transition hover:bg-[#dc3f1d] disabled:opacity-60">{loading ? "Signing in..." : "Sign in"}</button>
         </form>
+        <Link href="/admin/forgot-password" className="mt-5 block text-center text-sm font-semibold text-[#061a4a] transition-colors hover:text-[#fb532c]">Forgot password?</Link>
       </div>
     </main>
   );
