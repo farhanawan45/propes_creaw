@@ -54,7 +54,7 @@ export default function OrbitLabel({ service, x, y, angleDeg, active, dimmed }: 
       className={`pointer-events-none absolute flex w-[140px] flex-col transition-opacity duration-300 ${align}`}
       style={style}
     >
-      <span className="font-mono-label text-[10px] text-mist/70">{service.index}</span>
+      <span className="h-2.5 w-2.5 bg-copper" aria-hidden="true" />
       <span
         className={`mt-0.5 text-sm font-medium leading-snug transition-colors duration-300 ${
           active ? "text-ivory" : "text-mist"

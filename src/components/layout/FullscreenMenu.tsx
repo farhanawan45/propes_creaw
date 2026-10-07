@@ -86,7 +86,7 @@ export default function FullscreenMenu({
       className="fixed inset-0 z-[90] flex flex-col bg-pounamu-night"
     >
       <div className="flex items-center justify-between px-6 py-5 sm:px-10 sm:py-6">
-        <BrandLogo size="md" />
+        <BrandLogo size="md" variant="mark" animated />
         <button
           ref={closeRef}
           type="button"
@@ -122,7 +122,7 @@ export default function FullscreenMenu({
                 hovered && hovered !== item.href ? "opacity-35" : "opacity-100"
               }`}
             >
-              <span className="w-5 shrink-0 font-mono-label text-[8px] text-copper sm:w-6 sm:text-[9px]">{item.index}</span>
+              <span className="h-3 w-3 shrink-0 bg-copper" aria-hidden="true" />
               <span
                 className={`font-display text-[clamp(1.65rem,7.4vw,2rem)] font-semibold leading-[1.08] tracking-tight transition-colors duration-300 sm:text-[2.25rem] lg:text-[clamp(2.25rem,3.4vw,3rem)] xl:text-[3.25rem] ${
                   active === item.href || hovered === item.href ? "text-copper" : "text-ivory"

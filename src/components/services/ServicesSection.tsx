@@ -74,7 +74,7 @@ export default function ServicesSection() {
             </h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-mist sm:text-base">
-            Diverse specialist capabilities working as one, from first concept and guest arrival to production, travel and the final farewell.
+            Diverse specialist capabilities working as one, from first concept and guest arrival to production, travel and the final experience.
           </p>
         </div>
 
@@ -91,7 +91,7 @@ export default function ServicesSection() {
                 className={`shrink-0 rounded-[10px] px-4 py-2.5 text-left transition-colors duration-300 focus-ring ${active === index ? "bg-copper text-white" : "bg-ivory/[0.06] text-mist hover:bg-ivory/10 hover:text-ivory"}`}
                 aria-current={active === index ? "true" : undefined}
               >
-                <span className="mr-2 font-mono-label text-[8px] opacity-70">{item.index}</span>
+                <span className="mr-2 inline-block h-2.5 w-2.5 bg-copper" aria-hidden="true" />
                 <span className="text-xs font-medium sm:text-sm">{item.name}</span>
               </button>
             ))}

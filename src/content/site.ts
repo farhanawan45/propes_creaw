@@ -92,7 +92,7 @@ export const site = {
       { text: "We Create" },
       { text: " Experiences", emphasis: true },
     ],
-    lead: "Luxury events, MICE and journeys across New Zealand, thoughtfully crafted from first idea to final farewell.",
+    lead: "Every experience starts with a story, and yours is about to begin. Something memorable is taking shape behind the scenes.",
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
@@ -112,7 +112,7 @@ export const site = {
   },
 
   about: {
-    label: "01 WHO WE ARE",
+    label: "WHO WE ARE",
     title: "About Props N Crew",
     statement:
       "We create and deliver exceptional events, corporate programmes and journeys across New Zealand, combining local expertise with a crew that understands your culture, expectations and every detail.",
@@ -123,7 +123,7 @@ export const site = {
     ],
     stats: [
       { value: 500, suffix: "+", label: "Events Delivered" },
-      { value: 1, suffix: "", label: "One-Stop NZ Solution · Seasoned Professionals" },
+      { value: 1, suffix: "", label: "Collaborative NZ Solution · Seasoned Professionals" },
       { value: 14, suffix: "", label: "Specialist Services" },
       { value: 100, suffix: "%", label: "New Zealand Coverage" },
     ],
@@ -272,7 +272,7 @@ export const site = {
     {
       id: "local-hindi-entertainment",
       index: "14",
-      name: "Indian Entertainment Options",
+      name: "Entertainment Options",
       image: "/images/client/client-event-02.webp",
       description:
         "Live music, dance and performers spanning local New Zealand talent and Indian entertainment options.",
@@ -281,7 +281,7 @@ export const site = {
   ] satisfies Service[],
 
   work: {
-    label: "03 SELECTED EVENTS",
+    label: "SELECTED EVENTS",
     title: "Our Work",
     intro:
       "From destination weddings and leadership summits to incentive journeys and private celebrations, explore a selection of experiences brought to life across New Zealand through thoughtful planning, creative production and seamless on-ground delivery.",
@@ -368,14 +368,14 @@ export const site = {
   },
 
   contact: {
-    label: "04 GET IN TOUCH",
+    label: "GET IN TOUCH",
     title: "Let's create something extraordinary",
     sub: "Tell us about your event or journey and share your dates, group size and vision. Our New Zealand-based team will review every detail and respond within one business day with the right next steps.",
     phone: "+64 9 123 4567",
     phoneHref: "tel:+6491234567",
     whatsapp: "+64 21 123 4567",
     whatsappHref: "https://wa.me/6421123456",
-    email: "friends@propsncrew.co.nz",
+    email: "nz@propsncrew.co.nz",
     address: "Level 4, 123 Queen Street, Auckland CBD, Auckland 1010, New Zealand",
     timezone: "Pacific/Auckland",
     timezoneLabel: "AKL",

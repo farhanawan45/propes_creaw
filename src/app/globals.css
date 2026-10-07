@@ -65,6 +65,32 @@
   }
 }
 
+@keyframes brandLogoFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-2px) scale(1.018); }
+}
+
+@keyframes brandLogoShine {
+  0%, 62% { transform: translateX(-170%) skewX(-18deg); opacity: 0; }
+  70% { opacity: 0.75; }
+  88%, 100% { transform: translateX(210%) skewX(-18deg); opacity: 0; }
+}
+
+.brand-logo--animated {
+  position: relative;
+  animation: brandLogoFloat 4.8s ease-in-out infinite;
+}
+
+.brand-logo--animated::after {
+  content: "";
+  position: absolute;
+  inset: -20% auto -20% -28%;
+  width: 24%;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.9), transparent);
+  animation: brandLogoShine 5.4s ease-in-out infinite;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);

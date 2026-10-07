@@ -140,7 +140,7 @@ export default function ServicesMultiSelect({ value, onChange, error }: Services
                             >
                               {selected && <Check className="h-3 w-3 text-pounamu-night" strokeWidth={3} />}
                             </span>
-                            <span className="font-mono-label shrink-0 text-mist">{s.index}</span>
+                            <span className="h-2.5 w-2.5 shrink-0 bg-copper" aria-hidden="true" />
                             <span className="truncate">{s.name}</span>
                           </CommandItem>
                         );

@@ -33,7 +33,7 @@ export default function ServicesAccordion() {
                 aria-expanded={open}
               >
                 <span className="flex items-center gap-4">
-                  <span className="font-mono-label text-copper">{service.index}</span>
+                  <span className="h-3 w-3 shrink-0 bg-copper" aria-hidden="true" />
                   <span className="text-base font-medium text-ivory">{service.name}</span>
                 </span>
                 <Plus

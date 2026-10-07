@@ -47,8 +47,9 @@ export default function ServiceDetailPanel({ service, progress }: ServiceDetailP
       </div>
 
       <div className="p-6 sm:p-8">
-        <div className="font-mono-label text-copper-light">
-          {service.index} / {String(total).padStart(2, "0")}
+        <div className="flex items-center gap-3 font-mono-label text-copper-light">
+          <span className="h-3 w-3 bg-copper" aria-hidden="true" />
+          <span>{total} specialist capabilities</span>
         </div>
         <h3 className="mt-3 font-display text-2xl font-semibold text-ivory sm:text-3xl">{service.name}</h3>
         <p className="mt-4 text-base font-light leading-relaxed text-mist">{service.description}</p>

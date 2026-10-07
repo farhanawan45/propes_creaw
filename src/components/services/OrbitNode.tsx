@@ -59,7 +59,7 @@ export default function OrbitNode({ service, x, y, active, onEnter, onLeave, onS
           fill="var(--color-copper)"
           style={{ fontFamily: "var(--font-mono), monospace", letterSpacing: "0.04em" }}
         >
-          {service.index}
+          <span className="block h-2.5 w-2.5 bg-copper" aria-hidden="true" />
         </text>
       )}
     </g>
