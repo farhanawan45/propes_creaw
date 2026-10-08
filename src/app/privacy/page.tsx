@@ -13,7 +13,7 @@ export default function PrivacyPage() {
     <main className="min-h-screen bg-ivory px-5 py-8 text-ink sm:px-8 lg:px-12">
       <div className="mx-auto max-w-4xl">
         <div className="flex items-center justify-between border-b border-linen-border pb-6">
-          <Link href="/" className="rounded-full bg-pounamu-night px-4 py-3"><BrandLogo /></Link>
+          <Link href="/" className="rounded-full bg-pounamu-night px-4 py-3"><BrandLogo variant="mark" /></Link>
           <Link href="/#contact" className="btn-gradient rounded-full px-5 py-3 text-sm font-semibold text-ivory">Contact us</Link>
         </div>
         <article className="py-14 sm:py-20">

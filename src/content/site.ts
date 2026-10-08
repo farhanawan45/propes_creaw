@@ -275,7 +275,7 @@ export const site = {
       name: "Entertainment Options",
       image: "/images/client/client-event-02.webp",
       description:
-        "Live music, dance and performers spanning local New Zealand talent and Indian entertainment options.",
+        "Live music, dance and performers spanning local New Zealand talent and diverse entertainment options.",
       highlights: ["Live music & dance", "Local & Indian performers", "Full stage production"],
     },
   ] satisfies Service[],

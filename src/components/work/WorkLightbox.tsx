@@ -138,10 +138,8 @@ export default function WorkLightbox({
         </AnimatePresence>
       </div>
 
-      <div className="mt-6 font-mono-label tabular-nums text-mist sm:hidden">
-        <span className="text-copper">{String(index + 1).padStart(2, "0")}</span>
-        {" / "}
-        {String(projects.length).padStart(2, "0")}
+      <div className="mt-6 flex items-center gap-2 sm:hidden" aria-hidden="true">
+        <span className="h-2.5 w-2.5 bg-copper" />
       </div>
     </motion.div>
   );

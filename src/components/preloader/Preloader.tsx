@@ -101,7 +101,7 @@ export default function Preloader() {
       <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10" />
 
       <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5 sm:p-8">
-        <BrandLogo />
+        <BrandLogo variant="mark" />
         <button type="button" onClick={toggleSound} className="flex h-11 items-center justify-center gap-2 rounded-[10px] border border-white/20 bg-black/30 px-3 text-white backdrop-blur-md transition-colors hover:border-copper hover:text-copper focus-ring sm:px-4" aria-label={muted ? "Turn intro sound on" : "Turn intro sound off"}>
           {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
           <span className="hidden font-mono-label text-[8px] tracking-[0.14em] sm:inline">{muted ? "SOUND ON" : "SOUND OFF"}</span>

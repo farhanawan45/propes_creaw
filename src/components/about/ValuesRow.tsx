@@ -57,7 +57,7 @@ function ValueCard({ value, index }: { value: (typeof site.about.values)[number]
         <span className="absolute inset-x-8 top-0 h-px origin-left scale-x-0 bg-gradient-to-r from-transparent via-copper to-transparent transition-transform duration-500 ease-out group-hover:scale-x-100" />
 
         <div className="relative flex items-center justify-between">
-          <span className="font-mono-label text-[9px] text-stone">0{index + 1}</span>
+          <span className="h-2.5 w-2.5 shrink-0 bg-copper" aria-hidden="true" />
           <span className="h-px flex-1 bg-gradient-to-r from-copper/50 to-transparent mx-3" />
         </div>
         <div className="relative mt-5 flex h-12 w-12 items-center justify-center rounded-full border border-copper/30 bg-ivory shadow-[0_10px_35px_rgba(251,83,44,.1)] transition-all duration-500 group-hover:border-copper group-hover:shadow-[0_0_30px_rgba(251,83,44,.24)] lg:h-14 lg:w-14">

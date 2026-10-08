@@ -11,12 +11,11 @@ import type { WorkProject } from "@/content/site";
 interface WorkStackCardProps {
   project: WorkProject;
   index: number;
-  total: number;
   imageOnLeft: boolean;
   onView: () => void;
 }
 
-export default function WorkStackCard({ project, index, total, imageOnLeft, onView }: WorkStackCardProps) {
+export default function WorkStackCard({ project, index, imageOnLeft, onView }: WorkStackCardProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const imagePanelRef = useRef<HTMLDivElement>(null);
   const imageWrapRef = useRef<HTMLDivElement>(null);
@@ -105,9 +104,7 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
           <div className="relative order-2 flex flex-1 flex-col justify-between bg-pounamu-night p-6 pb-8 sm:p-8 lg:order-none lg:w-[42%] lg:flex-none lg:p-12">
             <div className="overflow-hidden">
               <div data-reveal className="flex items-center gap-3">
-                <span className="font-display text-2xl font-semibold text-copper sm:text-3xl">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
+                <span className="h-3 w-3 shrink-0 bg-copper" aria-hidden="true" />
                 <span className="font-mono-label rounded-[10px] border border-ivory/25 px-3 py-1 text-ivory">
                   {project.category}
                 </span>
@@ -184,9 +181,6 @@ export default function WorkStackCard({ project, index, total, imageOnLeft, onVi
           </div>
         </div>
 
-        <div className="pointer-events-none absolute right-5 top-4 rounded-full bg-pounamu-night/70 px-3 py-1.5 font-mono-label text-ivory/70 backdrop-blur-sm lg:bottom-6 lg:right-8 lg:top-auto lg:bg-transparent lg:p-0 lg:text-ivory/50 lg:backdrop-blur-none">
-          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-        </div>
       </div>
     </div>
   );

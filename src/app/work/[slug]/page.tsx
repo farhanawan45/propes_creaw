@@ -37,7 +37,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <main className="min-h-screen bg-pounamu-night text-ivory">
       <header className="absolute inset-x-0 top-0 z-20 px-5 py-6 sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-[1440px] items-center justify-between">
-          <Link href="/" aria-label="Props N Crew home"><BrandLogo /></Link>
+          <Link href="/" aria-label="Props N Crew home"><BrandLogo variant="mark" /></Link>
           <Link href="/#work" className="flex items-center gap-2 rounded-full border border-ivory/20 bg-pounamu-night/45 px-4 py-2.5 text-sm backdrop-blur-xl transition-colors hover:border-copper"><ArrowLeft className="h-4 w-4" /> All work</Link>
         </div>
       </header>
@@ -54,7 +54,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night via-pounamu-night/35 to-black/15" />
         <div className="relative mx-auto w-full max-w-[1440px]">
-          <div className="font-mono-label text-copper-light">{project.category} / {String(index + 1).padStart(2, "0")}</div>
+          <div className="flex items-center gap-3 font-mono-label text-copper-light"><span className="h-2.5 w-2.5 bg-copper" aria-hidden="true" />{project.category}</div>
           <h1 className="mt-5 max-w-5xl font-display text-[clamp(48px,8vw,118px)] font-semibold leading-[.92] tracking-[-.045em]">{project.title}</h1>
           <div className="mt-6 flex items-center gap-2 text-ivory/80"><MapPin className="h-5 w-5 text-copper" /><span>{project.location}, New Zealand</span></div>
         </div>

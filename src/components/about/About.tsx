@@ -166,9 +166,7 @@ export default function About() {
                 <div className="grid items-end gap-7 lg:grid-cols-[1fr_auto]">
                   <div>
                     <div className="inline-flex items-center gap-2.5 rounded-[10px] border border-white/25 bg-pounamu-night/[0.18] px-3.5 py-2.5 font-mono-label text-[10px] font-bold tracking-[0.13em] text-copper-light shadow-[0_5px_16px_rgba(0,0,0,.12)] [text-shadow:0_1px_5px_rgba(0,0,0,.85)] backdrop-blur-[2px] sm:px-4 sm:text-[11px]">
-                      <span className="size-1.5 shrink-0 rounded-full bg-copper shadow-[0_0_10px_rgba(255,122,89,.9)]" />
-                      <span>0{activeSlide + 1}</span>
-                      <span className="text-white/35">/</span>
+                      <span className="size-2.5 shrink-0 bg-copper shadow-[0_0_10px_rgba(255,122,89,.9)]" />
                       <span className="text-ivory">{slides[activeSlide].eyebrow}</span>
                     </div>
                     <AnimatePresence mode="wait">
@@ -196,9 +194,6 @@ export default function About() {
                 </div>
 
                 <div className="mt-7 flex items-center gap-4 sm:mt-9">
-                  <span className="shrink-0 font-mono-label text-[9px] text-white/65">
-                    0{activeSlide + 1} / 0{slides.length}
-                  </span>
                   <div className="grid flex-1 grid-cols-3 gap-2 sm:gap-3">
                   {slides.map((slide, index) => (
                     <button key={slide.title} type="button" onClick={() => setActiveSlide(index)} aria-label={`View slide ${index + 1}`} className="group py-2">

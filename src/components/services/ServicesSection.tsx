@@ -68,7 +68,7 @@ export default function ServicesSection() {
       <div className="relative mx-auto max-w-[1440px] px-4 sm:px-8 lg:px-10 xl:px-12">
         <div className="mx-auto max-w-5xl text-center">
           <div>
-            <div className="font-mono-label text-copper">02 WHAT WE DO</div>
+            <div className="flex items-center justify-center gap-3 font-mono-label text-copper"><span className="h-2.5 w-2.5 bg-copper" aria-hidden="true" />WHAT WE DO</div>
             <h2 className="mt-4 font-display font-semibold tracking-[-0.045em] text-ivory" style={{ fontSize: "clamp(44px, 6vw, 88px)", lineHeight: ".94" }}>
               One crew. <span className="text-copper-light">Every detail.</span>
             </h2>

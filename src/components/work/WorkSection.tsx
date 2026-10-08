@@ -37,7 +37,7 @@ export default function WorkSection() {
             <p className="mt-4 max-w-3xl text-lg font-light leading-relaxed text-stone">{site.work.intro}</p>
           </div>
           <div className="font-mono-label hidden text-stone lg:block">
-            {String(filteredProjects.length).padStart(2, "0")} Projects
+            Projects
           </div>
         </div>
 
@@ -64,7 +64,6 @@ export default function WorkSection() {
               key={project.id}
               project={project}
               index={i}
-              total={filteredProjects.length}
               imageOnLeft={i % 2 === 1}
               onView={() => setLightboxIndex(i)}
             />

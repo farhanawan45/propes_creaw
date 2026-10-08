@@ -108,7 +108,7 @@ export default function StatsStrip() {
           >
             <span className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" style={{ background: "radial-gradient(220px circle at var(--mx) var(--my), rgba(251,83,44,.18), transparent 68%)" }} />
             <div className="relative flex items-center gap-3">
-              <span className="font-mono-label text-[9px] text-copper-light">{String(i + 1).padStart(2, "0")}</span>
+              <span className="h-2.5 w-2.5 shrink-0 bg-copper" aria-hidden="true" />
               <span className="h-px flex-1 bg-gradient-to-r from-copper/60 to-transparent" />
             </div>
             <div className="relative mt-5 font-display font-semibold leading-none tracking-[-.045em] text-ivory" style={{ fontSize: "clamp(42px, 6vw, 78px)" }}>
