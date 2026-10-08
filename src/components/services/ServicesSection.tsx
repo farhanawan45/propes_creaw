@@ -74,7 +74,7 @@ export default function ServicesSection() {
             </h2>
           </div>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-mist sm:text-base">
-            Diverse specialist capabilities working as one, from first concept and guest arrival to production, travel and the final experience.
+            Specialist expertise, seamlessly brought together — from the initial concept and guest arrival through to event production, travel, and a farewell filled with unforgettable memories.
           </p>
         </div>
 

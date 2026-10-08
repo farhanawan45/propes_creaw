@@ -123,7 +123,7 @@ export const site = {
     ],
     stats: [
       { value: 500, suffix: "+", label: "Events Delivered" },
-      { value: 1, suffix: "", label: "Collaborative NZ Solution · Seasoned Professionals" },
+      { value: 1, suffix: "", label: "Your One-Stop NZ Partner" },
       { value: 14, suffix: "", label: "Specialist Services" },
       { value: 100, suffix: "%", label: "New Zealand Coverage" },
     ],
