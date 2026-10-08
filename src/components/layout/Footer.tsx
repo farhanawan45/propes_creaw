@@ -92,7 +92,7 @@ export default function Footer() {
         {/* Info grid */}
         <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <BrandLogo size="md" />
+            <BrandLogo size="md" variant="full" />
             <p className="mt-4 max-w-xs text-base font-light leading-relaxed text-mist">{site.footer.brandLine}</p>
             <div className="mt-6 flex gap-3">
               {site.social.map((s) => (
