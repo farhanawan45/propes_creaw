@@ -109,7 +109,7 @@ export default function About() {
         <div className="border-t border-ink/20 pt-6 sm:pt-8">
           <div className="flex items-center justify-between font-mono-label text-[10px] text-stone">
             <span>{site.about.label}</span>
-            <span>Auckland · New Zealand</span>
+            <span className="flex items-center gap-2"><span>Auckland</span><span className="h-1.5 w-1.5 bg-copper" aria-hidden="true" /><span>New Zealand</span></span>
           </div>
 
           <div className="mt-10 grid items-stretch gap-10 lg:grid-cols-12 lg:gap-12 xl:gap-16">

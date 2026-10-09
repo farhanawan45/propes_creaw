@@ -9,8 +9,8 @@ export default function LiveClock({ className = "inline-flex" }: { className?: s
   return (
     <span className={`items-center gap-2 font-mono-label text-mist ${className}`}>
       <span className="relative flex h-1.5 w-1.5">
-        <span className="absolute inline-flex h-full w-full rounded-full bg-copper opacity-75 animate-[pulseDot_2s_ease-in-out_infinite]" />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-copper" />
+        <span className="absolute inline-flex h-full w-full bg-copper opacity-75 animate-[pulseDot_2s_ease-in-out_infinite]" />
+        <span className="relative inline-flex h-1.5 w-1.5 bg-copper" />
       </span>
       {site.contact.timezoneLabel} {time ?? "--:--"}
     </span>

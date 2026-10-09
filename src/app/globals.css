@@ -271,7 +271,7 @@ body {
   width: 22px;
   height: 22px;
   border: 1px solid var(--color-copper);
-  border-radius: 50%;
+  border-radius: 2px;
   background: rgb(251 83 44 / 8%);
   box-shadow: 0 0 12px rgb(251 83 44 / 20%);
   pointer-events: none;

@@ -29,7 +29,7 @@ function MomentCard({ moment }: { moment: (typeof moments)[number] }) {
     <article className="event-moment-card group relative aspect-square w-[60vw] max-w-[220px] shrink-0 overflow-hidden rounded-[14px] border-2 border-pounamu-night/20 bg-white sm:w-[340px] sm:max-w-none sm:rounded-[18px] lg:w-[410px]">
       <Image src={moment.src} alt={moment.title} fill sizes="(max-width: 639px) 220px, (max-width: 1023px) 340px, 410px" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" unoptimized />
       <div className="absolute left-3 top-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full border border-pounamu-night/10 bg-white/95 px-3 py-2 text-pounamu-night shadow-[0_5px_16px_rgba(4,22,63,.14)] backdrop-blur-sm sm:left-4 sm:top-4 sm:max-w-[calc(100%-2rem)]">
-        <span className="h-2 w-2 shrink-0 rounded-full bg-copper" />
+        <span className="h-2 w-2 shrink-0 bg-copper" />
         <span className="truncate text-xs font-semibold leading-none sm:text-sm">{moment.label}</span>
       </div>
     </article>
@@ -40,7 +40,7 @@ export default function EventPossibilities() {
   return (
     <section className="overflow-hidden bg-ivory pb-10 pt-20 sm:pb-12 sm:pt-24 lg:pb-14 lg:pt-28" aria-labelledby="possibilities-title">
       <div className="mx-auto mb-12 max-w-[1440px] px-4 text-center sm:px-8 lg:mb-14 lg:px-10 xl:px-12">
-        <div className="font-mono-label text-copper">REAL MOMENTS · LIMITLESS POSSIBILITIES</div>
+        <div className="flex items-center justify-center gap-3 font-mono-label text-copper"><span>REAL MOMENTS</span><span className="h-2 w-2 bg-copper" aria-hidden="true" /><span>LIMITLESS POSSIBILITIES</span></div>
         <h2 id="possibilities-title" className="mx-auto mt-4 max-w-5xl font-display font-semibold leading-[.94] tracking-[-0.045em] text-pounamu-night" style={{ fontSize: "clamp(44px, 6vw, 88px)" }}>
           See what we can <span className="text-copper">bring to life.</span>
         </h2>
@@ -67,7 +67,7 @@ export default function EventPossibilities() {
 
       <div className="mx-auto mt-8 flex max-w-[1440px] items-center justify-center px-4 font-mono-label text-[8px] text-pounamu-night/55 sm:mt-10 sm:gap-3 sm:px-8 sm:text-[9px]">
         <span className="hidden h-px w-12 bg-copper/45 sm:block" />
-        <span className="whitespace-nowrap text-center">Hover to pause · Crafted across New Zealand</span>
+        <span className="flex items-center justify-center gap-2 whitespace-nowrap text-center"><span>Hover to pause</span><span className="h-1.5 w-1.5 bg-copper" aria-hidden="true" /><span>Crafted across New Zealand</span></span>
         <span className="hidden h-px w-12 bg-copper/45 sm:block" />
       </div>
     </section>

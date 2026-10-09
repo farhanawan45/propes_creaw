@@ -87,7 +87,7 @@ export const site = {
   },
 
   hero: {
-    label: "NEW ZEALAND · EVENTS · MICE",
+    label: "NEW ZEALAND ■ EVENTS ■ MICE",
     headline: [
       { text: "We Create" },
       { text: " Experiences", emphasis: true },

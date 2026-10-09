@@ -57,7 +57,7 @@ export default function ServiceDetailPanel({ service, progress }: ServiceDetailP
         <ul className="mt-5 space-y-2.5">
           {service.highlights.map((h) => (
             <li key={h} className="flex items-start gap-3 text-sm text-ivory/85">
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 rotate-45 items-center justify-center rounded-[4px] bg-copper text-white"><Sparkles className="h-3 w-3 -rotate-45" strokeWidth={1.8} /></span>
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-[3px] bg-copper text-white"><Sparkles className="h-3 w-3" strokeWidth={1.8} /></span>
               {h}
             </li>
           ))}

@@ -164,7 +164,7 @@ export default function ServicesSection() {
                 <ul className="mt-7 space-y-3 border-y border-pounamu-night/15 py-6">
                   {service.highlights.map((highlight) => (
                     <li key={highlight} className="flex items-center gap-3 text-sm font-medium text-pounamu-night/85 sm:text-base">
-                      <span className="flex h-6 w-6 shrink-0 rotate-45 items-center justify-center rounded-[5px] bg-copper text-white shadow-[0_5px_14px_rgba(251,83,44,.3)]"><Sparkles className="h-3.5 w-3.5 -rotate-45" strokeWidth={1.8} /></span>
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-copper text-white shadow-[0_5px_14px_rgba(251,83,44,.3)]"><Sparkles className="h-3.5 w-3.5" strokeWidth={1.8} /></span>
                       {highlight}
                     </li>
                   ))}
