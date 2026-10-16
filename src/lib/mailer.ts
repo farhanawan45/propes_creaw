@@ -1,22 +1,7 @@
-import nodemailer from "nodemailer";
 import type { ContactFormValues } from "./validation";
 import type { NewsletterValues } from "./validation";
 import { site } from "@/content/site";
-
-export function getTransporter() {
-  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
-
-  if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
-    throw new Error("SMTP environment variables are not configured");
-  }
-
-  return nodemailer.createTransport({
-    host: SMTP_HOST,
-    port: Number(SMTP_PORT),
-    secure: Number(SMTP_PORT) === 465,
-    auth: { user: SMTP_USER, pass: SMTP_PASS },
-  });
-}
+import { sendEmail } from "@/server/email";
 
 function escapeHtml(value: string) {
   return value
@@ -28,9 +13,7 @@ function escapeHtml(value: string) {
 }
 
 export async function sendContactEmail(data: ContactFormValues) {
-  const transporter = getTransporter();
   const to = process.env.CONTACT_TO_EMAIL || site.contact.email;
-  const from = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER!;
 
   const serviceLabels = data.services
     .map((id) => site.services.find((s) => s.id === id)?.name ?? id)
@@ -48,9 +31,8 @@ export async function sendContactEmail(data: ContactFormValues) {
     <p>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
   `;
 
-  await transporter.sendMail({
+  await sendEmail({
     to,
-    from,
     replyTo: data.email,
     subject: `New enquiry from ${data.fullName}, ${site.name}`,
     html,
@@ -58,13 +40,10 @@ export async function sendContactEmail(data: ContactFormValues) {
 }
 
 export async function sendNewsletterSignup(data: NewsletterValues) {
-  const transporter = getTransporter();
   const to = process.env.NEWSLETTER_TO_EMAIL || process.env.CONTACT_TO_EMAIL || site.contact.email;
-  const from = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER!;
 
-  await transporter.sendMail({
+  await sendEmail({
     to,
-    from,
     replyTo: data.email,
     subject: `Newsletter signup: ${data.email}`,
     html: `<h2>New newsletter signup</h2><p><strong>Email:</strong> ${escapeHtml(data.email)}</p><p>This subscriber consented through the ${escapeHtml(site.name)} website newsletter form.</p>`,
@@ -72,11 +51,8 @@ export async function sendNewsletterSignup(data: NewsletterValues) {
 }
 
 export async function sendAdminPasswordReset(to: string, resetUrl: string) {
-  const transporter = getTransporter();
-  const from = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER!;
-  await transporter.sendMail({
+  await sendEmail({
     to,
-    from,
     subject: `${site.name} admin password reset`,
     html: `<h2>Reset your admin password</h2><p>A password reset was requested for the ${escapeHtml(site.name)} admin portal.</p><p><a href="${escapeHtml(resetUrl)}">Reset admin password</a></p><p>This secure link expires in 30 minutes and can only be used once. If you did not request it, you can ignore this email.</p>`,
   });

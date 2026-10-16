@@ -1,7 +1,11 @@
 {
   "name": "props-new",
   "version": "0.1.0",
+  "main": "next.config.ts",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
@@ -9,6 +13,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emnapi/runtime": "^1.11.3",
     "@gsap/react": "^2.1.2",
     "@radix-ui/react-popover": "^1.1.23",
     "cmdk": "^1.1.1",
@@ -18,7 +23,6 @@
     "lucide-react": "^1.46.0",
     "mysql2": "^3.24.4",
     "next": "16.3.5",
-    "nodemailer": "^10.0.10",
     "react": "19.2.8",
     "react-day-picker": "^10.0.1",
     "react-dom": "19.2.8",

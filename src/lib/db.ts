@@ -6,8 +6,7 @@ import type { ContactFormValues, NewsletterValues } from "@/lib/validation";
 let pool: Pool | undefined;
 let schemaReady: Promise<void> | undefined;
 
-function required(name: string) {
-  const value = process.env[name];
+function required(name: string, value: string | undefined) {
   if (!value) throw new Error(`Missing database environment variable: ${name}`);
   return value;
 }
@@ -15,11 +14,11 @@ function required(name: string) {
 export function getDb() {
   if (!pool) {
     pool = mysql.createPool({
-      host: required("DB_HOST"),
+      host: required("DB_HOST", process.env.DB_HOST),
       port: Number(process.env.DB_PORT || 3306),
-      user: required("DB_USER"),
-      password: required("DB_PASSWORD"),
-      database: required("DB_NAME"),
+      user: required("DB_USER", process.env.DB_USER),
+      password: required("DB_PASSWORD", process.env.DB_PASSWORD),
+      database: required("DB_NAME", process.env.DB_NAME),
       waitForConnections: true,
       connectionLimit: 8,
       enableKeepAlive: true,
