@@ -79,7 +79,7 @@ export default function Header() {
               data-cursor="Home"
               aria-label="Props N Crew Home"
             >
-              <BrandLogo size="header" variant="mark" animated />
+              <BrandLogo size="header" variant="full" animated />
             </Link>
           </motion.div>
 
