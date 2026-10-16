@@ -2,13 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { LockKeyhole } from "lucide-react";
+import { Eye, EyeOff, LockKeyhole } from "lucide-react";
 import BrandLogo from "@/components/ui/BrandLogo";
 
 export default function AdminLoginPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -54,7 +55,10 @@ export default function AdminLoginPage() {
         <p className="mt-2 text-sm text-[#53617a]">Secure access to enquiries and newsletter subscribers.</p>
         <form onSubmit={submit} className="mt-7">
           <label htmlFor="password" className="text-sm font-semibold">Admin password</label>
-          <input id="password" type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} className="mt-2 h-12 w-full rounded-[10px] border border-[#dce3ef] bg-white px-4 outline-none transition focus:border-[#fb532c] focus:ring-4 focus:ring-[#fb532c]/10" />
+          <div className="relative mt-2">
+            <input id="password" type={showPassword ? "text" : "password"} autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} className="h-12 w-full rounded-[10px] border border-[#dce3ef] bg-white px-4 pr-12 outline-none transition focus:border-[#fb532c] focus:ring-4 focus:ring-[#fb532c]/10" />
+            <button type="button" onClick={() => setShowPassword((visible) => !visible)} aria-label={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} className="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-[#53617a] transition hover:text-[#061a4a]">{showPassword ? <EyeOff size={20} /> : <Eye size={20} />}</button>
+          </div>
           {error && <p className="mt-3 text-sm text-red-600" role="alert">{error}</p>}
           <button disabled={loading} className="mt-5 h-12 w-full rounded-[10px] bg-[#fb532c] font-semibold text-white transition hover:bg-[#dc3f1d] disabled:opacity-60">{loading ? "Signing in..." : "Sign in"}</button>
         </form>

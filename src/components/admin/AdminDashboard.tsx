@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CalendarDays, Download, Inbox, LogOut, Mail, RefreshCw, Search, Trash2, Users } from "lucide-react";
 import BrandLogo from "@/components/ui/BrandLogo";
+import ChangePasswordPanel from "@/components/admin/ChangePasswordPanel";
 
 type Enquiry = { id: number; full_name: string; email: string; phone: string; event_date: string; group_size: string; services: string | string[]; message: string; status: string; email_status: string; created_at: string };
 type Subscriber = { id: number; email: string; status: string; email_status: string; created_at: string };
@@ -67,7 +68,7 @@ export default function AdminDashboard() {
       <header className="sticky top-0 z-20 border-b border-[#dce3ef] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 lg:px-8">
           <div className="flex items-center gap-4"><BrandLogo /><span className="hidden h-7 w-px bg-[#dce3ef] sm:block" /><span className="hidden text-sm font-semibold sm:block">Admin Console</span></div>
-          <div className="flex items-center gap-2"><a href="/" target="_blank" className="rounded-[10px] border border-[#dce3ef] px-4 py-2 text-sm font-semibold">View website</a><button onClick={logout} aria-label="Sign out" className="rounded-[10px] border border-[#dce3ef] p-2.5"><LogOut size={18} /></button></div>
+          <div className="flex items-center gap-2"><ChangePasswordPanel /><a href="/" target="_blank" className="rounded-[10px] border border-[#dce3ef] px-4 py-2 text-sm font-semibold">View website</a><button onClick={logout} aria-label="Sign out" className="rounded-[10px] border border-[#dce3ef] p-2.5"><LogOut size={18} /></button></div>
         </div>
       </header>
 

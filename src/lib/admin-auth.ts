@@ -124,6 +124,18 @@ export async function resetAdminPassword(token: string, password: string) {
   }
 }
 
+export async function changeAdminPassword(currentPassword: string, newPassword: string) {
+  if (!(await verifyAdminPassword(currentPassword))) return false;
+
+  await ensureSchema();
+  const passwordHash = await hashPassword(newPassword);
+  await getDb().execute(
+    `INSERT INTO admin_credentials (id, password_hash) VALUES (1, ?)
+     ON DUPLICATE KEY UPDATE password_hash = VALUES(password_hash), updated_at = CURRENT_TIMESTAMP`,
+    [passwordHash]
+  );
+  return true;
+}
 export async function isAdminAuthenticated() {
   return verifyAdminToken((await cookies()).get(ADMIN_COOKIE)?.value);
 }
