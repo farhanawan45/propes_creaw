@@ -96,7 +96,7 @@ export const site = {
     ctaPrimary: { label: "Explore Services", href: "#services" },
     ctaSecondary: { label: "Get a Quote", href: "#contact" },
     video: {
-      introMp4: "/videos/client-intro-v2.mp4?v=client-v5-20261016",
+      introMp4: "/videos/client-intro-v2.mp4?v=client-v6-audio-20261018",
       mp4: [
         "/videos/client-hero.mp4?v=client-revision-20260923",
       ],
