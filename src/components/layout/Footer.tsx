@@ -90,9 +90,10 @@ export default function Footer() {
         </div>
 
         {/* Info grid */}
-        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1fr_.65fr_1fr_1.15fr] lg:gap-8 xl:grid-cols-[240px_140px_260px_360px] xl:justify-between">
+        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <BrandLogo size="md" variant="full" />
+            <p className="mt-4 max-w-xs text-base font-light leading-relaxed text-mist">{site.footer.brandLine}</p>
             <div className="mt-6 flex gap-3">
               {site.social.map((s) => (
                 <motion.a
@@ -156,7 +157,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="xl:w-fit xl:justify-self-end">
+          <div>
             <div className="font-mono-label text-copper">Contact</div>
             <ul className="mt-5 space-y-4 text-sm text-ivory/80">
               <li className="flex items-center gap-3">
