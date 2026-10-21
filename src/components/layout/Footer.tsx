@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* Info grid */}
-        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.1fr_.55fr_1fr_1.15fr] lg:gap-x-8">
           <div>
             <BrandLogo size="md" variant="full" />
             <p className="mt-4 max-w-xs text-base font-light leading-relaxed text-mist">{site.footer.brandLine}</p>
