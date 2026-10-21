@@ -249,6 +249,15 @@ export default function Hero() {
         </div>
       </div>
 
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-10 overflow-hidden sm:h-14" aria-hidden="true">
+        <div className="hero-wave-track flex h-full w-[200%]">
+          {[0, 1].map((copy) => (
+            <svg key={copy} viewBox="0 0 1440 56" preserveAspectRatio="none" className="h-full w-1/2 shrink-0">
+              <path d="M0 30 C120 4 240 4 360 30 S600 56 720 30 S960 4 1080 30 S1320 56 1440 30" fill="none" stroke="rgba(255,255,255,.78)" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+            </svg>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
