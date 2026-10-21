@@ -101,7 +101,7 @@ export default function Hero() {
       <div ref={mediaRef} className="absolute inset-0 origin-bottom overflow-hidden">
         {!mediaReady ? (
           <div
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-0 origin-left scale-[1.18] bg-cover bg-center"
             style={{ backgroundImage: `url(${site.hero.video.poster})` }}
           />
         ) : !videoFailed && !reduced ? (
@@ -111,7 +111,7 @@ export default function Hero() {
             muted={muted}
             playing={playing}
             onError={() => setVideoFailed(true)}
-            className="h-full w-full object-cover"
+            className="h-full w-full origin-left scale-[1.18] object-cover"
           />
         ) : (
           <KenBurnsFallback />

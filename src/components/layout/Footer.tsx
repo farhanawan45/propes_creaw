@@ -90,7 +90,7 @@ export default function Footer() {
         </div>
 
         {/* Info grid */}
-        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1fr_.65fr_1fr_1.15fr] lg:gap-8 xl:grid-cols-[240px_140px_260px_360px] xl:justify-start xl:gap-x-16">
+        <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1fr_.65fr_1fr_1.15fr] lg:gap-8 xl:grid-cols-[240px_140px_260px_360px] xl:justify-between">
           <div>
             <BrandLogo size="md" variant="full" />
             <div className="mt-6 flex gap-3">
@@ -156,7 +156,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="xl:w-fit xl:justify-self-end">
             <div className="font-mono-label text-copper">Contact</div>
             <ul className="mt-5 space-y-4 text-sm text-ivory/80">
               <li className="flex items-center gap-3">
