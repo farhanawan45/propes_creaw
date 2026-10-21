@@ -19,6 +19,11 @@
 
   --background: var(--color-pounamu-night);
   --foreground: var(--color-ivory);
+
+  /* Hosting-safe font stacks: no external download is required during build. */
+  --font-display: "Arial", "Helvetica Neue", sans-serif;
+  --font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Courier New", ui-monospace, monospace;
 }
 
 @theme inline {
@@ -37,9 +42,6 @@
   --color-copper-ink: var(--color-copper-ink);
   --color-sage: var(--color-sage);
 
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
 
   --breakpoint-xs: 390px;
   --breakpoint-3xl: 1920px;

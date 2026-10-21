@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Inter_Tight, Geist, Geist_Mono } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { site } from "@/content/site";
@@ -10,26 +9,6 @@ import ScrollProgress from "@/components/ui/ScrollProgress";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import Preloader from "@/components/preloader/Preloader";
 
-const interTight = Inter_Tight({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  display: "swap",
-});
-
-const geist = Geist({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -82,7 +61,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${interTight.variable} ${geist.variable} ${geistMono.variable} h-full scroll-smooth antialiased preload-lock`}
+      className="h-full scroll-smooth antialiased preload-lock"
     >
       <head>
         <link rel="preload" href={site.hero.video.mp4[0]} as="video" type="video/mp4" />
