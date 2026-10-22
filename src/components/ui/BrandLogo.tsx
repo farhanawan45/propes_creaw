@@ -17,7 +17,7 @@ export default function BrandLogo({
   const header = size === "header";
   const mark = variant === "mark";
   const frameSize = header
-    ? "h-[38px] w-[142px] p-0 sm:h-[50px] sm:w-[187px] lg:h-[55px] lg:w-[205px]"
+    ? "h-[38px] w-[142px] p-[3px] sm:h-[50px] sm:w-[187px] sm:p-1 lg:h-[55px] lg:w-[205px]"
     : mark
     ? medium
       ? "h-[64px] w-[239px] p-0"
