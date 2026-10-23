@@ -92,7 +92,7 @@ export default function Footer() {
         {/* Info grid */}
         <div className="grid grid-cols-1 gap-12 py-16 sm:grid-cols-2 lg:grid-cols-[1.1fr_.55fr_1fr_1.15fr] lg:gap-x-8">
           <div>
-            <BrandLogo size="md" variant="mark" className="!p-2" />
+            <BrandLogo size="md" variant="mark" animated className="!p-2" />
             <h3 className="mt-4 font-display text-2xl font-semibold leading-tight text-ivory">{site.name}</h3>
             <p className="mt-1 text-sm font-light tracking-wide text-mist">Your One Stop NZ Partner</p>
             <p className="mt-6 max-w-xs text-base font-light leading-relaxed text-mist">{site.footer.brandLine}</p>

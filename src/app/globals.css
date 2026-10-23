@@ -75,7 +75,7 @@
 @keyframes brandLogoShine {
   0%, 62% { transform: translateX(-170%) skewX(-18deg); opacity: 0; }
   70% { opacity: 0.75; }
-  88%, 100% { transform: translateX(210%) skewX(-18deg); opacity: 0; }
+  88%, 100% { transform: translateX(600%) skewX(-18deg); opacity: 0; }
 }
 
 .brand-logo--animated {
