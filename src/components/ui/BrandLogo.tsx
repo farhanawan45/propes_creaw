@@ -32,7 +32,7 @@ export default function BrandLogo({
     >
       <span className="relative block h-full w-full">
         <Image
-          src={mark ? "/images/pnc-mark.svg" : "/images/pnc-client-logo-v2.png"}
+          src={mark ? "/images/pnc-mark-crossline.svg" : "/images/pnc-client-logo-v2.png"}
           alt={mark ? "PNC" : "PNC Props-n-Crew"}
           fill
           sizes={header ? "(min-width: 1024px) 205px, (min-width: 640px) 187px, 142px" : mark ? "(min-width: 640px) 239px, 172px" : medium ? "160px" : "(min-width: 640px) 126px, 112px"}
