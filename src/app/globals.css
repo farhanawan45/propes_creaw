@@ -83,6 +83,10 @@
   animation: brandLogoFloat 4.8s ease-in-out infinite;
 }
 
+.brand-logo--animated.brand-logo--still {
+  animation: none;
+}
+
 .brand-logo--animated::after {
   content: "";
   position: absolute;
