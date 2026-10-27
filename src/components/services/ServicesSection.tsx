@@ -51,7 +51,9 @@ function ServiceCopy({ service, onEnquire }: { service: SlideService; onEnquire?
 
 export default function ServicesSection() {
   const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState(1);
+  // Slides whose image is downloaded (or was shown). Their <img> stays mounted
+  // under the active one so switching is a cross-fade, not a fresh image load.
+  const [mountedSlides, setMountedSlides] = useState<Set<number>>(() => new Set([0]));
   const navRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef(0);
   const reduceMotion = useReducedMotion();
@@ -60,8 +62,8 @@ export default function ServicesSection() {
 
   const select = (next: number) => {
     const normalized = (next + site.services.length) % site.services.length;
-    setDirection(next > active ? 1 : -1);
     setActive(normalized);
+    setMountedSlides((prev) => (prev.has(normalized) ? prev : new Set(prev).add(normalized)));
   };
 
   useEffect(() => {
@@ -93,6 +95,7 @@ export default function ServicesSection() {
         while (warmed.has(next)) next = (next + 1) % total;
         warmed.add(next);
         await preloadImage(slideSrc(site.services[next].image));
+        if (!cancelled) setMountedSlides((prev) => (prev.has(next) ? prev : new Set(prev).add(next)));
       }
     };
     const introRunning = document.documentElement.classList.contains("preload-lock");
@@ -177,17 +180,10 @@ export default function ServicesSection() {
             {site.services.map((item) => (
               <div key={item.id} aria-hidden="true" className="invisible pointer-events-none col-start-1 row-start-1 grid border border-transparent lg:grid-cols-[1.08fr_.92fr]">
                 <div className="min-h-[300px] sm:min-h-[400px] lg:min-h-[590px]" />
-                <ServiceCopy service={item} />
+                <div className="grid"><ServiceCopy service={item} /></div>
               </div>
             ))}
-            <AnimatePresence custom={direction} initial={false}>
-              <motion.article
-              key={service.id}
-              custom={direction}
-              initial={reduceMotion ? false : { opacity: 0.94, scale: 0.995 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={reduceMotion ? { opacity: 1 } : { opacity: 0.94, scale: 0.995 }}
-              transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeOut" }}
+            <motion.article
               drag={reduceMotion ? false : "x"}
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.08}
@@ -195,34 +191,53 @@ export default function ServicesSection() {
                 if (info.offset.x < -55) select(active + 1);
                 if (info.offset.x > 55) select(active - 1);
               }}
-              className="col-start-1 row-start-1 grid overflow-hidden rounded-[10px] border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,.28)] lg:grid-cols-[1.08fr_.92fr]"
+              className="col-start-1 row-start-1 grid overflow-hidden rounded-[10px] border border-white/20 shadow-[0_30px_90px_rgba(0,0,0,.28)] transition-colors duration-300 lg:grid-cols-[1.08fr_.92fr]"
               style={{ backgroundColor: cardThemes[active % cardThemes.length] }}
             >
               <div className="relative min-h-[300px] overflow-hidden sm:min-h-[400px] lg:min-h-[590px]">
-                <Image
-                  src={slideSrc(service.image)}
-                  alt={service.name}
-                  fill
-                  sizes="(max-width: 1023px) 100vw, 55vw"
-                  className="select-none object-cover"
-                  // Pre-compressed slider copies are served directly: this skips the slow
-                  // first-hit AVIF re-encode and matches the preload URLs exactly.
-                  unoptimized
-                  loading="eager"
-                  fetchPriority="high"
-                  placeholder="blur"
-                  blurDataURL={imageBlur}
-                  draggable={false}
-                />
+                {site.services.map((item, index) =>
+                  index === active || mountedSlides.has(index) ? (
+                    <Image
+                      key={item.id}
+                      src={slideSrc(item.image)}
+                      alt={index === active ? item.name : ""}
+                      aria-hidden={index === active ? undefined : true}
+                      fill
+                      sizes="(max-width: 1023px) 100vw, 55vw"
+                      className={`select-none object-cover transition-opacity duration-300 ease-out ${index === active ? "opacity-100" : "opacity-0"}`}
+                      // Pre-compressed slider copies are served directly: this skips the slow
+                      // first-hit AVIF re-encode and matches the preload URLs exactly.
+                      unoptimized
+                      loading="eager"
+                      fetchPriority={index === active ? "high" : "low"}
+                      placeholder="blur"
+                      blurDataURL={imageBlur}
+                      draggable={false}
+                    />
+                  ) : null
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-pounamu-night/55 via-transparent to-pounamu-night/[0.08]" />
                 <div className="absolute bottom-5 left-5 rounded-[10px] border border-white/30 bg-pounamu-night/55 px-4 py-2 font-mono-label text-[9px] text-ivory backdrop-blur-md sm:bottom-8 sm:left-8">
                   Curated in New Zealand
                 </div>
               </div>
 
-              <ServiceCopy service={service} onEnquire={enquire} />
-              </motion.article>
-            </AnimatePresence>
+              {/* Old and new copy share one grid cell: the old text fades out quickly
+                  while the new fades in, so the panel never flashes empty. */}
+              <div className="grid">
+                <AnimatePresence initial={false}>
+                  <motion.div
+                    key={service.id}
+                    className="col-start-1 row-start-1 grid"
+                    initial={reduceMotion ? false : { opacity: 0 }}
+                    animate={{ opacity: 1, transition: { duration: reduceMotion ? 0 : 0.28, ease: "easeOut" } }}
+                    exit={{ opacity: 0, transition: { duration: reduceMotion ? 0 : 0.1, ease: "easeIn" } }}
+                  >
+                    <ServiceCopy service={service} onEnquire={enquire} />
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </motion.article>
           </div>
         </div>
       </div>
