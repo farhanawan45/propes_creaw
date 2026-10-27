@@ -11,10 +11,49 @@ import { scrollToHash } from "@/lib/scrollTo";
 const cardThemes = ["#e8eef9", "#fff0eb", "#d8e4f7", "#ffb39f"] as const;
 const imageBlur = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 15'%3E%3Cfilter id='b'%3E%3CfeGaussianBlur stdDeviation='1'/%3E%3C/filter%3E%3Cpath fill='%23153a33' d='M0 0h12v15H0z'/%3E%3Cpath fill='%23c9774a' fill-opacity='.28' filter='url(%23b)' d='M-2 9l8-8 8 8-8 8z'/%3E%3C/svg%3E";
 
+// Lightweight slider copies (max 1100px, portrait sources centre-cropped to the
+// landscape slider box) live under /images/slider with the same relative path.
+const slideSrc = (src: string) => src.replace("/images/", "/images/slider/");
+
+function preloadImage(src: string) {
+  return new Promise<void>((resolve) => {
+    const image = new window.Image();
+    image.decoding = "async";
+    image.onload = image.onerror = () => resolve();
+    image.src = src;
+  });
+}
+
+type SlideService = (typeof site.services)[number];
+
+function ServiceCopy({ service, onEnquire }: { service: SlideService; onEnquire?: () => void }) {
+  return (
+    <div className="flex flex-col justify-center p-6 text-pounamu-night sm:p-9 lg:p-12 xl:p-14">
+      <div className="flex items-center gap-4 font-mono-label text-[9px] text-pounamu-night/55">
+        <span>Specialist capability</span><span className="h-px flex-1 bg-pounamu-night/20" />
+      </div>
+      <h3 className="mt-6 max-w-[13ch] font-display text-[clamp(2.5rem,4.6vw,5rem)] font-semibold leading-[.92] tracking-[-0.05em]">{service.name}</h3>
+      <p className="mt-6 max-w-xl text-base leading-relaxed text-pounamu-night/70 sm:text-lg">{service.description}</p>
+      <ul className="mt-7 space-y-3 border-y border-pounamu-night/15 py-6">
+        {service.highlights.map((highlight) => (
+          <li key={highlight} className="flex items-center gap-3 text-sm font-medium text-pounamu-night/85 sm:text-base">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-copper text-white shadow-[0_5px_14px_rgba(251,83,44,.3)]"><Sparkles className="h-3.5 w-3.5" strokeWidth={1.8} /></span>
+            {highlight}
+          </li>
+        ))}
+      </ul>
+      <button type="button" onClick={onEnquire} tabIndex={onEnquire ? undefined : -1} className="mt-7 flex w-fit items-center gap-3 rounded-[10px] bg-pounamu-night px-5 py-3.5 text-sm font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-pounamu focus-ring">
+        Enquire about this service <ArrowUpRight className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
+
 export default function ServicesSection() {
   const [active, setActive] = useState(0);
   const [direction, setDirection] = useState(1);
   const navRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(0);
   const reduceMotion = useReducedMotion();
   const { requestEnquiry } = useEnquiry();
   const service = site.services[active];
@@ -38,19 +77,33 @@ export default function ServicesSection() {
   }, [active, reduceMotion]);
 
   useEffect(() => {
-    const nearby = [
-      active,
-      (active + 1) % site.services.length,
-      (active + 2) % site.services.length,
-      (active - 1 + site.services.length) % site.services.length,
-    ];
-
-    nearby.forEach((index) => {
-      const preload = new window.Image();
-      preload.decoding = "async";
-      preload.src = site.services[index].image;
-    });
+    activeRef.current = active;
   }, [active]);
+
+  useEffect(() => {
+    // Warm every slide so slow connections already have the next images when the
+    // arrows are used. One download at a time, always the closest slide after the
+    // one on screen, and only after the intro video so nothing competes with it.
+    let cancelled = false;
+    const warmAll = async () => {
+      const total = site.services.length;
+      const warmed = new Set<number>();
+      while (!cancelled && warmed.size < total) {
+        let next = activeRef.current;
+        while (warmed.has(next)) next = (next + 1) % total;
+        warmed.add(next);
+        await preloadImage(slideSrc(site.services[next].image));
+      }
+    };
+    const introRunning = document.documentElement.classList.contains("preload-lock");
+    const startEvent = introRunning ? "intro:entered" : "load";
+    if (!introRunning && document.readyState === "complete") void warmAll();
+    else window.addEventListener(startEvent, warmAll, { once: true });
+    return () => {
+      cancelled = true;
+      window.removeEventListener(startEvent, warmAll);
+    };
+  }, []);
 
   const enquire = () => {
     requestEnquiry(service.id);
@@ -118,6 +171,15 @@ export default function ServicesSection() {
           </button>
 
           <div className="grid">
+            {/* Invisible copies of every slide share the grid cell so the card keeps
+                the tallest slide's height; otherwise the height changes per slide and
+                the browser shifts the page scroll when the arrows are clicked. */}
+            {site.services.map((item) => (
+              <div key={item.id} aria-hidden="true" className="invisible pointer-events-none col-start-1 row-start-1 grid border border-transparent lg:grid-cols-[1.08fr_.92fr]">
+                <div className="min-h-[300px] sm:min-h-[400px] lg:min-h-[590px]" />
+                <ServiceCopy service={item} />
+              </div>
+            ))}
             <AnimatePresence custom={direction} initial={false}>
               <motion.article
               key={service.id}
@@ -138,14 +200,16 @@ export default function ServicesSection() {
             >
               <div className="relative min-h-[300px] overflow-hidden sm:min-h-[400px] lg:min-h-[590px]">
                 <Image
-                  src={service.image}
+                  src={slideSrc(service.image)}
                   alt={service.name}
                   fill
                   sizes="(max-width: 1023px) 100vw, 55vw"
                   className="select-none object-cover"
-                  // Source files are already compressed WebP. Serving them directly
-                  // skips the slow first-hit AVIF re-encode and matches the preload URLs.
+                  // Pre-compressed slider copies are served directly: this skips the slow
+                  // first-hit AVIF re-encode and matches the preload URLs exactly.
                   unoptimized
+                  loading="eager"
+                  fetchPriority="high"
                   placeholder="blur"
                   blurDataURL={imageBlur}
                   draggable={false}
@@ -156,24 +220,7 @@ export default function ServicesSection() {
                 </div>
               </div>
 
-              <div className="flex flex-col justify-center p-6 text-pounamu-night sm:p-9 lg:p-12 xl:p-14">
-                <div className="flex items-center gap-4 font-mono-label text-[9px] text-pounamu-night/55">
-                  <span>Specialist capability</span><span className="h-px flex-1 bg-pounamu-night/20" />
-                </div>
-                <h3 className="mt-6 max-w-[13ch] font-display text-[clamp(2.5rem,4.6vw,5rem)] font-semibold leading-[.92] tracking-[-0.05em]">{service.name}</h3>
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-pounamu-night/70 sm:text-lg">{service.description}</p>
-                <ul className="mt-7 space-y-3 border-y border-pounamu-night/15 py-6">
-                  {service.highlights.map((highlight) => (
-                    <li key={highlight} className="flex items-center gap-3 text-sm font-medium text-pounamu-night/85 sm:text-base">
-                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-[3px] bg-copper text-white shadow-[0_5px_14px_rgba(251,83,44,.3)]"><Sparkles className="h-3.5 w-3.5" strokeWidth={1.8} /></span>
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-                <button type="button" onClick={enquire} className="mt-7 flex w-fit items-center gap-3 rounded-[10px] bg-pounamu-night px-5 py-3.5 text-sm font-semibold text-ivory transition-all duration-300 hover:-translate-y-0.5 hover:bg-pounamu focus-ring">
-                  Enquire about this service <ArrowUpRight className="h-4 w-4" />
-                </button>
-              </div>
+              <ServiceCopy service={service} onEnquire={enquire} />
               </motion.article>
             </AnimatePresence>
           </div>
