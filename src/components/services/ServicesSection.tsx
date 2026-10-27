@@ -143,8 +143,9 @@ export default function ServicesSection() {
                   fill
                   sizes="(max-width: 1023px) 100vw, 55vw"
                   className="select-none object-cover"
-                  quality={68}
-                  loading="lazy"
+                  // Source files are already compressed WebP. Serving them directly
+                  // skips the slow first-hit AVIF re-encode and matches the preload URLs.
+                  unoptimized
                   placeholder="blur"
                   blurDataURL={imageBlur}
                   draggable={false}
