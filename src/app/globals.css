@@ -269,15 +269,29 @@ body {
   background-size: 180px 180px;
 }
 
+/* Visible page scrollbar in the logo orange. scrollbar-gutter keeps the width
+   reserved while the intro locks scrolling, so the layout does not shift. */
 html {
-  scrollbar-width: none;
+  scrollbar-color: var(--color-copper) var(--color-pounamu-night);
+  scrollbar-gutter: stable;
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: var(--color-pounamu-night);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: var(--color-copper);
+  border-radius: 999px;
+  border: 2px solid var(--color-pounamu-night);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: var(--color-copper-light);
 }
 
 @media (prefers-reduced-motion: reduce) {
