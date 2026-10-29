@@ -85,7 +85,7 @@ export default function FullscreenMenu({
       transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
       className="fixed inset-0 z-[90] flex flex-col bg-pounamu-night max-sm:overflow-y-auto"
     >
-      <div className="flex items-center justify-between px-6 pb-4 pt-7 sm:px-10 sm:py-6">
+      <div className="flex items-center justify-between px-6 pb-4 pt-10 sm:px-10 sm:py-6">
         <BrandLogo size="md" variant="mark" animated className="max-sm:!h-11 max-sm:!w-[142px] max-sm:!p-1" />
         <button
           ref={closeRef}
