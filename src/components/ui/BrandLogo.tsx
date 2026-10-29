@@ -20,7 +20,7 @@ export default function BrandLogo({
   const frameSize = header
     ? "h-[38px] w-[126px] p-[3px] sm:h-[50px] sm:w-[165px] sm:p-1 lg:h-[55px] lg:w-[184px]"
     : footer
-    ? "h-[82px] w-[168px] p-1.5"
+    ? "h-[52px] w-[106px] p-1 sm:h-[64px] sm:w-[128px] sm:p-1.5"
     : mark
     ? medium
       ? "h-[64px] w-[239px] p-0"
@@ -38,7 +38,7 @@ export default function BrandLogo({
           src={footer ? "/images/pnc-footer-logo-d3.png?v=20261027" : mark ? "/images/pnc-mark-crossline.svg?v=motion-20261023" : "/images/pnc-client-logo-v2.png"}
           alt={mark ? "PNC" : "PNC Props-n-Crew"}
           fill
-          sizes={header ? "(min-width: 1024px) 184px, (min-width: 640px) 165px, 126px" : footer ? "156px" : mark ? "(min-width: 640px) 239px, 172px" : medium ? "160px" : "(min-width: 640px) 126px, 112px"}
+          sizes={header ? "(min-width: 1024px) 184px, (min-width: 640px) 165px, 126px" : footer ? "(min-width: 640px) 116px, 98px" : mark ? "(min-width: 640px) 239px, 172px" : medium ? "160px" : "(min-width: 640px) 126px, 112px"}
           className="object-contain"
           priority={animated}
           unoptimized
