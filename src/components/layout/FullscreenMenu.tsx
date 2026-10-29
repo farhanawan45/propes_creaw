@@ -83,9 +83,9 @@ export default function FullscreenMenu({
       animate={{ clipPath: "inset(0 0 0% 0)" }}
       exit={{ clipPath: "inset(0 0 100% 0)" }}
       transition={{ duration: 0.65, ease: [0.83, 0, 0.17, 1] }}
-      className="fixed inset-0 z-[90] flex flex-col bg-pounamu-night"
+      className="fixed inset-0 z-[90] flex flex-col bg-pounamu-night max-sm:overflow-y-auto"
     >
-      <div className="flex items-center justify-between px-6 py-5 sm:px-10 sm:py-6">
+      <div className="flex items-center justify-between px-6 pb-4 pt-7 sm:px-10 sm:py-6">
         <BrandLogo size="md" variant="mark" animated className="max-sm:!h-11 max-sm:!w-[142px] max-sm:!p-1" />
         <button
           ref={closeRef}
@@ -101,9 +101,11 @@ export default function FullscreenMenu({
         </button>
       </div>
 
-      <div className="flex flex-1 flex-col gap-7 overflow-y-auto px-6 pb-6 sm:px-10 lg:flex-row lg:items-center lg:gap-8">
+      {/* Phones: links sit under the logo with the contact block right after them,
+          instead of floating in the middle with large empty gaps. */}
+      <div className="flex flex-1 flex-col gap-7 overflow-y-auto px-6 pb-6 max-sm:flex-none max-sm:overflow-visible max-sm:pb-0 sm:px-10 lg:flex-row lg:items-center lg:gap-8">
         <nav
-          className="flex flex-1 flex-col justify-center gap-1.5 sm:gap-2"
+          className="flex flex-1 flex-col justify-center gap-1.5 max-sm:justify-start max-sm:pt-[clamp(0.75rem,3svh,2rem)] sm:gap-2"
           onMouseLeave={() => setHovered(null)}
         >
           {site.nav.map((item, i) => (
@@ -118,13 +120,13 @@ export default function FullscreenMenu({
               initial={{ y: 60, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.15 + i * 0.07, ease: [0.16, 1, 0.3, 1] }}
-              className={`group flex items-baseline gap-3 rounded-sm border-b border-deep-line px-1 py-3 transition-[opacity,background-color,padding] duration-300 hover:bg-ivory/[0.025] sm:gap-4 sm:px-2 sm:py-3.5 ${
+              className={`group flex items-baseline gap-3 rounded-sm border-b border-deep-line px-1 py-3.5 transition-[opacity,background-color,padding] duration-300 hover:bg-ivory/[0.025] sm:gap-4 sm:px-2 sm:py-3.5 ${
                 hovered && hovered !== item.href ? "opacity-35" : "opacity-100"
               }`}
             >
               <span className="h-3 w-3 shrink-0 bg-copper" aria-hidden="true" />
               <span
-                className={`font-display text-[clamp(1.65rem,7.4vw,2rem)] font-semibold leading-[1.08] tracking-tight transition-colors duration-300 sm:text-[2.25rem] lg:text-[clamp(2.25rem,3.4vw,3rem)] xl:text-[3.25rem] ${
+                className={`font-display text-[clamp(1.85rem,8.6vw,2.3rem)] font-semibold leading-[1.08] tracking-tight transition-colors duration-300 sm:text-[2.25rem] lg:text-[clamp(2.25rem,3.4vw,3rem)] xl:text-[3.25rem] ${
                   active === item.href || hovered === item.href ? "text-copper" : "text-ivory"
                 }`}
               >
@@ -151,7 +153,7 @@ export default function FullscreenMenu({
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 border-t border-deep-line bg-pounamu-night/95 px-5 py-4 text-xs sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:px-10 sm:py-6 sm:text-sm">
+      <div className="flex flex-col gap-3 border-t border-deep-line bg-pounamu-night/95 px-5 py-4 text-xs max-sm:mt-[clamp(1.75rem,5svh,3rem)] sm:flex-row sm:items-center sm:justify-between sm:bg-transparent sm:px-10 sm:py-6 sm:text-sm">
         <div className="grid grid-cols-2 gap-2 text-ivory/80 sm:flex sm:flex-wrap sm:gap-x-6 sm:gap-y-2">
           <a href={`mailto:${site.contact.email}`} className="col-span-2 rounded-xl border border-deep-line bg-ivory/[0.025] px-3 py-2.5 text-center transition-colors hover:border-copper/50 hover:text-copper sm:col-auto sm:border-0 sm:bg-transparent sm:p-0 sm:text-left">
             {site.contact.email}
